@@ -1,0 +1,207 @@
+@import 'tailwindcss';
+@import './tokens.css';
+
+/* Self-hosted Inter (variabel font) — geen externe font-requests */
+@import '@fontsource-variable/inter';
+
+@custom-variant hocus (&:hover, &:focus-visible);
+
+/* =============================================================================
+   BASIS
+   ============================================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--text);
+    background-color: var(--surface);
+    font-feature-settings:
+      'cv11' 1,
+      'ss01' 1,
+      'ss03' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    min-height: 100dvh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--brand-primary);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--brand-accent-soft);
+    color: var(--brand-primary);
+  }
+
+  /* Zichtbare focus voor toetsenbordgebruikers */
+  :focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: var(--radius-sm);
+  }
+
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+/* =============================================================================
+   COMPONENT-LAAG (kleine, herbruikbare klassen)
+   ============================================================================ */
+@layer components {
+  /* Contentbreedte + zijmarges (16px op mobiel → 48px op desktop) */
+  .container-site {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container-site {
+      padding-inline: 1.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 3rem;
+    }
+  }
+
+  /* Verticale sectie-spacing */
+  .section {
+    padding-block: 4rem;
+  }
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 5.5rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .section {
+      padding-block: 7rem;
+    }
+  }
+
+  /* Kleine label boven een kop */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-accent-text);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.25rem;
+    height: 2px;
+    background: var(--brand-accent);
+    border-radius: 1px;
+  }
+
+  /* Mobiel menu: inschuiven + vervagen bij openen */
+  @keyframes menu-backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes menu-panel-in {
+    from {
+      transform: translateX(24px);
+      opacity: 0;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+  .menu-backdrop {
+    animation: menu-backdrop-in var(--duration-base) var(--ease-out) both;
+  }
+  .menu-panel {
+    animation: menu-panel-in var(--duration-base) var(--ease-out) both;
+  }
+
+  /* Alleen zichtbaar voor screenreaders, tot focus (skip-link) */
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100px;
+    z-index: 100;
+    padding: 0.625rem 1rem;
+    background: var(--brand-primary);
+    color: var(--brand-primary-contrast);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    transition: top var(--duration-fast) var(--ease-out);
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+}
+
+/* =============================================================================
+   UTILITIES
+   ============================================================================ */
+@layer components {
+  /* Subtiele fade-in bij scrollen; JS (RevealObserver) voegt .is-visible toe.
+     Alleen actief als <html class="js"> is gezet (entry-client), zodat de
+     geprerenderde HTML zonder JS of met reduced-motion direct zichtbaar is. */
+  .js .reveal {
+    opacity: 0;
+    translate: 0 14px;
+    transition:
+      opacity var(--duration-slow) var(--ease-out),
+      translate var(--duration-slow) var(--ease-out);
+  }
+  .js .reveal.is-visible {
+    opacity: 1;
+    translate: 0 0;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal {
+      opacity: 1;
+      translate: 0 0;
+    }
+  }
+}
