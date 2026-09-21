@@ -8,16 +8,16 @@ Beschrijving (kopiëren in het PR-veld):
 
 ## Wijzigingen
 
-- AFAS-prijzen aangepast
-- AFAS inrichting / implementatie gewijzigd naar GRATIS
-- Overstappen naar AFAS gewijzigd naar GRATIS
+- AFAS-prijzen aangepast (Quick Scan € 350 eenmalig, begeleiding € 85 per uur)
+- AFAS inrichting & implementatie en Overstappen naar AFAS: "Inbegrepen" met badge "Kosteloos"
+- Toelichting "Kosteloze overstap & implementatie" onder de AFAS-tabel
 - Uitgebreide AFAS-migratie verwijderd
 - AFAS optimalisatie verwijderd
 - Complexe jaarrekening verwijderd
-- Btw-nummer toegevoegd
-- Footer bijgewerkt
+- Btw-nummer toegevoegd in de footer
+- Pakketkaarten: 5 kolommen op desktop, gelijke hoogte, CTA's uitgelijnd en volledig zichtbaar
 - Bestaande MERIT huisstijl behouden
-- Responsive weergave gecontroleerd
+- Responsive weergave gecontroleerd (1440 / 1280 / 768 / 375)
 
 ## Controle
 

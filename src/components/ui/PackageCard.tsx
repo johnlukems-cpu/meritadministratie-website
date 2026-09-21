@@ -17,7 +17,8 @@ export function PackageCard({ pkg }: PackageCardProps) {
   return (
     <li
       className={cn(
-        'reveal relative flex h-full flex-col rounded-lg border bg-surface p-6',
+        // Op desktop (5 naast elkaar) iets compactere zijpadding, zodat de CTA volledig past
+        'reveal relative flex h-full flex-col rounded-lg border bg-surface p-6 xl:px-4 xl:pt-5 xl:pb-6',
         highlighted ? 'border-accent shadow-md ring-1 ring-accent/40' : 'border-default',
       )}
     >
@@ -43,8 +44,8 @@ export function PackageCard({ pkg }: PackageCardProps) {
         <p className="mt-0.5 text-xs text-subtle">excl. 21% btw</p>
       </div>
 
-      {/* 5. Features — flexibel, zodat de CTA overal op dezelfde hoogte staat */}
-      <ul className="mt-5 flex-1 space-y-2.5 text-sm">
+      {/* 5. Features — mogen in lengte variëren; de CTA-container staat via mt-auto altijd onderaan */}
+      <ul className="mt-5 space-y-2.5 text-sm">
         {pkg.includes.map((item) => (
           <li key={item} className="flex items-start gap-2.5 leading-snug text-text">
             <span
@@ -58,12 +59,12 @@ export function PackageCard({ pkg }: PackageCardProps) {
         ))}
       </ul>
 
-      {/* 6. CTA */}
-      <div className="mt-6">
+      {/* 6. CTA-container: volledige breedte, altijd onderaan, knop gecentreerd en nooit afgesneden */}
+      <div className="mt-auto w-full pt-7">
         <Button
           to={`${routes.offerte.path}?pakket=${pkg.id}`}
           variant={highlighted ? 'primary' : 'outline'}
-          size="sm"
+          size="compact"
           fullWidth
           iconRight={<ArrowRight />}
         >

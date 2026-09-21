@@ -3,10 +3,10 @@ import { Link } from 'react-router';
 import { cn } from '@/lib/cn';
 
 type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'onDark';
-type Size = 'sm' | 'md' | 'lg';
+type Size = 'compact' | 'sm' | 'md' | 'lg';
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-md font-semibold whitespace-nowrap ' +
+  'inline-flex items-center justify-center rounded-md font-semibold whitespace-nowrap ' +
   'transition-[background-color,color,border-color,box-shadow,transform] duration-150 ease-out ' +
   'disabled:opacity-60 disabled:pointer-events-none select-none';
 
@@ -22,9 +22,11 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  sm: 'h-10 px-4 text-sm',
-  md: 'h-12 px-6 text-[0.9375rem]',
-  lg: 'h-14 px-8 text-base',
+  /** Voor smalle kaarten (pricing-grid): compacte padding, kleinere letter, nooit afgesneden */
+  compact: 'h-12 gap-1.5 px-4 text-[0.8125rem] tracking-tight',
+  sm: 'h-10 gap-2 px-4 text-sm',
+  md: 'h-12 gap-2 px-6 text-[0.9375rem]',
+  lg: 'h-14 gap-2 px-8 text-base',
 };
 
 interface CommonProps {
