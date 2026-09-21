@@ -49,12 +49,13 @@ export function PackagesSection({
           align="center"
           className="reveal"
         />
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4">
+        {/* Pricing-grid: 1 kolom mobiel, 2 tablet, 3 laptop, 5 desktop — gelijke breedte/hoogte per kaart */}
+        <ul className="mx-auto mt-14 grid max-w-6xl grid-cols-1 items-stretch gap-5 pt-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 xl:gap-4">
           {packages.map((pkg) => (
-            <PackageCard key={pkg.id} pkg={pkg} compact={compact} />
+            <PackageCard key={pkg.id} pkg={pkg} />
           ))}
         </ul>
-        <PricingNote className="reveal mt-8" />
+        <PricingNote className="reveal mx-auto mt-10 max-w-6xl" />
         {compact && (
           <div className="reveal mt-10 flex justify-center">
             <Button to={routes.pakketten.path} variant="outline" iconRight={<ArrowRight />}>

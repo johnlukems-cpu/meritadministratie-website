@@ -16,7 +16,7 @@ import { priceGroups } from '@/data/packages';
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from '@/lib/seo/json-ld';
 
 const description =
-  'AFAS-ondersteuning door MERIT: administratie in AFAS, Quick Scan, begeleiding en kosteloze inrichting en overstap naar AFAS.';
+  'AFAS-ondersteuning door MERIT: administratie in AFAS, Quick Scan, begeleiding en kosteloze inrichting en overstap naar AFAS voor administratieklanten.';
 
 const diensten = [
   {
@@ -30,13 +30,13 @@ const diensten = [
     icon: Search,
   },
   {
-    title: 'AFAS-inrichting / implementatie',
-    text: 'Implementatie van een nieuwe AFAS-omgeving, afgestemd op uw processen: grootboek, dagboeken, btw-codes, workflows en autorisaties. Kosteloos.',
+    title: 'AFAS-inrichting & implementatie',
+    text: 'Implementatie van een nieuwe AFAS-omgeving, afgestemd op uw processen: grootboek, dagboeken, btw-codes, workflows en autorisaties. Inbegrepen wanneer MERIT uw administratie verzorgt.',
     icon: Settings2,
   },
   {
     title: 'Overstappen naar AFAS',
-    text: 'Begeleide overstap vanuit uw huidige pakket, inclusief het overzetten van stamgegevens en historie en een gecontroleerde start. Kosteloos.',
+    text: 'Begeleide overstap vanuit uw huidige pakket, inclusief het overzetten van stamgegevens en historie en een gecontroleerde start. Inbegrepen wanneer MERIT uw administratie verzorgt.',
     icon: ArrowRightLeft,
   },
   {
@@ -74,7 +74,7 @@ export default function Afas() {
       <PageHero
         eyebrow="AFAS"
         title={siteConfig.taglineSecondary}
-        intro="MERIT combineert een mutatiegerichte administratie met AFAS-specialisatie. Of u nu al met AFAS werkt of wilt overstappen: wij verzorgen uw administratie in AFAS en helpen kosteloos bij de inrichting en de overstap."
+        intro="MERIT combineert een mutatiegerichte administratie met AFAS-specialisatie. Of u nu al met AFAS werkt of wilt overstappen: wij verzorgen uw administratie in AFAS en nemen de inrichting en de overstap naar AFAS kosteloos voor onze rekening."
         breadcrumbs={[{ name: 'AFAS', path: routes.afas.path }]}
         tone="dark"
         actions={
@@ -120,7 +120,7 @@ export default function Afas() {
         id="overstappen-naar-afas"
         eyebrow="Overstappen naar AFAS"
         title="Overstappen naar AFAS in vier stappen"
-        description="Een overstap naar AFAS regelen wij gestructureerd en kosteloos, zodat uw administratie doorloopt."
+        description="Een overstap naar AFAS regelen wij gestructureerd, zodat uw administratie doorloopt. Inbegrepen wanneer wij uw administratie verzorgen."
         steps={overstapStappen}
         tone="default"
       />
@@ -133,7 +133,7 @@ export default function Afas() {
                 id="afas-tarieven-title"
                 eyebrow="Tarieven"
                 title="AFAS-tarieven"
-                description="Vanaf-tarieven exclusief btw. Inrichting en overstap naar AFAS zijn kosteloos; overige AFAS-werkzaamheden en koppelingen offreren wij op basis van omvang en complexiteit."
+                description="Vanaf-tarieven exclusief btw. Inrichting en overstap naar AFAS zijn inbegrepen wanneer MERIT uw administratie verzorgt; overige AFAS-werkzaamheden en koppelingen offreren wij op basis van omvang en complexiteit."
                 className="reveal lg:sticky lg:top-28 lg:self-start"
               />
               <div className="space-y-6">

@@ -77,11 +77,11 @@ export const mutationTiersNote =
 
 export interface PriceItem {
   name: string;
-  /** Prijs als tekst, bijv. '€ 50', '€ 85 per uur', '€ 350 eenmalig' of 'Gratis' */
+  /** Prijs als tekst, bijv. '€ 50', '€ 85 per uur', '€ 350 eenmalig' of 'Inbegrepen' */
   price: string;
   note?: string;
-  /** Kosteloze dienst → visueel als gouden badge weergegeven */
-  free?: boolean;
+  /** Korte gouden badge naast de prijs, bijv. 'Kosteloos' (inbegrepen in de dienstverlening) */
+  badge?: string;
 }
 
 export interface PriceGroup {
@@ -90,7 +90,7 @@ export interface PriceGroup {
   intro?: string;
   items: PriceItem[];
   /** Toelichting onder de tabel */
-  footnote?: string;
+  footnote?: { title: string; text: string };
 }
 
 export const priceGroups: PriceGroup[] = [
@@ -124,11 +124,13 @@ export const priceGroups: PriceGroup[] = [
     items: [
       { name: 'AFAS Quick Scan', price: '€ 350 eenmalig' },
       { name: 'AFAS begeleiding & ondersteuning', price: '€ 85 per uur' },
-      { name: 'AFAS inrichting / implementatie', price: 'Gratis', free: true },
-      { name: 'Overstappen naar AFAS', price: 'Gratis', free: true },
+      { name: 'AFAS inrichting & implementatie', price: 'Inbegrepen', badge: 'Kosteloos' },
+      { name: 'Overstappen naar AFAS', price: 'Inbegrepen', badge: 'Kosteloos' },
     ],
-    footnote:
-      'Wij helpen u kosteloos met de inrichting en/of overstap naar AFAS. U betaalt alleen wanneer u gebruikmaakt van aanvullende ondersteuning, zoals begeleiding, training of een Quick Scan.',
+    footnote: {
+      title: 'Kosteloze overstap & implementatie',
+      text: 'Wij begeleiden u kosteloos bij de inrichting en overstap naar AFAS wanneer u uw financiële administratie door MERIT laat verzorgen. Zo zorgen wij voor een soepele overgang en een goede inrichting van uw administratie. Aanvullende begeleiding, training of advies buiten de inbegrepen werkzaamheden is beschikbaar op basis van het geldende uurtarief.',
+    },
   },
 ];
 

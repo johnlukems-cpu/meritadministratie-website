@@ -97,7 +97,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'Kunnen jullie helpen bij het overstappen naar AFAS?',
         answer:
-          'Ja. Wij begeleiden de overstap van uw huidige pakket naar AFAS: van inventarisatie en inrichting tot het overzetten van gegevens en de eerste periode werken. De inrichting en de overstap naar AFAS zijn kosteloos; u betaalt alleen voor aanvullende ondersteuning, zoals begeleiding, training of een Quick Scan.',
+          'Ja. Wij begeleiden de overstap van uw huidige pakket naar AFAS: van inventarisatie en inrichting tot het overzetten van gegevens en de eerste periode werken. Laat u uw financiële administratie door MERIT verzorgen, dan zijn de inrichting en de overstap naar AFAS kosteloos inbegrepen. Aanvullende begeleiding, training of advies buiten de inbegrepen werkzaamheden is beschikbaar op basis van het geldende uurtarief.',
       },
     ],
   },
