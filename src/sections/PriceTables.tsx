@@ -26,12 +26,23 @@ export function PriceGroupTable({ group }: { group: PriceGroup }) {
                 {item.note && <span className="block text-xs font-normal text-muted">{item.note}</span>}
               </th>
               <td className="px-5 py-3 text-right font-semibold whitespace-nowrap text-primary tabular-nums">
-                {item.price}
+                {item.free ? (
+                  <span className="inline-flex items-center rounded-full border border-accent/50 bg-accent-soft px-3 py-1 text-xs font-bold tracking-wide text-accent-text uppercase">
+                    {item.price}
+                  </span>
+                ) : (
+                  item.price
+                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {group.footnote && (
+        <p className="border-t border-default bg-surface-alt px-5 py-3.5 text-sm leading-relaxed text-muted">
+          {group.footnote}
+        </p>
+      )}
     </div>
   );
 }

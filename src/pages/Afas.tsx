@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowRightLeft, BookOpenCheck, ClipboardList, Headset, Search, Settings2, Sparkles, Workflow } from 'lucide-react';
+import { ArrowRight, ArrowRightLeft, BookOpenCheck, ClipboardList, Headset, Search, Settings2, Workflow } from 'lucide-react';
 import { Seo } from '@/components/Seo';
 import { Button } from '@/components/ui/Button';
 import { Container, Section } from '@/components/ui/Container';
@@ -16,7 +16,7 @@ import { priceGroups } from '@/data/packages';
 import { breadcrumbJsonLd, faqJsonLd, serviceJsonLd } from '@/lib/seo/json-ld';
 
 const description =
-  'AFAS-ondersteuning door MERIT: administratie in AFAS, Quick Scan, inrichting, optimalisatie, migratie en begeleiding bij het overstappen naar AFAS.';
+  'AFAS-ondersteuning door MERIT: administratie in AFAS, Quick Scan, begeleiding en kosteloze inrichting en overstap naar AFAS.';
 
 const diensten = [
   {
@@ -30,18 +30,13 @@ const diensten = [
     icon: Search,
   },
   {
-    title: 'AFAS-inrichting',
-    text: 'Implementatie van een nieuwe AFAS-omgeving, afgestemd op uw processen: grootboek, dagboeken, btw-codes, workflows en autorisaties.',
+    title: 'AFAS-inrichting / implementatie',
+    text: 'Implementatie van een nieuwe AFAS-omgeving, afgestemd op uw processen: grootboek, dagboeken, btw-codes, workflows en autorisaties. Kosteloos.',
     icon: Settings2,
   },
   {
-    title: 'AFAS-optimalisatie',
-    text: 'Bestaande omgeving verbeteren: automatisering van terugkerend werk, betere rapportages en een inrichting die met u meegroeit.',
-    icon: Sparkles,
-  },
-  {
-    title: 'Overstappen naar AFAS / migratie',
-    text: 'Begeleide overstap vanuit uw huidige pakket, inclusief het overzetten van stamgegevens en historie en een gecontroleerde start.',
+    title: 'Overstappen naar AFAS',
+    text: 'Begeleide overstap vanuit uw huidige pakket, inclusief het overzetten van stamgegevens en historie en een gecontroleerde start. Kosteloos.',
     icon: ArrowRightLeft,
   },
   {
@@ -51,10 +46,10 @@ const diensten = [
   },
 ];
 
-const migratieStappen = [
+const overstapStappen = [
   { title: 'Inventarisatie', text: 'We brengen uw huidige pakket, processen en wensen in kaart en bepalen de scope van de overstap.' },
   { title: 'Inrichting', text: 'We richten uw AFAS-omgeving in: grootboek, dagboeken, btw, workflows en gebruikers.' },
-  { title: 'Overzetten van gegevens', text: 'Stamgegevens, openstaande posten en waar gewenst historie worden zorgvuldig gemigreerd en gecontroleerd.' },
+  { title: 'Overzetten van gegevens', text: 'Stamgegevens, openstaande posten en waar gewenst historie worden zorgvuldig overgezet en gecontroleerd.' },
   { title: 'Start en begeleiding', text: 'We begeleiden de eerste periode, zodat u en uw medewerkers vertrouwd raken met de nieuwe werkwijze.' },
 ];
 
@@ -65,7 +60,7 @@ export default function Afas() {
   return (
     <>
       <Seo
-        title="AFAS-ondersteuning, inrichting en migratie"
+        title="AFAS-ondersteuning, inrichting en overstappen"
         description={description}
         jsonLd={[
           serviceJsonLd({ name: 'AFAS-ondersteuning en -administratie', description, path: routes.afas.path }),
@@ -79,7 +74,7 @@ export default function Afas() {
       <PageHero
         eyebrow="AFAS"
         title={siteConfig.taglineSecondary}
-        intro="MERIT combineert een mutatiegerichte administratie met AFAS-specialisatie. Of u nu al met AFAS werkt of wilt overstappen: wij verzorgen uw administratie in AFAS en helpen bij inrichting, optimalisatie en migratie."
+        intro="MERIT combineert een mutatiegerichte administratie met AFAS-specialisatie. Of u nu al met AFAS werkt of wilt overstappen: wij verzorgen uw administratie in AFAS en helpen kosteloos bij de inrichting en de overstap."
         breadcrumbs={[{ name: 'AFAS', path: routes.afas.path }]}
         tone="dark"
         actions={
@@ -122,11 +117,11 @@ export default function Afas() {
       />
 
       <StepsFlow
-        id="migratie"
+        id="overstappen-naar-afas"
         eyebrow="Overstappen naar AFAS"
-        title="Migratie in vier stappen"
-        description="Een overstap naar AFAS regelen wij gestructureerd, zodat uw administratie doorloopt."
-        steps={migratieStappen}
+        title="Overstappen naar AFAS in vier stappen"
+        description="Een overstap naar AFAS regelen wij gestructureerd en kosteloos, zodat uw administratie doorloopt."
+        steps={overstapStappen}
         tone="default"
       />
 
@@ -138,7 +133,7 @@ export default function Afas() {
                 id="afas-tarieven-title"
                 eyebrow="Tarieven"
                 title="AFAS-tarieven"
-                description="Vanaf-tarieven, exclusief 21% btw. Overige AFAS-werkzaamheden en koppelingen offreren wij op basis van omvang en complexiteit."
+                description="Vanaf-tarieven exclusief btw. Inrichting en overstap naar AFAS zijn kosteloos; overige AFAS-werkzaamheden en koppelingen offreren wij op basis van omvang en complexiteit."
                 className="reveal lg:sticky lg:top-28 lg:self-start"
               />
               <div className="space-y-6">

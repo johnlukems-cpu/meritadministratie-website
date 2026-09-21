@@ -11,7 +11,7 @@ interface TrustItem {
 const items: TrustItem[] = [
   { title: 'Administratie', text: 'Overzichtelijk en actueel in AFAS.', icon: FolderKanban },
   { title: 'Aangiften & jaarwerk', text: 'Btw, ICP, IB, vpb en jaarrekening.', icon: Landmark },
-  { title: 'AFAS-specialist', text: 'Inrichting, optimalisatie en migratie.', icon: Workflow },
+  { title: 'AFAS-specialist', text: 'Inrichting, overstap en begeleiding.', icon: Workflow },
   { title: 'Overstappen', text: 'Zorgvuldige overname van uw administratie.', icon: ArrowRightLeft },
   {
     title: 'Vast aanspreekpunt',

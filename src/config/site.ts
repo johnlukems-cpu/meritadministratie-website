@@ -36,8 +36,8 @@ export const siteConfig = {
     phone: '06 43 64 11 78' as string | null,
     /** KvK-nummer (KvK-uittreksel). null = niet tonen. */
     kvk: '42106520' as string | null,
-    /** BTW-NUMMER NOG INVULLEN — bijv. 'NL123456789B01'. null = niet tonen. */
-    btw: null as string | null,
+    /** Btw-identificatienummer (Mijn Belastingdienst Zakelijk). null = niet tonen. */
+    btw: 'NL005497990B94' as string | null,
     /** Bezoek- en postadres (KvK-uittreksel). null = niet tonen. */
     address: {
       street: 'Frankenstraat 27',

@@ -13,13 +13,13 @@ const highlights = [
     icon: Search,
   },
   {
-    title: 'Inrichting & optimalisatie',
-    text: 'Een AFAS-omgeving die past bij uw processen, zonder dubbel werk.',
+    title: 'Inrichting & implementatie',
+    text: 'Een AFAS-omgeving die past bij uw processen, zonder dubbel werk. Kosteloos.',
     icon: Settings2,
   },
   {
     title: 'Overstappen naar AFAS',
-    text: 'Begeleide migratie vanuit uw huidige pakket, inclusief historie.',
+    text: 'Begeleide overstap vanuit uw huidige pakket, inclusief historie. Kosteloos.',
     icon: ArrowRightLeft,
   },
   {
@@ -50,7 +50,7 @@ export function AfasSection() {
               id="afas-title"
               eyebrow="AFAS"
               title={siteConfig.taglineSecondary}
-              description="MERIT werkt met AFAS: professionele, veilige software die u op elk moment inzicht geeft, zonder dat u zelf boekhouder hoeft te worden. Wij verzorgen uw administratie in AFAS én helpen bij inrichting, optimalisatie en overstappen."
+              description="MERIT werkt met AFAS: professionele, veilige software die u op elk moment inzicht geeft, zonder dat u zelf boekhouder hoeft te worden. Wij verzorgen uw administratie in AFAS én helpen kosteloos bij de inrichting en de overstap."
               onDark
             />
             <ul className="mt-8 space-y-3">

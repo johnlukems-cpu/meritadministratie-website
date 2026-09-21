@@ -171,7 +171,7 @@ export const allServices: ServiceSummary[] = [
     id: 'afas-ondersteuning',
     title: 'AFAS-ondersteuning',
     description:
-      'Quick scan, inrichting, optimalisatie en begeleiding van uw AFAS-omgeving, of overstappen naar AFAS.',
+      'Quick Scan, inrichting en begeleiding van uw AFAS-omgeving, of kosteloos overstappen naar AFAS.',
     icon: Workflow,
     category: 'afas',
     to: routes.afas.path,

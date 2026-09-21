@@ -77,9 +77,11 @@ export const mutationTiersNote =
 
 export interface PriceItem {
   name: string;
-  /** Prijs als tekst, bijv. '€ 50', '€ 85 per uur', '€ 2.500+' of 'Op aanvraag' */
+  /** Prijs als tekst, bijv. '€ 50', '€ 85 per uur', '€ 350 eenmalig' of 'Gratis' */
   price: string;
   note?: string;
+  /** Kosteloze dienst → visueel als gouden badge weergegeven */
+  free?: boolean;
 }
 
 export interface PriceGroup {
@@ -87,6 +89,8 @@ export interface PriceGroup {
   title: string;
   intro?: string;
   items: PriceItem[];
+  /** Toelichting onder de tabel */
+  footnote?: string;
 }
 
 export const priceGroups: PriceGroup[] = [
@@ -108,7 +112,6 @@ export const priceGroups: PriceGroup[] = [
     items: [
       { name: 'Jaarrekening eenmanszaak / vof', price: '€ 500' },
       { name: 'Jaarrekening bv', price: '€ 700' },
-      { name: 'Complexe jaarrekening', price: '€ 1.000+' },
       { name: 'Maandafsluiting los', price: '€ 195 p/m' },
       { name: 'Financiële rapportage', price: '€ 50 p/m' },
       { name: 'Financieel advies', price: '€ 95 per uur' },
@@ -117,14 +120,15 @@ export const priceGroups: PriceGroup[] = [
   {
     id: 'afas',
     title: 'AFAS – overstappen, inrichting & begeleiding',
+    intro: 'Vanaf-tarieven exclusief btw',
     items: [
       { name: 'AFAS Quick Scan', price: '€ 350 eenmalig' },
       { name: 'AFAS begeleiding & ondersteuning', price: '€ 85 per uur' },
-      { name: 'AFAS inrichting / implementatie', price: '€ 1.250' },
-      { name: 'Overstappen naar AFAS', price: '€ 1.500' },
-      { name: 'Uitgebreide AFAS-migratie', price: '€ 2.500+' },
-      { name: 'AFAS optimalisatie', price: 'Op aanvraag' },
+      { name: 'AFAS inrichting / implementatie', price: 'Gratis', free: true },
+      { name: 'Overstappen naar AFAS', price: 'Gratis', free: true },
     ],
+    footnote:
+      'Wij helpen u kosteloos met de inrichting en/of overstap naar AFAS. U betaalt alleen wanneer u gebruikmaakt van aanvullende ondersteuning, zoals begeleiding, training of een Quick Scan.',
   },
 ];
 

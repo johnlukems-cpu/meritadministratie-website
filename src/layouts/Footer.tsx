@@ -45,6 +45,11 @@ export function Footer() {
               {siteConfig.description}
             </p>
             <p className="mt-4 text-sm font-medium italic text-accent-light">{siteConfig.tagline}</p>
+            {contact.btw && (
+              <p className="mt-4 text-sm text-on-dark-muted">
+                Btw-nummer: <span className="font-medium text-on-dark tabular-nums">{contact.btw}</span>
+              </p>
+            )}
             <SocialLinks onDark className="mt-6" />
           </div>
 
@@ -96,13 +101,7 @@ export function Footer() {
               )}
               {contact.openingHours && <li className="pl-6.5">{contact.openingHours}</li>}
             </ul>
-            {(contact.kvk || contact.btw) && (
-              <p className="mt-4 text-sm text-on-dark-muted">
-                {contact.kvk && <span>KvK {contact.kvk}</span>}
-                {contact.kvk && contact.btw && <span> · </span>}
-                {contact.btw && <span>Btw {contact.btw}</span>}
-              </p>
-            )}
+            {contact.kvk && <p className="mt-4 text-sm text-on-dark-muted">KvK {contact.kvk}</p>}
           </div>
         </div>
 

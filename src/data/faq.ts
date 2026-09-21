@@ -97,7 +97,7 @@ export const faqGroups: FaqGroup[] = [
       {
         question: 'Kunnen jullie helpen bij het overstappen naar AFAS?',
         answer:
-          'Ja. Wij begeleiden de overstap van uw huidige pakket naar AFAS: van inventarisatie en inrichting tot het overzetten van gegevens en de eerste periode werken. Overstappen naar AFAS is beschikbaar vanaf € 1.500; een uitgebreide migratie vanaf € 2.500.',
+          'Ja. Wij begeleiden de overstap van uw huidige pakket naar AFAS: van inventarisatie en inrichting tot het overzetten van gegevens en de eerste periode werken. De inrichting en de overstap naar AFAS zijn kosteloos; u betaalt alleen voor aanvullende ondersteuning, zoals begeleiding, training of een Quick Scan.',
       },
     ],
   },
