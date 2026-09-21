@@ -131,10 +131,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(function 
    Select
    ---------------------------------------------------------------------------- */
 
-export interface SelectOption {
-  value: string;
-  label: string;
-}
+export type { SelectOption } from '@/data/forms';
+import type { SelectOption } from '@/data/forms';
 
 interface SelectProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>, 'id' | 'className'> {
   label: string;

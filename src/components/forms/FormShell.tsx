@@ -39,7 +39,7 @@ export function FormError({ text }: { text: string | null }) {
     <div role="alert" className="flex items-start gap-3 rounded-lg border border-error/30 bg-error-soft p-4">
       <CircleAlert aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-error" />
       <p className="text-[0.9375rem] text-text">
-        {text ?? 'Er ging iets mis bij het verzenden. Probeer het opnieuw of mail ons direct.'}
+        {text ?? 'Er is iets misgegaan. Probeer het opnieuw of neem rechtstreeks contact met ons op.'}
       </p>
     </div>
   );
@@ -65,7 +65,7 @@ export function SubmitRow({
         aria-busy={busy}
         iconLeft={busy ? <LoaderCircle className="animate-spin" /> : undefined}
       >
-        {busy ? 'Bezig met verzenden…' : label}
+        {busy ? 'Verzenden...' : label}
       </Button>
       {note && <p className="text-sm text-muted">{note}</p>}
     </div>

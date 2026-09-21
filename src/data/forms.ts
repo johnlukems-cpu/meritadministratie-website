@@ -1,4 +1,8 @@
-import type { SelectOption } from '@/components/ui/Field';
+// Geen imports uit componenten: dit bestand wordt ook door de Vercel-functie api/contact.ts gebruikt.
+export interface SelectOption {
+  value: string;
+  label: string;
+}
 
 /** Keuzelijsten voor de formulieren. Pas hier aan; de formulieren volgen automatisch. */
 

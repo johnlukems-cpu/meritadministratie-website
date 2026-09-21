@@ -93,7 +93,7 @@ export const siteConfig = {
 
   /** Formulieren — zie ook .env.example en src/lib/forms/provider.ts */
   forms: {
-    provider: (import.meta.env.VITE_FORM_PROVIDER as 'mailto' | 'webhook' | undefined) ?? 'mailto',
+    provider: (import.meta.env.VITE_FORM_PROVIDER as 'api' | 'mailto' | 'webhook' | undefined) ?? 'api',
     endpoint: (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) ?? '',
   },
 

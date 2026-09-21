@@ -133,15 +133,16 @@ const sections: LegalSection[] = [
     content: (
       <>
         <p>
-          De formulieren op deze website worden op dit moment verwerkt via uw eigen e-mailprogramma:
-          na het verzenden opent een voorgevuld e-mailbericht aan {siteConfig.contact.email}. De
-          ingevulde gegevens worden daarbij niet op de website of bij een externe formulierdienst
-          opgeslagen.
+          Wanneer u een formulier verzendt, worden de ingevulde gegevens via de server van onze
+          website per e-mail aan ons bezorgd op {siteConfig.contact.email}. U ontvangt daarnaast
+          automatisch een bevestiging op het door u opgegeven e-mailadres. Voor het versturen van
+          deze e-mails maken wij gebruik van de e-maildienst Resend (Resend, Inc.), die de
+          gegevens uitsluitend verwerkt om de e-mails af te leveren.
         </p>
         <p>
-          Wanneer wij in de toekomst een externe dienst inzetten voor het verwerken van
-          formulieren (bijvoorbeeld een formulierdienst of CRM-systeem), passen wij deze
-          privacyverklaring aan en vermelden wij welke partij dat is.
+          De formulieren zijn beveiligd tegen misbruik (onder meer validatie, een verborgen
+          controleveld tegen spamrobots en een limiet op het aantal inzendingen). De ingevulde
+          gegevens worden niet op de website zelf opgeslagen.
         </p>
       </>
     ),
@@ -203,18 +204,21 @@ const sections: LegalSection[] = [
         </p>
         <ul>
           <li>
-            <strong>Hosting van de website:</strong> de website wordt gehost via GitHub Pages
-            (GitHub, Inc.). Bij het opvragen van de website verwerkt de hostingpartij technische
-            gegevens zoals uw IP-adres.
+            <strong>Hosting van de website:</strong> de website en de formulierverwerking draaien
+            bij Vercel (Vercel Inc.). Bij het opvragen van de website of het verzenden van een
+            formulier verwerkt de hostingpartij technische gegevens zoals uw IP-adres.
+          </li>
+          <li>
+            <strong>Verzenden van formulier-e-mails:</strong> Resend (Resend, Inc.) bezorgt de
+            interne melding en uw bevestigingsmail.
           </li>
           <li>
             <strong>E-mail:</strong> berichten die u ons stuurt, ontvangen wij in ons e-mailsysteem
-            bij <Placeholder label="e-mailprovider nog invullen" />.
+            bij Squarespace (Squarespace, Inc.).
           </li>
           <li>
-            <strong>Toekomstige diensten:</strong> zodra wij formulier-, agenda-, analytics- of
-            CRM-diensten inzetten, vermelden wij die hier en sluiten wij waar nodig een
-            verwerkersovereenkomst.
+            <strong>Toekomstige diensten:</strong> zodra wij agenda-, analytics- of CRM-diensten
+            inzetten, vermelden wij die hier en sluiten wij waar nodig een verwerkersovereenkomst.
           </li>
         </ul>
         <p>

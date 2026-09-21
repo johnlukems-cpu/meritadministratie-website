@@ -15,7 +15,7 @@ export function ContactForm() {
     return (
       <FormSuccess
         title="Bedankt voor uw bericht."
-        text={message ?? 'Wij nemen zo snel mogelijk contact met u op.'}
+        text={message ?? 'Wij nemen zo spoedig mogelijk contact met u op.'}
       />
     );
   }

@@ -86,24 +86,36 @@ in de browserbundel — **nooit geheimen** hierin zetten.
 
 | Variabele             | Doel                                                                          |
 | --------------------- | ----------------------------------------------------------------------------- |
-| `VITE_FORM_PROVIDER`  | `mailto` (standaard) of `webhook`                                             |
+| `VITE_FORM_PROVIDER`  | `api` (standaard), `mailto` of `webhook`                                      |
 | `VITE_FORM_ENDPOINT`  | URL voor `webhook` (Formspree, Make, Zapier, n8n, Brevo, HubSpot, …)          |
+| `RESEND_API_KEY`      | **Server-side.** Resend-API-key voor `api/contact.ts`                         |
+| `RESEND_FROM`         | Server-side. Afzender, bijv. `MERIT Administratie & Advies <noreply@meritadministratie.nl>` |
+| `CONTACT_TO`          | Server-side. Ontvanger interne melding (standaard `info@meritadministratie.nl`) |
 | `VITE_ANALYTICS_ID`   | Google Analytics 4 ID — laadt pas na cookie-toestemming                       |
 | `VITE_META_PIXEL_ID`  | Meta Pixel ID — laadt pas na cookie-toestemming                               |
 
 Voor productie zet je dezelfde waarden als **Repository variables** in GitHub
 (`Settings → Secrets and variables → Actions → Variables`); de workflow leest ze bij de build.
 
-## Formulieren
+## Formulieren en e-mail
 
 Contact, offerte en kennismaking gebruiken één provider-adapter: `src/lib/forms/provider.ts`.
 
-- **Nu:** `mailto` — opent het e-mailprogramma van de bezoeker met een voorgevuld bericht. Dit is
-  een tijdelijke oplossing, geen definitieve oplossing voor leadbeheer.
-- **Later:** zet `VITE_FORM_PROVIDER=webhook` en `VITE_FORM_ENDPOINT=<url>`; de formulieren posten
-  dan JSON (`FormSubmission`) naar het endpoint. Of voeg een eigen provider toe in `provider.ts`
-  (bijv. HubSpot, Brevo) — de formuliercomponenten hoeven niet te wijzigen.
-- Validatie: `src/lib/forms/schemas.ts` · hook: `src/lib/forms/useForm.ts` · honeypot tegen spam.
+- **Standaard (`api`):** bezoeker → `POST /api/contact` (Vercel-functie `api/contact.ts`) → Resend →
+  interne melding naar `info@meritadministratie.nl` (Reply-To = bezoeker) + bevestigingsmail naar de
+  bezoeker. De Resend-API-key staat uitsluitend server-side (`RESEND_API_KEY`, nooit `VITE_`).
+- Server-side: dezelfde zod-validatie als de frontend, lengtelimieten, e-mailvalidatie,
+  header-injection-sanitizing, honeypot, minimale invultijd, rate-limiting per IP en
+  dubbele-inzending-detectie. Templates: `api/_lib/email.ts`.
+- Fallbacks: `VITE_FORM_PROVIDER=mailto` (opent e-mailprogramma; handig lokaal met `vite`, waar
+  `api/` niet draait) of `webhook` + `VITE_FORM_ENDPOINT`.
+- Validatie: `src/lib/forms/schemas.ts` · hook: `src/lib/forms/useForm.ts`.
+
+**Resend-domeinverificatie (nog niet gedaan):** om te verzenden vanaf `@meritadministratie.nl`
+moet het domein in Resend worden geverifieerd. Gebruik daarvoor bij voorkeur een **subdomein**
+(bijv. `send.meritadministratie.nl`), zodat de bestaande Squarespace-e-mailrecords (MX/SPF/DKIM/DMARC
+op het hoofddomein) onaangeraakt blijven. Tot die tijd kun je in Preview testen met
+`RESEND_FROM=onboarding@resend.dev` (levert alleen af aan het e-mailadres van het Resend-account).
 
 ## Cookies en tracking
 
