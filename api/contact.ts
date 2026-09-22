@@ -16,7 +16,11 @@
  * honeypot, minimale invultijd, eenvoudige rate-limiting per IP en dubbele-inzending-detectie
  * (beide per functie-instantie; voldoende als basisbescherming zonder externe opslag).
  */
-import { contactSchema, kennismakingSchema, offerteSchema } from '../src/lib/forms/schemas';
+// LET OP: relatieve imports MET expliciete .js-extensie (ESM-conventie van TypeScript; de
+// bronbestanden zijn .ts). Vercel compileert en typecheckt api/ met moduleResolution nodenext:
+// extensieloze paden geven TS2835 en Node ESM vindt ze niet (ERR_MODULE_NOT_FOUND).
+// Geen '@/'-aliassen gebruiken in api/.
+import { contactSchema, kennismakingSchema, offerteSchema } from '../src/lib/forms/schemas.js';
 import {
   buildConfirmationEmail,
   buildInternalEmail,
@@ -26,7 +30,7 @@ import {
   sendViaResend,
   SITE_NAME,
   type FormKind,
-} from './_lib/email';
+} from './_lib/email.js';
 
 const schemas = {
   contact: contactSchema,
