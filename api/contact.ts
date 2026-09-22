@@ -128,9 +128,22 @@ export default async function handler(req: NodeRequest, res: ServerResponse): Pr
     return json(res, { ok: false, error: 'Forbidden' }, 403);
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
+  // Resend-API-key: uitsluitend server-side. .trim() vangt een per ongeluk meegekopieerde
+  // spatie of regeleinde af (veelvoorkomend bij plakken in het Vercel-dashboard).
+  const apiKey = process.env.RESEND_API_KEY?.trim();
   if (!apiKey) {
-    console.error('[contact] RESEND_API_KEY ontbreekt');
+    // Alleen NAMEN loggen, nooit waarden: maakt een typefout of verkeerde omgeving direct zichtbaar.
+    const related = Object.keys(process.env)
+      .filter((key) => /RESEND|CONTACT/i.test(key))
+      .sort();
+    console.error(
+      '[contact] RESEND_API_KEY ontbreekt in deze omgeving ' +
+        `(VERCEL_ENV=${process.env.VERCEL_ENV ?? 'onbekend'}). ` +
+        `Gerelateerde variabelen in deze omgeving: ${related.length > 0 ? related.join(', ') : 'geen'}. ` +
+        'Zet RESEND_API_KEY in Vercel → Settings → Environment Variables voor zowel Preview als ' +
+        'Production (zonder VITE_-prefix) en start daarna een nieuwe deployment: omgevingsvariabelen ' +
+        'worden bij de deployment aan de functie gekoppeld, bestaande deployments pikken ze niet op.',
+    );
     return json(res, { ok: false, error: USER_ERROR }, 500);
   }
 
@@ -188,8 +201,8 @@ export default async function handler(req: NodeRequest, res: ServerResponse): Pr
   const replyToName = name.replace(/["<>]/g, '').trim() || 'Bezoeker';
   const page = typeof payload.page === 'string' ? sanitizeHeaderValue(payload.page).slice(0, 200) : '/';
 
-  const from = process.env.RESEND_FROM || DEFAULT_FROM;
-  const to = process.env.CONTACT_TO || DEFAULT_TO;
+  const from = process.env.RESEND_FROM?.trim() || DEFAULT_FROM;
+  const to = process.env.CONTACT_TO?.trim() || DEFAULT_TO;
 
   // 1. Interne melding
   const internal = buildInternalEmail(kind, fields, page);
