@@ -10,7 +10,7 @@ import {
   huidigeSituaties,
   kennismakingDiensten,
   rechtsvormen,
-} from '../../src/data/forms';
+} from '../../src/data/forms.js'; // expliciete .js-extensie verplicht (ESM/nodenext, zie api/contact.ts)
 
 export type FormKind = 'contact' | 'offerte' | 'kennismaking';
 
