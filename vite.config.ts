@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { fileURLToPath, URL } from 'node:url';
 import { devAssetWriter } from './scripts/dev-asset-writer.ts';
+import { devAdminApi } from './scripts/dev-admin-api.ts';
 
 /**
  * Base path van de site.
@@ -16,7 +17,7 @@ const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`;
 
 export default defineConfig({
   base,
-  plugins: [react(), tailwindcss(), devAssetWriter()],
+  plugins: [react(), tailwindcss(), devAssetWriter(), devAdminApi()],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
