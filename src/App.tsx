@@ -1,5 +1,7 @@
+import { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router';
 import { RootLayout } from '@/layouts/RootLayout';
+import { ADMIN_BASE } from '@/config/admin-routes';
 import { redirects, routes } from '@/config/routes';
 
 import Home from '@/pages/Home';
@@ -21,12 +23,28 @@ import Cookies from '@/pages/Cookies';
 import NotFound from '@/pages/NotFound';
 
 /**
+ * MERIT Content Studio (beveiligd admin-gedeelte). Apart geladen, zodat deze
+ * code niet in de bundel van de publieke website terechtkomt. Wordt nooit
+ * geprerenderd: /admin staat niet in config/routes.ts en is uitgesloten in
+ * robots.txt; Vercel serveert het via een rewrite naar admin.html.
+ */
+const AdminRoutes = lazy(() => import('@/pages/admin/AdminRoutes'));
+
+/**
  * Routetabel. Paden komen uit config/routes.ts zodat router, navigatie,
  * sitemap en prerender altijd synchroon lopen.
  */
 export function App() {
   return (
     <Routes>
+      <Route
+        path={`${ADMIN_BASE}/*`}
+        element={
+          <Suspense fallback={null}>
+            <AdminRoutes />
+          </Suspense>
+        }
+      />
       <Route element={<RootLayout />}>
         <Route path={routes.home.path} element={<Home />} />
         <Route path={routes.diensten.path} element={<Diensten />} />
