@@ -60,6 +60,24 @@ for (const { url, files } of targets) {
   console.log(`  ✓ ${url}`);
 }
 
+// App-shell voor het beveiligde admin-gedeelte (MERIT Content Studio).
+// Bewust NIET geprerenderd: de inhoud is niet openbaar en mag niet in de HTML staan.
+// Het is dezelfde bundel met een lege #root, zodat de router client-side start.
+// Vercel serveert /admin/* via een rewrite naar dit bestand (zie vercel.json).
+const adminShell = template
+  .replace(
+    '<!--app-head-->',
+    [
+      '<meta name="robots" content="noindex, nofollow" />',
+      '    <meta name="referrer" content="same-origin" />',
+      '    <title>MERIT Content Studio</title>',
+    ].join('\n    '),
+  )
+  .replace(/\s*<title>Merit Administratie<\/title>/, '')
+  .replace('<!--app-html-->', '');
+await writeFile(join(distDir, 'admin.html'), adminShell, 'utf8');
+console.log('  ✓ /admin/* (app-shell, niet geprerenderd)');
+
 // Oude paden: klein redirect-bestand (meta refresh + canonical naar het nieuwe pad).
 // GitHub Pages kent geen server-side redirects; de router doet daarnaast een client-side Navigate.
 const SITE_URL = 'https://meritadministratie.nl';
