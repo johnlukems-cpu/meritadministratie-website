@@ -177,7 +177,7 @@ export interface ContentStats {
   total: number;
 }
 
-/** Één regel in de contentkalender. */
+/** Eén regel in de contentkalender. */
 export interface CalendarEntry {
   id: string;
   title: string;
