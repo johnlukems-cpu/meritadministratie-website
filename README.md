@@ -98,9 +98,9 @@ in de browserbundel — **nooit geheimen** hierin zetten.
 | `ADMIN_PASSWORD`      | **Server-side.** Wachtwoord voor de Content Studio (`/admin/content`)         |
 | `ADMIN_SESSION_SECRET`| Server-side. Willekeurige string (≥ 32 tekens) die de sessiecookie ondertekent |
 | `ADMIN_SESSION_HOURS` | Server-side. Geldigheid van een sessie in uren (standaard 8)                  |
-| `KV_REST_API_URL`     | Server-side. Opslag voor de Content Studio (Vercel KV / Upstash Redis)        |
 | `KV_REST_API_URL`     | Server-side. Redis REST-endpoint voor de Content Studio (Upstash via Vercel)  |
 | `KV_REST_API_TOKEN`   | Server-side. Token bij dat endpoint                                           |
+
 Voor productie zet je dezelfde waarden als **Repository variables** in GitHub
 (`Settings → Secrets and variables → Actions → Variables`); de workflow leest ze bij de build.
 
