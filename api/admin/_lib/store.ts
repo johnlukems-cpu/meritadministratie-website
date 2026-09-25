@@ -8,8 +8,8 @@
  *
  * Twee drivers:
  *
- *   redis    Actief zodra de REST-variabelen van de integratie bestaan. Vercel zet deze
- *            zelf zodra u in het dashboard een Redis-store aan het project koppelt:
+ *   redis    Actief zodra de REST-variabelen van de integratie bestaan. Vercel zet
+ *            deze zelf zodra u in het dashboard een Redis-store aan het project koppelt:
  *              KV_REST_API_URL        + KV_REST_API_TOKEN          (Upstash via Vercel Marketplace)
  *            of UPSTASH_REDIS_REST_URL + UPSTASH_REDIS_REST_TOKEN  (Upstash rechtstreeks)
  *            of REDIS_REST_API_URL     + REDIS_REST_API_TOKEN      (andere REST-compatibele Redis)
