@@ -7,7 +7,10 @@ import type { ContentCreateValues, ContentUpdateValues } from './schemas';
 import type { Channel, ContentItem, ContentStats } from './types';
 
 export interface StorageInfo {
-  driver: 'kv' | 'memory';
+  driver: 'redis' | 'memory';
+  /** Leesbare naam van de actieve opslag, bijv. 'Upstash Redis (Vercel Marketplace)' */
+  provider: string;
+  /** false = tijdelijk geheugen; het dashboard toont dan een waarschuwing */
   persistent: boolean;
 }
 
