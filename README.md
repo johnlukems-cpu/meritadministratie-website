@@ -142,8 +142,8 @@ opnieuw — de inlogschermen zijn alleen de interface, niet de beveiliging. Ontb
 Wilt u later meerdere gebruikers of SSO: vervang de provider in `api/admin/_lib/auth.ts`,
 het contract (`requireAdmin`) blijft gelijk.
 
-**Opslag.** Eén JSON-document in Vercel KV / Upstash Redis (`api/admin/_lib/store.ts`).
 **Opslag.** Permanent in Redis — zie het hoofdstuk [Opslag: Redis](#opslag-redis) hieronder.
+
 **AI-generatie is nog niet gekoppeld.** `api/admin/_lib/ai.ts` legt alleen het contract vast
 (`AIContentService`) en bouwt de briefing op uit de MERIT-kennisbank. Zolang er geen provider is,
 geeft `POST /api/admin/content/generate` de briefing terug met code `not_configured`, zodat u de
