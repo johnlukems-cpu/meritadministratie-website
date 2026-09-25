@@ -91,7 +91,7 @@ export function publishToInstagram(post: SocialPost): Promise<PublishResult> {
   return MetaService.publish('instagram', post);
 }
 
-/** Één ingang: kiest automatisch de juiste dienst voor een kanaal. */
+/** Eén ingang: kiest automatisch de juiste dienst voor een kanaal. */
 export function publishToChannel(channel: SocialChannel, post: SocialPost): Promise<PublishResult> {
   switch (channel) {
     case 'linkedin':
