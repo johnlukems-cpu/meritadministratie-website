@@ -13,6 +13,7 @@
     "sitemap": "node scripts/generate-sitemap.mjs",
     "preview": "vite preview",
     "lint": "eslint .",
+    "test:store": "node scripts/test-content-store.mjs",
     "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
     "check": "npm run typecheck && npm run lint"
   },
