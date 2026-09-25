@@ -39,6 +39,7 @@ Vereist Node.js **22.18 of hoger** (de build-scripts lezen `src/config/routes.ts
 npm install        # dependencies installeren
 npm run dev        # ontwikkelserver → http://localhost:5173
 npm run check      # typecheck + lint
+npm run test:store # tests van de Content Studio-opslag (geen echte Redis nodig)
 npm run build      # productie-build → dist/ (client-build, prerender, sitemap)
 npm run preview    # gebouwde site lokaal bekijken → http://localhost:4173
 ```
@@ -98,8 +99,8 @@ in de browserbundel — **nooit geheimen** hierin zetten.
 | `ADMIN_SESSION_SECRET`| Server-side. Willekeurige string (≥ 32 tekens) die de sessiecookie ondertekent |
 | `ADMIN_SESSION_HOURS` | Server-side. Geldigheid van een sessie in uren (standaard 8)                  |
 | `KV_REST_API_URL`     | Server-side. Opslag voor de Content Studio (Vercel KV / Upstash Redis)        |
-| `KV_REST_API_TOKEN`   | Server-side. Token bij bovenstaande store                                     |
-
+| `KV_REST_API_URL`     | Server-side. Redis REST-endpoint voor de Content Studio (Upstash via Vercel)  |
+| `KV_REST_API_TOKEN`   | Server-side. Token bij dat endpoint                                           |
 Voor productie zet je dezelfde waarden als **Repository variables** in GitHub
 (`Settings → Secrets and variables → Actions → Variables`); de workflow leest ze bij de build.
 
@@ -142,10 +143,7 @@ Wilt u later meerdere gebruikers of SSO: vervang de provider in `api/admin/_lib/
 het contract (`requireAdmin`) blijft gelijk.
 
 **Opslag.** Eén JSON-document in Vercel KV / Upstash Redis (`api/admin/_lib/store.ts`).
-Zonder `KV_REST_API_URL` + `KV_REST_API_TOKEN` valt de studio terug op geheugen; content
-verdwijnt dan bij een herstart van de functie en het dashboard toont daar een waarschuwing over.
-Een andere opslag (Postgres, Supabase) sluit u aan door `StorageDriver` te implementeren.
-
+**Opslag.** Permanent in Redis — zie het hoofdstuk [Opslag: Redis](#opslag-redis) hieronder.
 **AI-generatie is nog niet gekoppeld.** `api/admin/_lib/ai.ts` legt alleen het contract vast
 (`AIContentService`) en bouwt de briefing op uit de MERIT-kennisbank. Zolang er geen provider is,
 geeft `POST /api/admin/content/generate` de briefing terug met code `not_configured`, zodat u de
@@ -161,6 +159,71 @@ diensten en tarieven. Prijzen komen uit `src/data/packages.ts`, zodat er één b
 
 **Lokaal draaien.** Zet `ADMIN_PASSWORD` en `ADMIN_SESSION_SECRET` in `.env` (niet gecommit);
 `npm run dev` laat de admin-endpoints meedraaien via de dev-only plugin `scripts/dev-admin-api.ts`.
+
+## Opslag: Redis
+
+De Content Studio bewaart content permanent in **Redis**, via de **Upstash (Serverless Redis)**-integratie
+uit de **Vercel Marketplace**. De communicatie loopt over de **REST-API** van Redis: serverless functies
+kunnen geen langlevende TCP-verbinding aanhouden, en de REST-API heeft daardoor geen extra npm-pakket
+nodig. Er is dus **geen nieuwe dependency** toegevoegd.
+
+**Abstractielaag.** `api/admin/_lib/store.ts` definieert `StorageDriver` (`list` · `get` · `put` ·
+`remove` · `ping`) met twee implementaties: `redis` en `memory`. De endpoints en de interface praten
+uitsluitend via `listItems`, `getItem`, `saveItem`, `removeItem`, `storeInfo` en `withStore` — nergens
+in `api/admin/*.ts` of in `src/` staat een Redis-aanroep. Een andere opslag (Postgres, Supabase, Neon)
+sluit u aan door één nieuwe `StorageDriver` te schrijven en die in `getDriver()` terug te geven.
+
+**Sleutels.** Eén document per item, plus een index:
+
+| Sleutel | Inhoud |
+| ------- | ------ |
+| `merit:content:item:<id>` | JSON van één `ContentItem` (status, `scheduledAt`, `publishedAt`, kanalen, website-/LinkedIn-/Facebook-/Instagram-tekst, tijdlijn) |
+| `merit:content:index` | Redis-SET met alle id's |
+
+Omdat elk item zijn eigen sleutel heeft, kunnen twee gelijktijdige bewerkingen elkaar niet
+overschrijven. Verweesde id's (item verlopen of handmatig verwijderd) worden bij het ophalen
+automatisch uit de index gehaald.
+
+**Environment variables.** Vercel zet deze zelf zodra u de store koppelt:
+
+| Variabele | Doel |
+| --------- | ---- |
+| `KV_REST_API_URL` | REST-endpoint van de Redis-store |
+| `KV_REST_API_TOKEN` | Token bij dat endpoint |
+
+Gebruikt u Upstash rechtstreeks, dan worden ook `UPSTASH_REDIS_REST_URL` + `UPSTASH_REDIS_REST_TOKEN`
+herkend. Een TCP-reeks (`REDIS_URL`) wordt **niet** gebruikt; staat alleen die er, dan logt de functie
+één duidelijke aanwijzing en valt hij terug op geheugen. Zet deze waarden nooit in de code of in Git.
+
+**Preview koppelen**
+
+1. Vercel → project **meritadministratie-website** → **Storage** → **Create Database** →
+   **Marketplace** → **Upstash / Serverless Redis** → store aanmaken (regio dicht bij uw functies).
+2. Bij **Connect Project**: vink **Preview** aan. Vercel voegt `KV_REST_API_URL` en
+   `KV_REST_API_TOKEN` toe aan die omgeving.
+3. Start een nieuwe deployment van `feature/content-studio` — omgevingsvariabelen worden bij het
+   deployen aan de functie gekoppeld, bestaande deployments pikken ze niet alsnog op.
+4. Open `<preview-url>/admin/content`. De waarschuwing *"Tijdelijke opslag"* is dan weg; content
+   blijft nu bewaard tussen sessies en koude starts.
+
+**Production later koppelen**
+
+1. Dezelfde store → **Connect Project** → vink nu ook **Production** aan (of maak een aparte store
+   voor productie, zodat test- en echte content gescheiden blijven — dat is de aanbeveling).
+2. Deploy `main` opnieuw nadat de variabelen zijn toegevoegd.
+3. Controleer in de Runtime Logs dat er geen regel `[content-studio] REDIS_URL gevonden…` verschijnt;
+   die betekent dat alleen de TCP-reeks is gezet en de REST-variabelen ontbreken.
+
+**Sessies.** Admin-sessies hoeven *niet* in Redis: de sessiecookie is een HMAC-ondertekend token met
+vervaltijd (`api/admin/_lib/auth.ts`), dus de server hoeft geen sessiestatus bij te houden. Dat blijft
+werken bij meerdere functie-instanties en koude starts. Wilt u later sessies kunnen intrekken
+(uitloggen op alle apparaten), dan is de Redis-laag daar klaar voor — de authenticatie is voor deze
+wijziging bewust ongemoeid gelaten.
+
+**Tests.** `npm run test:store` draait de opslagtests. Er is geen echte Redis nodig: het script
+(`scripts/test-content-store.mjs`) start een kleine HTTP-server die de Redis REST-API nabootst en test
+daar de echte driver tegen — aanmaken, ophalen, lijst, wijzigen, statuswissels, geplande content,
+alle vier de kanaalteksten, verwijderen, index-opschoning, foutafhandeling en de terugval op geheugen.
 
 ## Cookies en tracking
 
