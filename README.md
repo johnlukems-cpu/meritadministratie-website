@@ -9,6 +9,7 @@ contact-/offerte-/kennismakingsformulieren en juridische pagina's. Gehost op Git
 **Routes:** `/`, `/diensten` (+ 4 subpagina's), `/pakketten`, `/afas`, `/voor-ondernemers`, `/over-ons`,
 `/faq`, `/contact`, `/offerte`, `/kennismaking`, `/privacy-policy`, `/cookiebeleid`
 (oude paden `/privacy` en `/cookies` verwijzen door).
+Daarnaast het beveiligde, niet-openbare `/admin/content` — de MERIT Content Studio (zie verderop).
 
 **Bronnen bedrijfsgegevens:** KvK-uittreksel (KvK 42106520, adres, telefoon), Prijzenoverzicht 2026
 (pakketten, aangiften, jaarwerk, AFAS-tarieven) en het officiële logo. Prijzen staan uitsluitend in
@@ -93,6 +94,11 @@ in de browserbundel — **nooit geheimen** hierin zetten.
 | `CONTACT_TO`          | Server-side. Ontvanger interne melding (standaard `info@meritadministratie.nl`) |
 | `VITE_ANALYTICS_ID`   | Google Analytics 4 ID — laadt pas na cookie-toestemming                       |
 | `VITE_META_PIXEL_ID`  | Meta Pixel ID — laadt pas na cookie-toestemming                               |
+| `ADMIN_PASSWORD`      | **Server-side.** Wachtwoord voor de Content Studio (`/admin/content`)         |
+| `ADMIN_SESSION_SECRET`| Server-side. Willekeurige string (≥ 32 tekens) die de sessiecookie ondertekent |
+| `ADMIN_SESSION_HOURS` | Server-side. Geldigheid van een sessie in uren (standaard 8)                  |
+| `KV_REST_API_URL`     | Server-side. Opslag voor de Content Studio (Vercel KV / Upstash Redis)        |
+| `KV_REST_API_TOKEN`   | Server-side. Token bij bovenstaande store                                     |
 
 Voor productie zet je dezelfde waarden als **Repository variables** in GitHub
 (`Settings → Secrets and variables → Actions → Variables`); de workflow leest ze bij de build.
@@ -116,6 +122,45 @@ moet het domein in Resend worden geverifieerd. Gebruik daarvoor bij voorkeur een
 (bijv. `send.meritadministratie.nl`), zodat de bestaande Squarespace-e-mailrecords (MX/SPF/DKIM/DMARC
 op het hoofddomein) onaangeraakt blijven. Tot die tijd kun je in Preview testen met
 `RESEND_FROM=onboarding@resend.dev` (levert alleen af aan het e-mailadres van het Resend-account).
+
+## MERIT Content Studio (`/admin/content`)
+
+Beveiligd, niet-openbaar beheergedeelte om website- en social-content voor te bereiden,
+te plannen en klaar te zetten. **Niet** onderdeel van de publieke website: de route staat niet in
+`src/config/routes.ts`, wordt niet geprerenderd, staat niet in de sitemap, is uitgesloten in
+`robots.txt` en krijgt `X-Robots-Tag: noindex` mee.
+
+**Schermen** — `/admin/content` (dashboard), `/admin/content/nieuw` (briefing invullen),
+`/admin/content/:id` (tekst per kanaal, statusacties), `/admin/content/kalender`.
+
+**Toegang.** Wachtwoord → `POST /api/admin/session` → HttpOnly-sessiecookie (HMAC-ondertekend).
+Het wachtwoord staat uitsluitend server-side in `ADMIN_PASSWORD`; de frontend bevat geen enkel
+geheim en kan de cookie niet lezen. Elk endpoint onder `/api/admin/` controleert de sessie
+opnieuw — de inlogschermen zijn alleen de interface, niet de beveiliging. Ontbreken
+`ADMIN_PASSWORD` of `ADMIN_SESSION_SECRET`, dan is het hele gedeelte gesloten (fail closed).
+Wilt u later meerdere gebruikers of SSO: vervang de provider in `api/admin/_lib/auth.ts`,
+het contract (`requireAdmin`) blijft gelijk.
+
+**Opslag.** Eén JSON-document in Vercel KV / Upstash Redis (`api/admin/_lib/store.ts`).
+Zonder `KV_REST_API_URL` + `KV_REST_API_TOKEN` valt de studio terug op geheugen; content
+verdwijnt dan bij een herstart van de functie en het dashboard toont daar een waarschuwing over.
+Een andere opslag (Postgres, Supabase) sluit u aan door `StorageDriver` te implementeren.
+
+**AI-generatie is nog niet gekoppeld.** `api/admin/_lib/ai.ts` legt alleen het contract vast
+(`AIContentService`) en bouwt de briefing op uit de MERIT-kennisbank. Zolang er geen provider is,
+geeft `POST /api/admin/content/generate` de briefing terug met code `not_configured`, zodat u de
+teksten zelf kunt schrijven. Aansluiten: zie het TODO-blok boven in dat bestand.
+
+**Social media is nog niet gekoppeld.** `LinkedInService` en `MetaService`
+(`api/admin/_lib/social.ts`) bevatten geen tokens en doen geen netwerkverkeer;
+`publishToLinkedIn/Facebook/Instagram()` geven de melding
+"Social media koppeling wordt binnenkort geactiveerd." De status blijft dan ongewijzigd.
+
+**Kennisbank.** `src/lib/content/knowledge.ts` — bedrijfsgegevens, positionering, schrijfregels,
+diensten en tarieven. Prijzen komen uit `src/data/packages.ts`, zodat er één bron van waarheid is.
+
+**Lokaal draaien.** Zet `ADMIN_PASSWORD` en `ADMIN_SESSION_SECRET` in `.env` (niet gecommit);
+`npm run dev` laat de admin-endpoints meedraaien via de dev-only plugin `scripts/dev-admin-api.ts`.
 
 ## Cookies en tracking
 
