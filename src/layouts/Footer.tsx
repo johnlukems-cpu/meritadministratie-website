@@ -53,8 +53,8 @@ export function Footer() {
             <SocialLinks onDark className="mt-6" />
           </div>
 
-          <FooterColumn title="Navigatie" items={footerNav.navigatie} />
           <FooterColumn title="Diensten" items={footerNav.diensten} />
+          <FooterColumn title="Navigatie" items={footerNav.navigatie} />
 
           {/* Contact — alleen ingevulde gegevens worden getoond */}
           <div>
@@ -102,6 +102,19 @@ export function Footer() {
               {contact.openingHours && <li className="pl-6.5">{contact.openingHours}</li>}
             </ul>
             {contact.kvk && <p className="mt-4 text-sm text-on-dark-muted">KvK {contact.kvk}</p>}
+
+            <ul className="mt-6 space-y-2.5 border-t border-on-dark-border pt-5">
+              {footerNav.conversie.map((item) => (
+                <li key={item.to}>
+                  <Link
+                    to={item.to}
+                    className="inline-flex items-center gap-1.5 text-[0.9375rem] font-semibold text-accent underline-offset-4 transition-colors hover:underline focus-visible:outline-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

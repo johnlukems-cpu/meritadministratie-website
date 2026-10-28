@@ -1,54 +1,42 @@
 import { Seo } from '@/components/Seo';
+import { CapacitySection } from '@/sections/CapacitySection';
+import { CtaBand } from '@/sections/CtaBand';
+import { Hero } from '@/sections/Hero';
+import { PricingPreview } from '@/sections/PricingPreview';
+import { Process } from '@/sections/Process';
+import { ServicesGrid } from '@/sections/ServicesGrid';
+import { siteConfig } from '@/config/site';
 import { homeFaq } from '@/data/faq';
 import { faqJsonLd, organizationJsonLd, websiteJsonLd } from '@/lib/seo/json-ld';
-import { Hero } from '@/sections/Hero';
-import { TrustBar } from '@/sections/TrustBar';
-import { Intro } from '@/sections/Intro';
-import { ServicesGrid } from '@/sections/ServicesGrid';
-import { PackagesSection } from '@/sections/PackagesSection';
-import { AfasSection } from '@/sections/AfasSection';
-import { Audiences } from '@/sections/Audiences';
-import { HowItWorks } from '@/sections/HowItWorks';
-import { SwitchSection } from '@/sections/SwitchSection';
-import { Faq } from '@/sections/Faq';
-import { CtaBand } from '@/sections/CtaBand';
-import { ContactBlock } from '@/sections/ContactBlock';
 
-/**
- * Homepage — volgorde: topbar + header (layout) → hero → USP-balk → introductie →
- * diensten → pakketten → AFAS → voor wie → werkwijze → overstappen → FAQ → CTA → contact → footer.
- */
 export default function Home() {
   return (
     <>
       <Seo
+        title={`${siteConfig.name} — financiële backoffice en AFAS-ondersteuning`}
         rawTitle
-        title="MERIT Administratie & Advies | Administratie & Boekhouding"
-        description="MERIT Administratie & Advies ondersteunt ondernemers en MKB-bedrijven met administratie, boekhouding, aangiften, jaarwerk en AFAS."
+        description="MERIT ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering. Backoffice vanaf € 35 per uur."
+        canonicalPath="/"
         jsonLd={[organizationJsonLd(), websiteJsonLd(), faqJsonLd(homeFaq)]}
       />
+
+      {/* 1. Hero */}
       <Hero />
-      <TrustBar />
-      <Intro />
-      <ServicesGrid
-        heading={{
-          eyebrow: 'Diensten',
-          title: 'Waar wij u mee helpen',
-          description:
-            'Van de dagelijkse boekhouding tot aangiften, jaarwerk en AFAS: wij zorgen dat uw financiële administratie overzichtelijk en op orde blijft.',
-        }}
-      />
-      <PackagesSection compact tone="default" />
-      <AfasSection />
-      <Audiences />
-      <HowItWorks
-        title="In vier stappen ontzorgd"
-        description="Een heldere aanpak: kennismaken, inventariseren, inrichten en ontzorgen. Zo weet u precies wat u van ons kunt verwachten."
-      />
-      <SwitchSection />
-      <Faq items={homeFaq} />
+
+      {/* 2. Dienstenoverzicht */}
+      <ServicesGrid tone="default" />
+
+      {/* 3. Voor administratie- en accountantskantoren */}
+      <CapacitySection />
+
+      {/* 4. Tarievenpreview */}
+      <PricingPreview />
+
+      {/* 5. Samenwerkingsproces */}
+      <Process tone="default" />
+
+      {/* 6. Afsluitende CTA */}
       <CtaBand />
-      <ContactBlock tone="default" />
     </>
   );
 }

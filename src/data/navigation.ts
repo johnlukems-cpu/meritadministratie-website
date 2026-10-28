@@ -3,6 +3,8 @@ import { routes } from '@/config/routes';
 export interface NavItem {
   label: string;
   to: string;
+  /** Korte toelichting in het dropdownmenu */
+  hint?: string;
   /** Subitems (dropdown op desktop, ingeklapt op mobiel) */
   children?: NavItem[];
 }
@@ -14,50 +16,77 @@ export const mainNav: NavItem[] = [
     label: 'Diensten',
     to: routes.diensten.path,
     children: [
-      { label: 'Administratie & boekhouding', to: routes.administratie.path },
-      { label: 'Belastingaangifte', to: routes.belastingaangifte.path },
-      { label: 'Startende ondernemers', to: routes.startendeOndernemers.path },
-      { label: 'Overstappen van boekhouder', to: routes.overstappen.path },
-      { label: 'Voor ondernemers', to: routes.voorOndernemers.path },
+      {
+        label: 'Financial Backoffice',
+        to: routes.financialBackoffice.path,
+        hint: 'Dagelijkse financiële verwerking',
+      },
+      {
+        label: 'Btw-aangiften',
+        to: routes.btwAangiften.path,
+        hint: 'Voorbereiden, verwerken en aansluiten',
+      },
+      {
+        label: 'Jaarrekeningen',
+        to: routes.jaarrekeningen.path,
+        hint: 'Jaarafsluiting en balansdossiers',
+      },
+      {
+        label: 'AFAS & Software Support',
+        to: routes.afasSupport.path,
+        hint: 'Ondersteuning binnen uw AFAS-processen',
+      },
+      {
+        label: 'Finance Control',
+        to: routes.financeControl.path,
+        hint: 'Controles en afwijkingssignalering',
+      },
+      {
+        label: 'Automatisering',
+        to: routes.automatisering.path,
+        hint: 'Minder handmatig werk',
+      },
     ],
   },
-  { label: 'Pakketten', to: routes.pakketten.path },
-  { label: 'AFAS', to: routes.afas.path },
-  { label: 'Over ons', to: routes.overOns.path },
-  { label: 'FAQ', to: routes.faq.path },
+  { label: 'Voor kantoren', to: routes.voorKantoren.path },
+  { label: 'Voor mkb', to: routes.voorMkb.path },
+  { label: 'Tarieven', to: routes.tarieven.path },
+  { label: 'Over ons', to: routes.overMerit.path },
   { label: 'Contact', to: routes.contact.path },
 ];
 
 /** Primaire call-to-action in de header */
 export const headerCta = {
-  label: 'Neem contact op',
-  to: routes.contact.path,
+  label: 'Plan een kennismaking',
+  to: routes.kennismaking.path,
 };
 
 /** Kolommen in de footer */
 export const footerNav = {
+  diensten: [
+    { label: 'Financial Backoffice', to: routes.financialBackoffice.path },
+    { label: 'Btw-aangiften', to: routes.btwAangiften.path },
+    { label: 'Jaarrekeningen', to: routes.jaarrekeningen.path },
+    { label: 'AFAS & Software Support', to: routes.afasSupport.path },
+    { label: 'Finance Control', to: routes.financeControl.path },
+    { label: 'Automatisering', to: routes.automatisering.path },
+    { label: 'Alle diensten', to: routes.diensten.path },
+  ],
   navigatie: [
-    { label: 'Home', to: routes.home.path },
-    { label: 'Diensten', to: routes.diensten.path },
-    { label: 'Pakketten', to: routes.pakketten.path },
-    { label: 'AFAS', to: routes.afas.path },
-    { label: 'Over ons', to: routes.overOns.path },
-    { label: 'FAQ', to: routes.faq.path },
+    { label: 'Voor administratiekantoren', to: routes.voorKantoren.path },
+    { label: 'Voor accountantskantoren', to: routes.voorKantoren.path },
+    { label: 'Voor mkb-ondernemers', to: routes.voorMkb.path },
+    { label: 'Tarieven', to: routes.tarieven.path },
+    { label: 'Over ons', to: routes.overMerit.path },
+    { label: 'Veelgestelde vragen', to: routes.faq.path },
     { label: 'Contact', to: routes.contact.path },
   ],
-  diensten: [
-    { label: 'Financiële administratie', to: routes.administratie.path },
-    { label: 'Btw- en ICP-aangifte', to: routes.belastingaangifte.path },
-    { label: 'IB- en vpb-aangifte', to: routes.belastingaangifte.path },
-    { label: 'Jaarwerk en jaarrekening', to: routes.pakketten.path },
-    { label: 'AFAS-ondersteuning', to: routes.afas.path },
-    { label: 'Startende ondernemers', to: routes.startendeOndernemers.path },
-    { label: 'Overstappen van boekhouder', to: routes.overstappen.path },
-    { label: 'Offerte aanvragen', to: routes.offerte.path },
-    { label: 'Kennismaking', to: routes.kennismaking.path },
+  conversie: [
+    { label: 'Plan een kennismaking', to: routes.kennismaking.path },
+    { label: 'Vraag een offerte aan', to: routes.offerte.path },
   ],
   juridisch: [
-    { label: 'Privacy', to: routes.privacy.path },
+    { label: 'Privacyverklaring', to: routes.privacy.path },
     { label: 'Cookiebeleid', to: routes.cookies.path },
   ],
 } satisfies Record<string, NavItem[]>;

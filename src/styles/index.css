@@ -3,6 +3,7 @@
 
 /* Self-hosted Inter (variabel font) — geen externe font-requests */
 @import '@fontsource-variable/inter';
+@import '@fontsource-variable/source-serif-4';
 
 @custom-variant hocus (&:hover, &:focus-visible);
 
@@ -33,6 +34,11 @@
     font-family: var(--font-sans);
     color: var(--text);
     background-color: var(--surface);
+    /* Nederlandse samenstellingen ("jaarrekeningvoorbereiding",
+       "backofficeondersteuning") zijn langer dan een smalle kolom. `anywhere`
+       verlaagt ook de min-content-breedte, waardoor grid- en flexkolommen écht
+       kunnen krimpen; een woord breekt alleen af als het anders buiten beeld valt. */
+    overflow-wrap: anywhere;
     font-feature-settings:
       'cv11' 1,
       'ss01' 1,
@@ -45,11 +51,26 @@
 
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--brand-primary);
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
   h4 {
     color: var(--brand-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     text-wrap: balance;
+  }
+
+  /* Kaart- en lijstkoppen blijven schreefloos: daar leest Inter rustiger. */
+  .ui-heading,
+  .ui-heading h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   p {

@@ -10,7 +10,7 @@ export default function Contact() {
     <>
       <Seo
         title="Contact"
-        description={`Neem contact op met ${siteConfig.name} via ${siteConfig.contact.email} of het contactformulier: voor een vraag, offerte, kennismaking, overstap of AFAS.`}
+        description={`Neem contact op met ${siteConfig.name} via ${siteConfig.contact.email} of het contactformulier: voor een kennismaking, een offerte of om werkzaamheden uit te besteden.`}
         jsonLd={[
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
@@ -21,7 +21,7 @@ export default function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Neem contact met ons op"
-        intro="Heeft u een vraag over uw administratie, wilt u een offerte of kennismaking, overweegt u een overstap of wilt u uw AFAS-situatie bespreken? Wij reageren zo snel mogelijk."
+        intro="Wilt u werkzaamheden uitbesteden, een urenbundel afnemen of eerst vrijblijvend kennismaken? Laat ons weten waar het om gaat; wij reageren zo snel mogelijk."
         breadcrumbs={[{ name: 'Contact', path: routes.contact.path }]}
       />
       <ContactBlock

@@ -1,38 +1,52 @@
-import { Link } from 'react-router';
+import { ArrowRight } from 'lucide-react';
 import { Accordion, type AccordionItem } from '@/components/ui/Accordion';
+import { Button } from '@/components/ui/Button';
 import { Container, Section } from '@/components/ui/Container';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { routes } from '@/config/routes';
+import { homeFaq } from '@/data/faq';
 
-interface FaqProps {
-  items: readonly AccordionItem[];
+interface FaqSectionProps {
+  items?: readonly AccordionItem[];
   title?: string;
   description?: string;
+  tone?: 'default' | 'alt';
+  /** Link naar de volledige FAQ-pagina tonen */
+  showAllLink?: boolean;
+  id?: string;
 }
 
-/** Veelgestelde vragen met toegankelijke accordion. Herbruikbaar per pagina. */
-export function Faq({
-  items,
+/** FAQ-accordion. Standaard de selectie voor de homepage. */
+export function FaqSection({
+  items = homeFaq,
   title = 'Veelgestelde vragen',
-  description = 'Antwoord op de vragen die ondernemers ons het meest stellen.',
-}: FaqProps) {
+  description = 'Over samenwerken, uitbesteden, btw-aangiften, jaarafsluitingen en tarieven.',
+  tone = 'default',
+  showAllLink = true,
+  id = 'faq',
+}: FaqSectionProps) {
+  const titleId = `${id}-title`;
   return (
-    <Section id="faq" aria-labelledby="faq-title">
+    <Section id={id} tone={tone} aria-labelledby={titleId}>
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-          <div className="reveal">
-            <SectionHeading id="faq-title" eyebrow="FAQ" title={title} description={description} />
-            <p className="mt-6 text-[0.9375rem] text-muted">
-              Staat uw vraag er niet bij?{' '}
-              <Link to={routes.contact.path} className="font-semibold text-primary underline-offset-4 hover:underline">
-                Neem contact op
-              </Link>
-              .
-            </p>
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div>
+            <SectionHeading
+              id={titleId}
+              eyebrow="Vragen"
+              title={title}
+              description={description}
+              className="reveal"
+            />
+            {showAllLink && (
+              <div className="reveal mt-8">
+                <Button to={routes.faq.path} variant="outline" iconRight={<ArrowRight />}>
+                  Alle vragen bekijken
+                </Button>
+              </div>
+            )}
           </div>
-          <div className="reveal">
-            <Accordion items={items} />
-          </div>
+          <Accordion items={items} className="reveal" />
         </div>
       </Container>
     </Section>

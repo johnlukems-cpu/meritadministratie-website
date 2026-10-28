@@ -2,11 +2,14 @@ import { forwardRef, type ButtonHTMLAttributes, type ReactNode } from 'react';
 import { Link } from 'react-router';
 import { cn } from '@/lib/cn';
 
-type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'onDark';
+type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'onDark' | 'onDarkOutline';
 type Size = 'compact' | 'sm' | 'md' | 'lg';
 
 const base =
-  'inline-flex items-center justify-center rounded-md font-semibold whitespace-nowrap ' +
+  'inline-flex items-center justify-center rounded-md text-center font-semibold ' +
+  // body heeft `overflow-wrap: anywhere` voor lange samenstellingen; in een knop
+  // mag een woord juist niet breken — daar wordt alleen op een spatie afgebroken.
+  '[overflow-wrap:normal] ' +
   'transition-[background-color,color,border-color,box-shadow,transform] duration-150 ease-out ' +
   'disabled:opacity-60 disabled:pointer-events-none select-none';
 
@@ -19,14 +22,21 @@ const variants: Record<Variant, string> = {
   ghost: 'bg-transparent text-primary hover:bg-primary-soft/60',
   onDark:
     'bg-white text-primary shadow-sm hover:bg-accent-soft focus-visible:outline-white',
+  onDarkOutline:
+    'border border-white/30 bg-transparent text-on-dark hover:border-white/60 hover:bg-white/10 focus-visible:outline-white',
 };
 
+/**
+ * Hoogtes zijn een MINIMUM (min-h) met verticale padding, niet een vaste hoogte.
+ * Daardoor mag een lang label op smalle schermen over twee regels lopen in plaats
+ * van de knop — en daarmee de hele kolom — breder te maken dan het scherm.
+ */
 const sizes: Record<Size, string> = {
-  /** Voor smalle kaarten (pricing-grid): compacte padding, kleinere letter, nooit afgesneden */
-  compact: 'h-12 gap-1.5 px-4 text-[0.8125rem] tracking-tight',
-  sm: 'h-10 gap-2 px-4 text-sm',
-  md: 'h-12 gap-2 px-6 text-[0.9375rem]',
-  lg: 'h-14 gap-2 px-8 text-base',
+  /** Voor smalle kaarten (pricing-grid): compacte padding, kleinere letter */
+  compact: 'min-h-12 gap-1.5 px-4 py-2 text-[0.8125rem] tracking-tight',
+  sm: 'min-h-10 gap-2 px-4 py-2 text-sm',
+  md: 'min-h-12 gap-2 px-6 py-2.5 text-[0.9375rem]',
+  lg: 'min-h-14 gap-2 px-6 py-3 text-base sm:px-8',
 };
 
 interface CommonProps {

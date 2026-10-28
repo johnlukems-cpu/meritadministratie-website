@@ -90,7 +90,11 @@ export function PageHero({
               {intro}
             </p>
           )}
-          {actions && <div className="mt-8 flex flex-wrap gap-3">{actions}</div>}
+          {actions && (
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
+              {actions}
+            </div>
+          )}
         </div>
       </Container>
     </section>

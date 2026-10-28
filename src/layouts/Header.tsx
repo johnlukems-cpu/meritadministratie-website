@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { NavLink, useLocation } from 'react-router';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/Button';
 import { headerCta, mainNav, type NavItem } from '@/data/navigation';
@@ -45,7 +45,7 @@ function DesktopNavItem({ item }: { item: NavItem }) {
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
-      'inline-flex h-10 items-center gap-1 rounded-md px-2.5 text-[0.9375rem] font-medium transition-colors xl:px-3',
+      'inline-flex h-10 items-center gap-1 rounded-md px-2 text-[0.875rem] font-medium whitespace-nowrap transition-colors xl:px-2.5 xl:text-[0.9375rem]',
       isActive ? 'text-primary' : 'text-muted hover:text-primary',
     );
 
@@ -91,21 +91,26 @@ function DesktopNavItem({ item }: { item: NavItem }) {
       </div>
 
       {open && (
-        <ul className="absolute left-0 top-full z-30 mt-1 w-72 rounded-lg border border-default bg-surface p-2 shadow-lg">
+        <ul className="absolute left-0 top-full z-30 mt-1 w-80 rounded-lg border border-default bg-surface p-2 shadow-lg">
           {item.children.map((child) => (
             <li key={child.to}>
               <NavLink
                 to={child.to}
                 className={({ isActive }) =>
                   cn(
-                    'block rounded-md px-3 py-2.5 text-[0.9375rem] transition-colors',
+                    'block rounded-md px-3 py-2.5 transition-colors',
                     isActive
-                      ? 'bg-primary-soft font-medium text-primary'
+                      ? 'bg-primary-soft text-primary'
                       : 'text-text hover:bg-surface-alt hover:text-primary',
                   )
                 }
               >
-                {child.label}
+                <span className="block text-[0.9375rem] font-medium">{child.label}</span>
+                {child.hint && (
+                  <span className="mt-0.5 block text-[0.8125rem] leading-snug text-muted">
+                    {child.hint}
+                  </span>
+                )}
               </NavLink>
             </li>
           ))}
@@ -253,7 +258,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         </nav>
 
         <div className="border-t border-default p-4">
-          <Button to={headerCta.to} onClick={onClose} fullWidth>
+          <Button to={headerCta.to} onClick={onClose} variant="secondary" fullWidth iconRight={<ArrowRight />}>
             {headerCta.label}
           </Button>
         </div>
@@ -293,11 +298,11 @@ export function Header() {
         scrolled ? 'border-default shadow-sm' : 'border-transparent',
       )}
     >
-      <div className="container-site flex h-[var(--header-height)] items-center justify-between gap-6">
+      <div className="container-site flex h-[var(--header-height)] items-center justify-between gap-4 xl:gap-6">
         <Logo height={40} priority />
 
         <nav aria-label="Hoofdnavigatie" className="hidden lg:block">
-          <ul className="flex items-center gap-1">
+          <ul className="flex items-center gap-0.5 xl:gap-1">
             {mainNav.map((item) => (
               <DesktopNavItem key={item.label} item={item} />
             ))}
@@ -306,7 +311,13 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <div className="hidden md:block">
-            <Button to={headerCta.to} size="sm">
+            <Button
+              to={headerCta.to}
+              size="sm"
+              variant="secondary"
+              className="whitespace-nowrap"
+              iconRight={<ArrowRight />}
+            >
               {headerCta.label}
             </Button>
           </div>

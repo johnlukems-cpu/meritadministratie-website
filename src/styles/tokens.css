@@ -21,7 +21,7 @@
   --brand-primary-contrast: #ffffff; /* tekst op primaire kleur */
 
   /* --- Merk: accentkleur (goud uit het logo) — spaarzaam gebruiken ----------- */
-  --brand-accent: #c8a34a;
+  --brand-accent: #c9a24c;
   --brand-accent-hover: #b8933f;
   --brand-accent-light: #e4ca82; /* licht goud, voor accenten op donkere vlakken */
   --brand-accent-soft: #f8f1dd;
@@ -39,7 +39,7 @@
   /* --- Tekst ---------------------------------------------------------------- */
   --text: #182433;
   --text-muted: #5b6473;
-  --text-subtle: #7c8595;
+  --text-subtle: #656d7a; /* AA op wit, surface-alt én surface-muted (≥4.5:1) */
   --text-on-dark: #ffffff;
   --text-on-dark-muted: #b9c2d4;
 
@@ -49,11 +49,11 @@
   --border-on-dark: rgba(255, 255, 255, 0.12);
 
   /* --- Status ---------------------------------------------------------------- */
-  --success: #1e7f4f;
+  --success: #1d7b4d; /* AA op --success-soft (4.64:1) */
   --success-soft: #e6f4ec;
   --error: #b3261e;
   --error-soft: #fbeae9;
-  --warning: #9a6b00;
+  --warning: #916500; /* AA op --warning-soft (4.68:1) */
   --warning-soft: #fdf3dc;
 
   /* --- Focus ring ------------------------------------------------------------ */
@@ -74,6 +74,8 @@
   /* --- Typografie ------------------------------------------------------------ */
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, sans-serif;
+  /* Serif voor koppen: geeft de zakelijke, redactionele toon uit het ontwerp. */
+  --font-display: 'Source Serif 4 Variable', ui-serif, Georgia, 'Times New Roman', serif;
 
   /* --- Layout ---------------------------------------------------------------- */
   --container-max: 1200px;
@@ -140,6 +142,7 @@
   --color-current: currentColor;
 
   --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
 
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);

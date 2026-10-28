@@ -3,16 +3,25 @@ import { BookingWidget } from '@/components/BookingWidget';
 import { Container, Section } from '@/components/ui/Container';
 import { KennismakingForm } from '@/components/forms/KennismakingForm';
 import { PageHero } from '@/sections/PageHero';
-import { HowItWorks } from '@/sections/HowItWorks';
+import { Process } from '@/sections/Process';
 import { siteConfig } from '@/config/site';
 import { routes } from '@/config/routes';
 import { breadcrumbJsonLd } from '@/lib/seo/json-ld';
 
 const verloop = [
   { title: 'U vraagt een kennismaking aan', text: 'Via het formulier, in een minuut ingevuld.' },
-  { title: 'Wij nemen contact op', text: 'Om een moment af te stemmen dat u uitkomt.' },
-  { title: 'Kort gesprek', text: 'Telefonisch of online: uw situatie, uw wensen en onze werkwijze.' },
-  { title: 'U beslist', text: 'Past het? Dan maken wij een voorstel. Zo niet, dan zit u nergens aan vast.' },
+  {
+    title: 'Wij nemen contact op',
+    text: 'Om een moment af te stemmen dat u uitkomt.',
+  },
+  {
+    title: 'Kort gesprek',
+    text: 'Telefonisch of online: uw werkvoorraad, welke werkzaamheden overdraagbaar zijn en hoe wij werken.',
+  },
+  {
+    title: 'U beslist',
+    text: 'Past het? Dan ontvangt u een voorstel met werkzaamheden, tarief en controlemomenten. Zo niet, dan zit u nergens aan vast.',
+  },
 ];
 
 export default function Kennismaking() {
@@ -20,19 +29,16 @@ export default function Kennismaking() {
     <>
       <Seo
         title="Plan een kennismaking"
-        description="Maak vrijblijvend kennis met MERIT Administratie & Advies en bespreek hoe wij uw onderneming administratief kunnen ondersteunen."
+        description="Plan een vrijblijvende kennismaking met MERIT en bespreek welke financiële backofficewerkzaamheden uw kantoor wil uitbesteden en hoe de afspraken worden vastgelegd."
         jsonLd={[
-          breadcrumbJsonLd([
-            { name: 'Home', path: '/' },
-            { name: 'Kennismaking', path: routes.kennismaking.path },
-          ]),
+          breadcrumbJsonLd([{ name: 'Plan een kennismaking', path: routes.kennismaking.path }]),
         ]}
       />
       <PageHero
         eyebrow="Kennismaking"
         title="Plan een kennismaking"
-        intro="Maak vrijblijvend kennis en bespreek hoe MERIT Administratie & Advies uw onderneming administratief kan ondersteunen."
-        breadcrumbs={[{ name: 'Kennismaking', path: routes.kennismaking.path }]}
+        intro="Maak vrijblijvend kennis en bespreek welke werkzaamheden u wilt uitbesteden. Na het gesprek ontvangt u een voorstel met werkzaamheden, tarief en controlemomenten."
+        breadcrumbs={[{ name: 'Plan een kennismaking', path: routes.kennismaking.path }]}
       />
 
       <Section aria-labelledby="kennismaking-form-title">
@@ -79,11 +85,10 @@ export default function Kennismaking() {
         </Container>
       </Section>
 
-      <HowItWorks
-        eyebrow="En daarna"
-        title="Zo gaat het verder na de kennismaking"
-        description="Past het van beide kanten, dan richten we de samenwerking in vier duidelijke stappen in."
+      <Process
         tone="alt"
+        title="Zo gaat het verder na de kennismaking"
+        description="Past het van beide kanten, dan richten wij de samenwerking in drie duidelijke stappen in."
       />
     </>
   );

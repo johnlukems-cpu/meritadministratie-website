@@ -5,7 +5,7 @@ import { Container, Section } from '@/components/ui/Container';
 import { PageHero } from '@/sections/PageHero';
 import { CtaBand } from '@/sections/CtaBand';
 import { routes } from '@/config/routes';
-import { allFaq, faqGroups } from '@/data/faq';
+import { allFaqItems, faqGroups } from '@/data/faq';
 import { breadcrumbJsonLd, faqJsonLd } from '@/lib/seo/json-ld';
 
 export default function Faq() {
@@ -13,19 +13,19 @@ export default function Faq() {
     <>
       <Seo
         title="Veelgestelde vragen"
-        description="Antwoorden op veelgestelde vragen over administratie uitbesteden, pakketten en tarieven, btw- en andere aangiften, AFAS en overstappen van boekhouder."
+        description="Antwoorden op veelgestelde vragen over samenwerken met MERIT: werkzaamheden uitbesteden, verantwoordelijkheden, btw-aangiften, jaarafsluitingen, AFAS, tarieven en urenbundels."
         jsonLd={[
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
             { name: 'FAQ', path: routes.faq.path },
           ]),
-          faqJsonLd(allFaq),
+          faqJsonLd(allFaqItems),
         ]}
       />
       <PageHero
         eyebrow="FAQ"
         title="Veelgestelde vragen"
-        intro="Antwoord op de vragen die ondernemers ons het meest stellen over administratie, tarieven, aangiften, AFAS en overstappen. Staat uw vraag er niet bij? Neem gerust contact op."
+        intro="Antwoord op de vragen die kantoren ons het meest stellen over samenwerken, uitbesteden, verantwoordelijkheden en tarieven. Staat uw vraag er niet bij? Neem gerust contact op."
         breadcrumbs={[{ name: 'FAQ', path: routes.faq.path }]}
       />
 

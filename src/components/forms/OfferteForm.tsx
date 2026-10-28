@@ -1,9 +1,10 @@
 import { useSyncExternalStore, type ReactNode } from 'react';
 import { Link } from 'react-router';
-import { Checkbox, CheckboxGroup, Input, Select, Textarea } from '@/components/ui/Field';
+import { Checkbox, Input, Select, Textarea } from '@/components/ui/Field';
 import { routes } from '@/config/routes';
-import { branches, gewensteOndersteuning, huidigeSituaties, rechtsvormen } from '@/data/forms';
+import { offerteDiensten } from '@/data/forms';
 import { packages } from '@/data/packages';
+import { hourBundles } from '@/data/pricing';
 import { useForm } from '@/lib/forms/useForm';
 import { FormError, FormSuccess, Honeypot, SubmitRow } from './FormShell';
 
@@ -16,95 +17,156 @@ function Fieldset({ legend, children }: { legend: string; children: ReactNode })
   );
 }
 
-export function OfferteForm() {
-  // Vooraf gekozen pakket via /offerte?pakket=<id> (knoppen op de pakketkaarten).
-  // Via useSyncExternalStore met server-snapshot null, zodat de geprerenderde HTML
-  // (zonder query) zonder hydratiefout wordt overgenomen.
-  const chosenId = useSyncExternalStore(
+/** Leest één queryparameter, met een server-snapshot van null (geen hydratiefout). */
+function useQueryParam(name: string): string | null {
+  return useSyncExternalStore(
     () => () => {},
-    () => new URLSearchParams(window.location.search).get('pakket'),
+    () => new URLSearchParams(window.location.search).get(name),
     () => null,
   );
-  const chosenPackage = packages.find((p) => p.id === chosenId);
+}
+
+/**
+ * Zet `?pakket=…` om naar een leesbaar label. De urenbundels en de mkb-pakketten
+ * gebruiken deels dezelfde id's, daarom dragen de links een prefix.
+ */
+function resolvePackage(value: string | null): string | null {
+  if (!value) return null;
+  if (value.startsWith('bundel-')) {
+    const bundle = hourBundles.find((b) => b.id === value.slice('bundel-'.length));
+    return bundle
+      ? `Urenbundel ${bundle.name} — ${bundle.hours} uur p/m (€ ${bundle.pricePerMonth} p/m)`
+      : null;
+  }
+  if (value.startsWith('mkb-')) {
+    const pkg = packages.find((p) => p.id === value.slice('mkb-'.length));
+    return pkg ? `${pkg.name} — vanaf € ${pkg.priceFrom} p/m` : null;
+  }
+  return null;
+}
+
+export function OfferteForm() {
+  const rawService = useQueryParam('dienst');
+  const chosen = offerteDiensten.some((o) => o.value === rawService) ? (rawService as string) : '';
+  const chosenLabel = offerteDiensten.find((o) => o.value === chosen)?.label;
+  const chosenPackage = resolvePackage(useQueryParam('pakket'));
 
   const { formRef, onSubmit, status, errors, message } = useForm({
     kind: 'offerte',
     schema: () => import('@/lib/forms/schemas').then((m) => m.offerteSchema),
-    arrayFields: ['gewensteOndersteuning'],
     booleanFields: ['privacyAkkoord'],
   });
 
   if (status === 'success') {
     return (
       <FormSuccess
-        title="Bedankt voor uw offerteaanvraag."
-        text={message ?? 'Wij bekijken uw gegevens en nemen zo snel mogelijk contact met u op.'}
+        title="Bedankt voor uw aanvraag."
+        text={
+          message ??
+          'We beoordelen de werkzaamheden en nemen contact met u op om de scope en een passend vast tarief af te stemmen.'
+        }
       />
     );
   }
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="relative space-y-10" aria-label="Offerteformulier">
+    <form
+      ref={formRef}
+      onSubmit={onSubmit}
+      noValidate
+      className="relative space-y-10"
+      aria-label="Offerteformulier"
+    >
       <Honeypot />
+
       {chosenPackage && (
         <>
-          <input type="hidden" name="pakket" value={chosenPackage.name} />
+          <input type="hidden" name="pakket" value={chosenPackage} />
           <p className="rounded-lg border border-accent/40 bg-accent-soft px-4 py-3 text-sm text-text">
-            Gekozen pakket: <strong className="font-semibold">{chosenPackage.name}</strong> (vanaf €{' '}
-            {chosenPackage.priceFrom} p/m, excl. btw). Wij nemen dit mee in het voorstel.
+            Uw keuze: <strong className="font-semibold">{chosenPackage}</strong>, exclusief btw. Wij
+            nemen dit mee in het voorstel.
           </p>
         </>
+      )}
+
+      {chosenLabel && (
+        <p className="rounded-lg border border-accent/40 bg-accent-soft px-4 py-3 text-sm text-text">
+          Uw aanvraag gaat over <strong className="font-semibold">{chosenLabel}</strong>. U kunt dit
+          hieronder nog aanpassen.
+        </p>
       )}
 
       <Fieldset legend="Uw gegevens">
         <div className="grid gap-5 sm:grid-cols-2">
           <Input label="Naam" name="naam" autoComplete="name" required error={errors.naam} />
-          <Input label="Bedrijfsnaam" name="bedrijfsnaam" autoComplete="organization" error={errors.bedrijfsnaam} />
-          <Input label="E-mailadres" name="email" type="email" autoComplete="email" inputMode="email" required error={errors.email} />
-          <Input label="Telefoonnummer" name="telefoon" type="tel" autoComplete="tel" inputMode="tel" error={errors.telefoon} />
+          <Input
+            label="Bedrijfsnaam"
+            name="bedrijfsnaam"
+            autoComplete="organization"
+            required
+            error={errors.bedrijfsnaam}
+          />
+          <Input
+            label="E-mailadres"
+            name="email"
+            type="email"
+            autoComplete="email"
+            inputMode="email"
+            required
+            error={errors.email}
+          />
+          <Input
+            label="Telefoonnummer"
+            name="telefoon"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            error={errors.telefoon}
+          />
         </div>
       </Fieldset>
 
-      <Fieldset legend="Uw onderneming">
-        <div className="grid gap-5 sm:grid-cols-2">
-          <Select label="Rechtsvorm" name="rechtsvorm" options={rechtsvormen} required error={errors.rechtsvorm} />
-          <Select label="Branche" name="branche" options={branches} required error={errors.branche} />
-        </div>
+      <Fieldset legend="Uw aanvraag">
         <Select
-          label="Huidige situatie"
-          name="huidigeSituatie"
-          options={huidigeSituaties}
+          key={chosen || 'leeg'}
+          label="Gewenste dienst"
+          name="gewensteDienst"
+          options={offerteDiensten}
+          defaultValue={chosen}
           required
-          error={errors.huidigeSituatie}
+          error={errors.gewensteDienst}
         />
-      </Fieldset>
 
-      <Fieldset legend="Gewenste ondersteuning">
-        <CheckboxGroup
-          legend="Waar kunnen wij u mee helpen?"
-          name="gewensteOndersteuning"
-          options={gewensteOndersteuning}
-          required
-          hint="Meerdere keuzes mogelijk."
-          error={errors.gewensteOndersteuning}
-        />
-      </Fieldset>
-
-      <Fieldset legend="Omvang van uw administratie">
-        <p className="-mt-2 text-sm text-muted">
-          Een inschatting is voldoende; dit helpt ons een passend voorstel te maken.
-        </p>
         <div className="grid gap-5 sm:grid-cols-3">
-          <Input label="Transacties per maand" name="transactiesPerMaand" inputMode="numeric" placeholder="bijv. 50" error={errors.transactiesPerMaand} />
-          <Input label="Verkoopfacturen per maand" name="verkoopfacturen" inputMode="numeric" placeholder="bijv. 10" error={errors.verkoopfacturen} />
-          <Input label="Inkoopfacturen per maand" name="inkoopfacturen" inputMode="numeric" placeholder="bijv. 20" error={errors.inkoopfacturen} />
+          <Input
+            label="Aantal administraties"
+            name="aantalAdministraties"
+            inputMode="numeric"
+            placeholder="bijv. 25"
+            error={errors.aantalAdministraties}
+          />
+          <Input
+            label="Boekhoudsoftware"
+            name="boekhoudsoftware"
+            placeholder="bijv. AFAS"
+            error={errors.boekhoudsoftware}
+          />
+          <Input
+            label="Gewenste periode of deadline"
+            name="periode"
+            placeholder="bijv. voor 1 maart"
+            error={errors.periode}
+          />
         </div>
+
         <Textarea
-          label="Bericht"
-          name="bericht"
-          rows={5}
-          placeholder="Is er iets dat wij moeten weten over uw situatie of wensen?"
-          error={errors.bericht}
+          label="Omschrijving van de werkzaamheden"
+          name="omschrijving"
+          required
+          rows={6}
+          placeholder="Welke werkzaamheden wilt u uitbesteden, om welke periode gaat het en wat is de huidige stand van de administratie?"
+          hint="Hoe concreter u dit beschrijft, hoe nauwkeuriger ons voorstel kan zijn."
+          error={errors.omschrijving}
         />
       </Fieldset>
 
@@ -116,7 +178,10 @@ export function OfferteForm() {
           label={
             <>
               Ik ga akkoord met het{' '}
-              <Link to={routes.privacy.path} className="font-medium text-primary underline underline-offset-4">
+              <Link
+                to={routes.privacy.path}
+                className="font-medium text-primary underline underline-offset-4"
+              >
                 privacybeleid
               </Link>
               .
@@ -124,7 +189,11 @@ export function OfferteForm() {
           }
         />
         {status === 'error' && <FormError text={message} />}
-        <SubmitRow status={status} label="Verstuur offerteaanvraag" note="Vrijblijvend en zonder verplichtingen." />
+        <SubmitRow
+          status={status}
+          label="Vraag een prijsvoorstel aan"
+          note="Vrijblijvend. Dit is een aanvraag, geen automatische prijsberekening."
+        />
       </div>
     </form>
   );

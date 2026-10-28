@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { Container, Section } from '@/components/ui/Container';
+import { Container } from '@/components/ui/Container';
 import { routes } from '@/config/routes';
 
 interface CtaButton {
@@ -9,46 +9,63 @@ interface CtaButton {
 }
 
 interface CtaBandProps {
+  eyebrow?: string;
   title?: string;
   text?: string;
   primary?: CtaButton;
   /** `null` verbergt de tweede knop */
   secondary?: CtaButton | null;
+  /** Genegeerd: de band is altijd donker. Blijft staan zodat bestaande aanroepen werken. */
   tone?: 'alt' | 'default';
 }
 
-/** Afsluitende call-to-action. Herbruikbaar op alle pagina's. */
+/** Afsluitende call-to-action in een donkere band. Herbruikbaar op alle pagina's. */
 export function CtaBand({
-  title = 'Klaar voor meer overzicht in uw administratie?',
-  text = 'Laten we samen bekijken hoe MERIT Administratie & Advies uw onderneming administratief kan ondersteunen.',
+  eyebrow = 'Klaar voor extra capaciteit?',
+  title = 'Meer weten over wat MERIT voor uw kantoor kan betekenen?',
+  text = 'Bespreek uw werkzaamheden en ontvang een passend voorstel.',
   primary = { label: 'Plan een kennismaking', to: routes.kennismaking.path },
-  secondary = { label: 'Vraag een offerte aan', to: routes.offerte.path },
-  tone = 'alt',
+  secondary = { label: 'Neem contact op', to: routes.contact.path },
 }: CtaBandProps) {
   return (
-    <Section tone={tone} aria-labelledby="cta-title">
-      <Container>
-        <div className="reveal relative overflow-hidden rounded-xl border border-default bg-surface px-6 py-12 text-center shadow-md sm:px-12 md:py-16">
-          <span
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,var(--brand-primary),var(--brand-accent))]"
-          />
-          <h2 id="cta-title" className="mx-auto max-w-2xl text-3xl font-semibold sm:text-4xl">
-            {title}
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg text-muted">{text}</p>
-          <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button to={primary.to} size="lg" iconRight={<ArrowRight />}>
+    <section className="relative overflow-hidden bg-surface-dark text-on-dark" aria-labelledby="cta-title">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10"
+        style={{
+          background:
+            'radial-gradient(70% 140% at 82% 20%, #15325c 0%, transparent 60%), var(--brand-primary)',
+        }}
+      />
+      <Container className="py-14 md:py-16 lg:py-20">
+        <div className="reveal flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+          <div className="min-w-0">
+            {eyebrow && (
+              <p className="mb-4 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-light uppercase sm:text-xs">
+                {eyebrow}
+              </p>
+            )}
+            <h2
+              id="cta-title"
+              className="max-w-2xl text-[1.625rem] leading-[1.22] text-on-dark sm:text-[2rem] lg:text-[2.25rem] lg:leading-[1.18]"
+            >
+              {title}
+            </h2>
+            <p className="mt-4 max-w-xl text-[1.0625rem] text-on-dark-muted">{text}</p>
+          </div>
+
+          <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row [&>*]:w-full sm:[&>*]:w-auto">
+            <Button to={primary.to} size="lg" variant="secondary" iconRight={<ArrowRight />}>
               {primary.label}
             </Button>
             {secondary && (
-              <Button to={secondary.to} size="lg" variant="outline">
+              <Button to={secondary.to} size="lg" variant="onDarkOutline">
                 {secondary.label}
               </Button>
             )}
           </div>
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }

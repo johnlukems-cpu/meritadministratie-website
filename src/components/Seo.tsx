@@ -21,7 +21,8 @@ export interface SeoProps {
 
 function buildHeadData(props: SeoProps, pathname: string): HeadData {
   const path = props.canonicalPath ?? pathname;
-  const normalized = path === '/' ? '' : path.replace(/\/+$/, '');
+  // Root → '/' zodat de canonical exact gelijk is aan de URL in sitemap.xml.
+  const normalized = path === '/' ? '/' : path.replace(/\/+$/, '');
   const ogImage = props.ogImage ?? siteConfig.ogImage;
 
   return {
@@ -50,7 +51,13 @@ function upsertMeta(selector: string, attrs: Record<string, string>) {
 function applyHeadToDocument(head: HeadData) {
   document.title = head.title;
   upsertMeta('meta[name="description"]', { name: 'description', content: head.description });
-  upsertMeta('link[rel="canonical"]', { rel: 'canonical', href: head.canonical });
+  // Een noindex-pagina (zoals 404) krijgt geen canonical; een achtergebleven canonical
+  // van de vorige route zou naar de verkeerde URL verwijzen.
+  if (head.noindex) {
+    document.head.querySelector('link[rel="canonical"]')?.remove();
+  } else {
+    upsertMeta('link[rel="canonical"]', { rel: 'canonical', href: head.canonical });
+  }
   upsertMeta('meta[name="robots"]', {
     name: 'robots',
     content: head.noindex ? 'noindex, nofollow' : 'index, follow',

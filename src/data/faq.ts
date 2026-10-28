@@ -6,134 +6,191 @@ export interface FaqGroup {
   items: AccordionItem[];
 }
 
-/** Veelgestelde vragen per onderwerp — pagina /faq. Homepage toont een selectie. */
+/**
+ * Veelgestelde vragen per onderwerp — pagina /faq. De homepage toont een selectie
+ * (zie `homeFaq`). Antwoorden beschrijven uitsluitend werkzaamheden en afspraken die
+ * MERIT daadwerkelijk kan uitvoeren; er worden geen resultaten of besparingen gegarandeerd.
+ */
 export const faqGroups: FaqGroup[] = [
   {
-    id: 'algemeen',
-    title: 'Algemeen',
+    id: 'samenwerking',
+    title: 'Samenwerking en werkwijze',
     items: [
       {
-        question: 'Voor welke ondernemers is MERIT Administratie & Advies geschikt?',
+        question: 'Voor welke organisaties werkt MERIT?',
         answer:
-          'Wij werken voor zzp’ers, eenmanszaken, startende ondernemers, kleine ondernemingen, MKB-bedrijven en bv’s. Of u nu net begint of al jaren onderneemt: wij stemmen onze dienstverlening af op uw situatie en de omvang van uw administratie.',
+          'Wij ondersteunen in de eerste plaats Nederlandse administratie- en accountantskantoren met financiële backofficewerkzaamheden. Daarnaast ondersteunen wij mkb-ondernemingen met hun financiële administratie.',
       },
       {
-        question: 'Kan ik eerst vrijblijvend kennismaken?',
+        question: 'Werken jullie in onze eigen software en volgens onze procedures?',
         answer:
-          'Zeker. In een kort kennismakingsgesprek bespreken wij uw situatie en wensen en leggen wij uit hoe wij werken. U zit nergens aan vast.',
+          'Ja. Wij werken binnen de software, de procedures en de werkafspraken van uw kantoor. Bij de start leggen wij samen vast hoe wordt aangeleverd, welke stappen wij uitvoeren en hoe wij terugkoppelen.',
       },
       {
-        question: 'Kan ik mijn volledige administratie uitbesteden?',
+        question: 'Hoe wordt vastgelegd wie waarvoor verantwoordelijk is?',
         answer:
-          'Dat kan. U deelt uw facturen en bonnen digitaal met ons; wij verwerken de administratie in AFAS, verzorgen de aangiften en houden u op de hoogte. Wilt u een deel zelf blijven doen, dan is dat ook mogelijk.',
+          'Voorafgaand aan de samenwerking leggen wij schriftelijk vast welke werkzaamheden wij uitvoeren, welke werkzaamheden bij uw kantoor blijven en op welke momenten wordt gecontroleerd en afgestemd. De beoordeling, goedkeuring en indiening van aangiften en jaarstukken blijven bij de daartoe bevoegde verantwoordelijke partij, tenzij uitdrukkelijk anders overeengekomen.',
       },
       {
-        question: 'Hoe deel ik mijn facturen en bonnen met jullie?',
+        question: 'Kunnen wij klein beginnen?',
         answer:
-          'Digitaal: per e-mail, via een gedeelde omgeving of rechtstreeks in AFAS. Wij maken hierover bij de start praktische afspraken, zodat het aanleveren u zo min mogelijk tijd kost.',
+          'Ja. Veel kantoren starten met een beperkt aantal uren per maand of met één afgebakende opdracht. Zodra duidelijk is welke werkzaamheden goed overdraagbaar zijn, kunt u de omvang uitbreiden.',
+      },
+      {
+        question: 'Hoe wordt teruggekoppeld wat is verwerkt?',
+        answer:
+          'Wij koppelen terug welke werkzaamheden zijn verwerkt en wat aandacht vraagt: ontbrekende documenten, afwijkingen en posten die een beoordeling van uw kantoor nodig hebben. De vorm en frequentie van die terugkoppeling spreken wij vooraf af.',
+      },
+      {
+        question: 'Kunnen jullie ook bij piekbelasting worden ingezet?',
+        answer:
+          'Dat is een van de meest voorkomende redenen voor samenwerking. Rond btw-aangifteperioden en jaarafsluitingen kunt u extra capaciteit inzetten voor afgebakende werkzaamheden. Wij bespreken vooraf welke omvang haalbaar is binnen de gewenste doorlooptijd.',
       },
     ],
   },
   {
-    id: 'tarieven',
-    title: 'Pakketten en tarieven',
+    id: 'uitbesteden',
+    title: 'Werk uitbesteden',
     items: [
       {
-        question: 'Wat kost een administratie bij MERIT?',
+        question: 'Welke werkzaamheden kunnen wij uitbesteden?',
         answer:
-          'Onze pakketten beginnen bij € 125 per maand (MERIT Start) en lopen op tot € 950+ per maand voor een volledige externe financiële afdeling (MERIT Finance). Alle bedragen zijn vanaf-tarieven en exclusief 21% btw. Het definitieve tarief hangt af van het aantal mutaties, administraties, medewerkers en de gewenste dienstverlening.',
+          'Onder andere het verwerken van inkoop- en verkoopfacturen en bankmutaties, debiteuren- en crediteurenbeheer, grootboekcontroles, het voorbereiden van btw-aangiften, het voorbereiden van jaarafsluitingen en balansdossiers, en het wegwerken van administratieve achterstanden.',
       },
       {
-        question: 'Wat is een mutatie?',
+        question: 'Werken jullie ook aan administratieve achterstanden?',
         answer:
-          'Een mutatie is een boeking in uw administratie, bijvoorbeeld een inkoopfactuur, een verkoopfactuur of een bankregel. Het aantal mutaties per maand bepaalt grotendeels de omvang van het werk en daarmee het tarief.',
+          'Ja. Het wegwerken van achterstanden is een afgebakende opdracht: wij bepalen eerst de omvang en de staat van de administratie en doen daarna een voorstel met een werkwijze en controlepunten.',
       },
       {
-        question: 'Zit de jaarrekening in het pakket?',
+        question: 'Hoe worden documenten en gegevens aangeleverd?',
         answer:
-          'Bij het instappakket vanaf € 125 per maand is de jaarlijkse jaarafsluiting/jaarrekening niet automatisch inbegrepen; deze kan als aanvullende dienst worden toegevoegd. Bij MERIT Finance is jaarwerk onderdeel van het pakket. Zo blijft het instaptarief laag en het pakket schaalbaar.',
+          'Digitaal, op de manier die binnen uw kantoor gebruikelijk is: via uw eigen omgeving, een gedeelde map of rechtstreeks in de software waarin wordt gewerkt. Wij maken hierover bij de start praktische afspraken.',
       },
       {
-        question: 'Zijn de prijzen inclusief btw?',
-        answer: 'Nee. Alle genoemde prijzen zijn exclusief 21% btw.',
+        question: 'Blijft ons kantoor het aanspreekpunt voor de klant?',
+        answer:
+          'Ja, tenzij u daarover andere afspraken met ons maakt. Standaard werken wij op de achtergrond: uw kantoor houdt het klantcontact en wij verzorgen de overeengekomen werkzaamheden.',
       },
     ],
   },
   {
-    id: 'aangiften',
-    title: 'Aangiften',
+    id: 'btw',
+    title: 'Btw-aangiften',
     items: [
       {
-        question: 'Kunnen jullie mijn btw-aangifte verzorgen?',
+        question: 'Verzorgen jullie de volledige btw-aangifte?',
         answer:
-          'Ja. Wij bereiden uw btw-aangifte voor op basis van de verwerkte administratie, stemmen deze met u af en dienen de aangifte tijdig in. Ook de ICP-opgaaf voor leveringen binnen de EU nemen wij mee.',
+          'Wij verzorgen de administratieve voorbereiding en verwerking: het controleren van btw-coderingen en btw-rekeningen, het aansluiten van de btw-administratie op het grootboek en het opstellen van de onderbouwing. De fiscale beoordeling, de goedkeuring en het indienen van de aangifte vinden plaats volgens de afspraken die wij met uw kantoor maken.',
       },
       {
-        question: 'Verzorgen jullie ook de aangifte inkomstenbelasting en vennootschapsbelasting?',
+        question: 'Wie controleert en dient de aangifte in?',
         answer:
-          'Ja. De IB-aangifte voor ondernemers en dga’s en de vpb-aangifte voor bv’s bereiden wij voor op basis van het jaarwerk en stemmen wij met u af voordat ze worden ingediend.',
+          'Dat leggen wij per samenwerking vast. Standaard bereidt MERIT de aangifte voor en controleert en dient uw kantoor de aangifte in. Afwijkende afspraken zijn mogelijk en worden schriftelijk vastgelegd.',
       },
       {
-        question: 'Geven jullie ook fiscaal advies?',
+        question: 'Kunnen jullie ICP-opgaven voorbereiden?',
         answer:
-          'Onze kern is de administratieve verwerking en het voorbereiden van aangiften. Waar wij mogelijkheden of aandachtspunten zien, benoemen wij die. Voor specifieke fiscale vraagstukken stemmen wij met u af of aanvullend advies nodig is.',
+          'Ja. Wij kunnen de gegevens voor ICP-opgaven voorbereiden en de administratieve verwerking van intracommunautaire transacties controleren.',
+      },
+      {
+        question: 'Kunnen jullie btw-boekingen uit eerdere perioden herstellen?',
+        answer:
+          'Ja. Wij kunnen btw-boekingen uit eerdere perioden controleren en herstellen en de bijbehorende aansluitingen en controledocumentatie voorbereiden. Dit is doorgaans een afgebakende opdracht met een eigen voorstel.',
+      },
+      {
+        question: 'Hoe gaan jullie om met buitenlandse btw-vraagstukken?',
+        answer:
+          'Wij ondersteunen bij buitenlandse btw-vraagstukken binnen de overeengekomen deskundigheid en afbakening. Valt een vraagstuk daarbuiten, dan geven wij dat aan zodat uw kantoor of een specialist het kan beoordelen.',
+      },
+    ],
+  },
+  {
+    id: 'jaarafsluiting',
+    title: 'Jaarafsluiting en jaarrekeningen',
+    items: [
+      {
+        question: 'Wat doen jullie precies rond de jaarafsluiting?',
+        answer:
+          'Wij verzorgen de administratieve voorbereiding: het controleren van grootboekrekeningen, het aansluiten van bankadministraties, het controleren van debiteuren, crediteuren en tussenrekeningen, het opstellen van specificaties van balansrekeningen en het voorbereiden van balansdossiers en aansluitingen.',
+      },
+      {
+        question: 'Stellen jullie de jaarrekening op?',
+        answer:
+          'Wij kunnen ondersteunen bij het samenstellen van conceptjaarrekeningen, voor zover dat binnen de expertise en de opdracht valt. De verantwoordelijkheid voor de definitieve beoordeling en vaststelling ligt volgens de afspraken bij de bevoegde verantwoordelijke partij.',
+      },
+      {
+        question: 'Voert MERIT wettelijke accountantscontroles uit?',
+        answer:
+          'Nee. MERIT is geen accountantsorganisatie die wettelijke controles uitvoert. Onze werkzaamheden betreffen administratieve voorbereiding, verwerking en controle, en zijn geen wettelijke controle of assurance.',
+      },
+      {
+        question: 'Wat is het verschil tussen de administratieve jaarafsluiting en het samenstellen van een jaarrekening?',
+        answer:
+          'Bij de administratieve jaarafsluiting wordt de administratie controleerbaar en sluitend gemaakt: posten gecontroleerd, aansluitingen gemaakt en specificaties opgesteld. Het voorbereiden van een jaarrekening betreft het opbouwen van het dossier en de overzichten daarvoor. Het samenstellen van een jaarrekening is het opstellen van de jaarrekening zelf; een wettelijke accountantscontrole is een afzonderlijke, wettelijk geregelde opdracht.',
       },
     ],
   },
   {
     id: 'afas',
-    title: 'AFAS',
+    title: 'AFAS en software',
     items: [
       {
-        question: 'Moet ik AFAS gebruiken om klant te worden?',
+        question: 'Werken jullie in AFAS?',
         answer:
-          'Wij werken met AFAS en zetten daar uw administratie in op. Werkt u nog niet met AFAS, dan helpen wij u bij de inrichting of de overstap. Zo profiteert u van één professionele, veilige omgeving waarin uw cijfers altijd actueel zijn.',
+          'Ja. Wij ondersteunen bij de financiële verwerking en bij workflows in AFAS, volgens de processen en werkafspraken van uw kantoor.',
       },
       {
-        question: 'Wat is een AFAS Quick Scan?',
+        question: 'Is MERIT een gecertificeerd AFAS-partner?',
         answer:
-          'Een beknopte beoordeling van uw huidige AFAS-inrichting: wat werkt goed, waar zit dubbel werk en welke verbeteringen zijn mogelijk. U ontvangt een overzicht met concrete aanbevelingen. De Quick Scan is een eenmalige dienst vanaf € 350.',
+          'Wij presenteren ons niet als officieel AFAS-partner en claimen geen certificering of modulespecifieke expertise. Wij geven vooraf aan welke werkzaamheden binnen onze aantoonbare deskundigheid vallen.',
       },
       {
-        question: 'Kunnen jullie helpen bij het overstappen naar AFAS?',
+        question: 'Kunnen jullie ook in andere software werken?',
         answer:
-          'Ja. Wij begeleiden de overstap van uw huidige pakket naar AFAS: van inventarisatie en inrichting tot het overzetten van gegevens en de eerste periode werken. Laat u uw financiële administratie door MERIT verzorgen, dan zijn de inrichting en de overstap naar AFAS kosteloos inbegrepen. Aanvullende begeleiding, training of advies buiten de inbegrepen werkzaamheden is beschikbaar op basis van het geldende uurtarief.',
+          'Dat bespreken wij per situatie. Bepalend is of de werkzaamheden binnen onze deskundigheid vallen en of wij binnen uw procedures kunnen werken. Wij geven vooraf aan wat haalbaar is.',
       },
     ],
   },
   {
-    id: 'overstappen',
-    title: 'Overstappen van boekhouder',
+    id: 'tarieven',
+    title: 'Tarieven en afspraken',
     items: [
       {
-        question: 'Kan ik overstappen vanaf mijn huidige boekhouder?',
+        question: 'Hoe zijn de tarieven opgebouwd?',
         answer:
-          'Ja. Overstappen kan op elk moment, al is de start van een nieuw kwartaal of boekjaar vaak het meest praktisch. Wij stemmen de overdracht met u af en vragen de benodigde gegevens op, zodat u er zelf weinig werk aan heeft.',
+          'Wij werken met uurtarieven per type werkzaamheden en met maandelijkse urenbundels tegen een voordeliger effectief uurtarief. Projectmatige opdrachten en automatiseringsprojecten worden afzonderlijk geoffreerd. Alle tarieven zijn exclusief 21% btw.',
       },
       {
-        question: 'Hoe werkt een overstap van boekhouder?',
+        question: 'Wat is het voordeel van een urenbundel?',
         answer:
-          'Na uw akkoord nemen wij contact op met uw huidige boekhouder en vragen wij de administratie en relevante stukken op. Wij controleren de overgenomen gegevens, richten de administratie in AFAS in en nemen de werkzaamheden vanaf de afgesproken datum over.',
+          'Een urenbundel geeft u elke maand een vast aantal uren ondersteuning tegen een voordeliger effectief uurtarief, zodat de capaciteit beschikbaar is wanneer u die nodig heeft. De werkzaamheden binnen de bundel worden vooraf vastgelegd.',
       },
       {
-        question: 'Wat als mijn administratie niet helemaal op orde is?',
+        question: 'Wordt meerwerk automatisch uitgevoerd?',
         answer:
-          'Dat komt vaker voor en is geen probleem. Wij bekijken wat er ontbreekt of niet klopt en brengen de administratie in overleg met u op orde.',
+          'Nee. Meerwerk wordt vooraf met u besproken en pas na uw akkoord uitgevoerd.',
+      },
+      {
+        question: 'Ontvangen wij vooraf een voorstel?',
+        answer:
+          'Ja. Na de kennismaking en inventarisatie ontvangt u een voorstel waarin de werkzaamheden, het tarief of de urenbundel, de verantwoordelijkheden en de controlemomenten staan.',
       },
     ],
   },
 ];
 
-/** Selectie voor de homepage */
+/** Selectie voor de homepage: de meest gestelde vragen over samenwerking en tarieven. */
 export const homeFaq: AccordionItem[] = [
   faqGroups[0].items[0],
-  faqGroups[1].items[0],
-  faqGroups[3].items[0],
-  faqGroups[4].items[0],
-  faqGroups[0].items[2],
-  faqGroups[2].items[0],
   faqGroups[0].items[1],
+  faqGroups[0].items[3],
+  faqGroups[1].items[0],
+  faqGroups[2].items[0],
+  faqGroups[3].items[0],
+  faqGroups[5].items[0],
+  faqGroups[5].items[1],
 ];
 
-/** Alle vragen plat (voor FAQPage structured data) */
-export const allFaq: AccordionItem[] = faqGroups.flatMap((g) => g.items);
+/** Alle vragen plat — voor FAQPage structured data op /faq. */
+export const allFaqItems: AccordionItem[] = faqGroups.flatMap((g) => g.items);

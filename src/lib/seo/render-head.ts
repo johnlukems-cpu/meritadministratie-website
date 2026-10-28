@@ -23,7 +23,8 @@ export function renderHeadHtml(head: HeadData, siteName: string, locale: string)
   const tags: string[] = [
     `<title>${escapeHtml(head.title)}</title>`,
     `<meta name="description" content="${escapeHtml(head.description)}" />`,
-    `<link rel="canonical" href="${escapeHtml(head.canonical)}" />`,
+    // Een noindex-pagina (404) krijgt geen canonical.
+    ...(head.noindex ? [] : [`<link rel="canonical" href="${escapeHtml(head.canonical)}" />`]),
     `<meta name="robots" content="${head.noindex ? 'noindex, nofollow' : 'index, follow'}" />`,
     `<meta property="og:type" content="${head.ogType}" />`,
     `<meta property="og:site_name" content="${escapeHtml(siteName)}" />`,

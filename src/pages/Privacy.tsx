@@ -6,7 +6,7 @@ import { siteConfig } from '@/config/site';
 import { routes } from '@/config/routes';
 
 /** Datum van de laatste wijziging — pas aan bij elke inhoudelijke wijziging. */
-const UPDATED = '16 september 2026';
+const UPDATED = '28 oktober 2026';
 
 /**
  * Bedrijfsgegevens komen uit siteConfig. Zolang een gegeven daar `null` is,
@@ -77,24 +77,37 @@ const sections: LegalSection[] = [
         <h3>Contactformulier</h3>
         <ul>
           <li>Naam</li>
-          <li>Bedrijfsnaam (optioneel)</li>
+          <li>Naam van uw organisatie</li>
           <li>E-mailadres</li>
           <li>Telefoonnummer (optioneel)</li>
-          <li>Onderwerp en de inhoud van uw bericht</li>
+          <li>Type organisatie en de gewenste dienst</li>
+          <li>Gewenst aantal uren per maand (optioneel)</li>
+          <li>Gewenste startdatum (optioneel)</li>
+          <li>De inhoud van uw bericht</li>
         </ul>
-        <h3>Offerteaanvraag</h3>
+        <h3>Aanvraag voor een prijsvoorstel of offerte</h3>
         <ul>
-          <li>Naam, bedrijfsnaam, e-mailadres en telefoonnummer</li>
-          <li>Rechtsvorm, branche en huidige administratieve situatie</li>
-          <li>Gewenste ondersteuning</li>
-          <li>Indicatie van de omvang van uw administratie (aantallen transacties en facturen)</li>
-          <li>Eventuele toelichting in het berichtveld</li>
+          <li>Naam, bedrijfsnaam, e-mailadres en telefoonnummer (telefoonnummer optioneel)</li>
+          <li>De gewenste dienst</li>
+          <li>Aantal administraties (optioneel)</li>
+          <li>Welke boekhoudsoftware u gebruikt (optioneel)</li>
+          <li>Gewenste periode of deadline (optioneel)</li>
+          <li>Uw omschrijving van de werkzaamheden</li>
+          <li>Een eerder gekozen urenbundel of pakket, als u via zo'n knop bent gekomen</li>
         </ul>
         <h3>Kennismakingsaanvraag</h3>
         <ul>
-          <li>Naam, bedrijfsnaam, e-mailadres en telefoonnummer</li>
-          <li>Gewenste dienst en eventuele toelichting</li>
+          <li>Naam, naam van uw organisatie, e-mailadres en telefoonnummer</li>
+          <li>Type organisatie en de gewenste dienst</li>
+          <li>Gewenst aantal uren per maand en gewenste startdatum (optioneel)</li>
+          <li>Eventuele toelichting</li>
         </ul>
+        <p>
+          Wij vragen via deze formulieren uitsluitend zakelijke contactgegevens en informatie over
+          de gewenste dienstverlening. Stuur ons via de website geen gegevens van uw eigen klanten
+          of andere vertrouwelijke administratiegegevens; die wisselen wij pas uit nadat wij
+          daarover afspraken hebben gemaakt.
+        </p>
         <h3>Technische gegevens</h3>
         <p>
           Bij het bezoeken van de website kunnen technische gegevens worden verwerkt die nodig zijn

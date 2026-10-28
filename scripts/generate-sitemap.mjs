@@ -9,7 +9,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const { routeList } = await import(pathToFileURL(join(root, 'src/config/routes.ts')).href);
 
-const SITE_URL = 'https://meritadministratie.nl';
+const { SITE_URL } = await import(pathToFileURL(join(root, 'src/config/url.ts')).href);
 const today = new Date().toISOString().slice(0, 10);
 
 const urls = routeList

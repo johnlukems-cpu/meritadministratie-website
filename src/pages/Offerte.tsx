@@ -9,8 +9,9 @@ import { routes } from '@/config/routes';
 import { breadcrumbJsonLd } from '@/lib/seo/json-ld';
 
 const verwachting = [
-  'Wij bekijken uw gegevens en nemen contact met u op als iets onduidelijk is.',
-  'U ontvangt een helder voorstel, afgestemd op uw situatie en omvang.',
+  'Wij beoordelen de werkzaamheden en nemen contact met u op als iets onduidelijk is.',
+  'Samen stemmen wij de scope af: welke werkzaamheden, welke periode en welke aanlevering.',
+  'U ontvangt een voorstel met een vast tarief, de verantwoordelijkheden en de controlemomenten.',
   'Geen verplichtingen: u beslist zelf of en wanneer u start.',
 ];
 
@@ -19,19 +20,16 @@ export default function Offerte() {
     <>
       <Seo
         title="Offerte aanvragen"
-        description="Vraag vrijblijvend een offerte aan voor administratie, boekhouding of belastingaangiften. Vertel kort over uw onderneming; wij nemen daarna contact met u op."
+        description="Vraag vrijblijvend een prijsvoorstel aan voor btw-aangiften, jaarrekeningen, financiële backoffice, AFAS-ondersteuning, Finance Control of automatisering. Vaste tarieven op afspraak."
         jsonLd={[
-          breadcrumbJsonLd([
-            { name: 'Home', path: '/' },
-            { name: 'Offerte aanvragen', path: routes.offerte.path },
-          ]),
+          breadcrumbJsonLd([{ name: 'Prijsvoorstel aanvragen', path: routes.offerte.path }]),
         ]}
       />
       <PageHero
         eyebrow="Offerte"
-        title="Vraag een offerte aan"
-        intro="Vertel ons kort over uw onderneming en uw administratieve situatie. Wij nemen daarna contact met u op."
-        breadcrumbs={[{ name: 'Offerte aanvragen', path: routes.offerte.path }]}
+        title="Vraag een prijsvoorstel aan"
+        intro="Vertel ons welke werkzaamheden u wilt uitbesteden en wat de omvang ongeveer is. Wij beoordelen de werkzaamheden en nemen contact met u op om de scope en een passend tarief af te stemmen."
+        breadcrumbs={[{ name: 'Prijsvoorstel aanvragen', path: routes.offerte.path }]}
       />
 
       <Section aria-labelledby="offerte-form-title">
@@ -39,7 +37,7 @@ export default function Offerte() {
           <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
             <div className="reveal rounded-xl border border-default bg-surface p-6 shadow-md sm:p-8 lg:p-10">
               <h2 id="offerte-form-title" className="text-2xl font-semibold">
-                Uw offerteaanvraag
+                Uw aanvraag
               </h2>
               <p className="mt-2 mb-8 text-[0.9375rem] text-muted">
                 Velden met een <span className="text-error">*</span> zijn verplicht. Weet u iets niet
@@ -68,7 +66,7 @@ export default function Offerte() {
               <div className="rounded-lg border border-default p-6">
                 <h2 className="text-lg font-semibold">Liever eerst kennismaken?</h2>
                 <p className="mt-2 text-[0.9375rem] text-muted">
-                  In een kort gesprek bespreken we uw situatie en bekijken we samen wat u nodig heeft.
+                  In een kort gesprek bespreken wij uw werkvoorraad en bekijken wij samen welke werkzaamheden zich goed laten overdragen.
                 </p>
                 <Link
                   to={routes.kennismaking.path}

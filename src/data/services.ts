@@ -1,203 +1,98 @@
 import type { LucideIcon } from 'lucide-react';
 import {
-  ArrowRightLeft,
-  BarChart3,
-  BookOpenCheck,
-  Building2,
   Calculator,
-  CalendarCheck,
-  ClipboardList,
-  FileCheck2,
   FileSpreadsheet,
   FolderKanban,
-  Globe2,
-  Landmark,
-  Receipt,
-  Rocket,
+  Settings2,
+  ShieldCheck,
   Workflow,
 } from 'lucide-react';
 import { routes } from '@/config/routes';
-
-export type ServiceCategory = 'administratie' | 'aangiften' | 'jaarwerk' | 'afas' | 'ondersteuning';
-
-export interface ServiceSummary {
-  /** Unieke sleutel, ook bruikbaar als anker */
-  id: string;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  category: ServiceCategory;
-  /** Doelpagina met meer informatie */
-  to: string;
-  /** Vanaf-tarief zoals in het Prijzenoverzicht 2026 (excl. btw); ontbreekt = op aanvraag/in pakket */
-  priceFrom?: string;
-  /** Tonen op de homepage */
-  featured?: boolean;
-}
-
-export const serviceCategories: Record<ServiceCategory, string> = {
-  administratie: 'Financiële administratie',
-  aangiften: 'Aangiften',
-  jaarwerk: 'Jaarwerk & rapportage',
-  afas: 'AFAS',
-  ondersteuning: 'Ondersteuning & overstappen',
-};
+import { QUOTED_LABEL } from '@/data/pricing';
 
 /**
- * Alle diensten. Volgorde = weergavevolgorde op /diensten.
- * Prijzen komen uitsluitend uit het Prijzenoverzicht 2026.
+ * De zes diensten waarmee MERIT administratie- en accountantskantoren ondersteunt.
+ * Bron voor het dienstenoverzicht op de homepage, de pagina /diensten, de footer en
+ * de keuzelijsten in de formulieren.
+ *
+ * `priceFrom` moet gelijk blijven aan het tarief in src/data/pricing.ts. Voor diensten
+ * met `quoted: true` daar staat hier `QUOTED_LABEL` — die diensten krijgen nergens op
+ * de website een uurtarief of vanaf-prijs.
  */
-export const allServices: ServiceSummary[] = [
+
+export interface ServiceSummary {
+  /** Unieke sleutel, ook bruikbaar als anker en als formulierwaarde */
+  id: string;
+  /** Volledige naam (paginatitel, navigatie, broodkruimels) */
+  title: string;
+  /** Kortere naam voor de dienstkaarten; valt terug op `title` */
+  cardTitle?: string;
+  /** Korte omschrijving op de dienstkaart */
+  description: string;
+  icon: LucideIcon;
+  /** Doelpagina met de volledige dienstbeschrijving */
+  to: string;
+  /** Tariefweergave zoals op de tarievenpagina (excl. btw) */
+  priceFrom: string;
+}
+
+export const services: ServiceSummary[] = [
   {
-    id: 'financiele-administratie',
-    title: 'Financiële administratie',
+    id: 'financial-backoffice',
+    title: 'Financial Backoffice',
     description:
-      'De basis op orde: een overzichtelijke administratie die aansluit op uw onderneming, zodat u op elk moment weet waar u staat.',
+      'Financiële verwerking, bankmutaties, facturen en debiteuren- en crediteurenbeheer.',
     icon: FolderKanban,
-    category: 'administratie',
-    to: routes.administratie.path,
-    priceFrom: 'in pakket vanaf € 125 p/m',
-    featured: true,
+    to: routes.financialBackoffice.path,
+    priceFrom: 'vanaf € 35 per uur',
   },
   {
-    id: 'boekhouding',
-    title: 'Boekhouding',
-    description:
-      'Doorlopende, nauwkeurige verwerking van uw boekhouding in AFAS, inclusief controle en afstemming.',
-    icon: BookOpenCheck,
-    category: 'administratie',
-    to: routes.administratie.path,
-    featured: true,
-  },
-  {
-    id: 'bankverwerking',
-    title: 'Bankverwerking',
-    description:
-      'Bankmutaties worden periodiek verwerkt en afgeletterd tegen facturen, zodat de administratie sluit.',
-    icon: Landmark,
-    category: 'administratie',
-    to: routes.administratie.path,
-  },
-  {
-    id: 'inkoop-verkoopfacturen',
-    title: 'Inkoop- en verkoopfacturen',
-    description:
-      'Verwerking van uw facturen en beheer van debiteuren en crediteuren: wat staat open, wat komt binnen, wat moet betaald.',
-    icon: Receipt,
-    category: 'administratie',
-    to: routes.administratie.path,
-  },
-  {
-    id: 'btw-aangifte',
-    title: 'Btw-aangifte',
-    description:
-      'Elke periode tijdig en correct ingediend bij de Belastingdienst, inclusief controle vooraf.',
+    id: 'btw-aangiften',
+    title: 'Btw-aangiften',
+    description: 'Voorbereiden en verwerken van btw-aangiften en btw-controles.',
     icon: Calculator,
-    category: 'aangiften',
-    to: routes.belastingaangifte.path,
-    priceFrom: 'vanaf € 50',
-    featured: true,
+    to: routes.btwAangiften.path,
+    priceFrom: QUOTED_LABEL,
   },
   {
-    id: 'icp-aangifte',
-    title: 'ICP-aangifte',
-    description:
-      'Voor ondernemingen die goederen of diensten leveren binnen de EU: wij zorgen dat de opgaaf klopt.',
-    icon: Globe2,
-    category: 'aangiften',
-    to: routes.belastingaangifte.path,
-    priceFrom: 'vanaf € 40',
-  },
-  {
-    id: 'ib-aangifte',
-    title: 'IB-aangifte',
-    description:
-      'Uw aangifte inkomstenbelasting als ondernemer of dga, zorgvuldig voorbereid en met u afgestemd.',
-    icon: FileCheck2,
-    category: 'aangiften',
-    to: routes.belastingaangifte.path,
-    priceFrom: 'vanaf € 150',
-    featured: true,
-  },
-  {
-    id: 'vpb-aangifte',
-    title: 'Vpb-aangifte',
-    description:
-      'Vennootschapsbelasting voor uw bv, inclusief heldere onderbouwing richting de Belastingdienst.',
-    icon: Building2,
-    category: 'aangiften',
-    to: routes.belastingaangifte.path,
-    priceFrom: 'vanaf € 300',
-  },
-  {
-    id: 'jaarwerk',
-    title: 'Jaarwerk',
-    description:
-      'De jaarafsluiting van uw administratie: alle posten gecontroleerd en de cijfers klaar voor de jaarlijkse aangifte.',
-    icon: CalendarCheck,
-    category: 'jaarwerk',
-    to: routes.pakketten.path,
-  },
-  {
-    id: 'jaarrekening',
-    title: 'Jaarrekening',
-    description:
-      'Jaarrekening voor eenmanszaak, vof of bv, opgesteld op basis van een sluitende administratie.',
+    id: 'jaarrekeningen',
+    title: 'Jaarrekeningen & Jaarafsluiting',
+    cardTitle: 'Jaarrekeningen',
+    description: 'Ondersteuning bij jaarafsluitingen en voorbereiding van jaarrekeningen.',
     icon: FileSpreadsheet,
-    category: 'jaarwerk',
-    to: routes.pakketten.path,
-    priceFrom: 'vanaf € 500',
+    to: routes.jaarrekeningen.path,
+    priceFrom: QUOTED_LABEL,
   },
   {
-    id: 'rapportage',
-    title: 'Rapportage',
+    id: 'afas-software-support',
+    title: 'AFAS & Software Support',
     description:
-      'Periodieke financiële rapportage en maandafsluiting, zodat u beslissingen neemt op actuele cijfers.',
-    icon: BarChart3,
-    category: 'jaarwerk',
-    to: routes.pakketten.path,
-    priceFrom: 'vanaf € 50 p/m',
-  },
-  {
-    id: 'administratieve-ondersteuning',
-    title: 'Administratieve ondersteuning',
-    description:
-      'Hulp bij alles wat er verder bij komt kijken: van vraagposten en facturatie tot fiscale correspondentie.',
-    icon: ClipboardList,
-    category: 'ondersteuning',
-    to: routes.administratie.path,
-  },
-  {
-    id: 'afas-ondersteuning',
-    title: 'AFAS-ondersteuning',
-    description:
-      'Quick Scan en begeleiding van uw AFAS-omgeving; inrichting en overstap naar AFAS zijn inbegrepen bij uw administratie.',
+      'Ondersteuning bij dagelijkse verwerking en optimalisatie van werkprocessen.',
     icon: Workflow,
-    category: 'afas',
-    to: routes.afas.path,
-    priceFrom: 'vanaf € 85 per uur',
-    featured: true,
+    to: routes.afasSupport.path,
+    priceFrom: '€ 45 – € 55 per uur',
   },
   {
-    id: 'overstappen',
-    title: 'Overstappen van boekhouder',
-    description:
-      'Wij nemen contact op met uw huidige boekhouder en zorgen voor een soepele, tijdige overdracht.',
-    icon: ArrowRightLeft,
-    category: 'ondersteuning',
-    to: routes.overstappen.path,
-    featured: true,
+    id: 'finance-control',
+    title: 'Finance Control',
+    description: 'Grootboekcontroles, aansluitingen en kwaliteitscontroles.',
+    icon: ShieldCheck,
+    to: routes.financeControl.path,
+    priceFrom: 'vanaf € 45 per uur',
   },
   {
-    id: 'startende-ondernemers',
-    title: 'Startende ondernemers',
-    description:
-      'Een goede administratieve basis vanaf de start, inclusief de eerste inrichting van uw administratie in AFAS.',
-    icon: Rocket,
-    category: 'ondersteuning',
-    to: routes.startendeOndernemers.path,
+    id: 'automatisering',
+    title: 'Automatisering',
+    description: 'Slimmere processen en minder handmatig werk.',
+    icon: Settings2,
+    to: routes.automatisering.path,
+    priceFrom: 'op offertebasis',
   },
 ];
 
-/** De zes diensten op de homepage */
-export const services: ServiceSummary[] = allServices.filter((s) => s.featured);
+/** Naam zoals die op een dienstkaart staat. */
+export const cardName = (service: ServiceSummary): string => service.cardTitle ?? service.title;
+
+/** Dienst opzoeken op id (voor interne links en formulierwaarden). */
+export const serviceById = (id: string): ServiceSummary | undefined =>
+  services.find((s) => s.id === id);

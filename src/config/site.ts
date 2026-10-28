@@ -2,9 +2,15 @@
  * Centrale site-configuratie.
  * Bedrijfsgegevens, contactinformatie en integratie-instellingen op één plek.
  *
- * Bronnen: KvK-uittreksel (KvK 42106520), Prijzenoverzicht 2026 en de ontwerpdocumenten
- * in de projectmap. Velden met `null` zijn nog niet bekend en worden NIET aan bezoekers getoond.
+ * Bronnen: KvK-uittreksel (KvK 42106520), Mijn Belastingdienst Zakelijk (btw-nummer),
+ * Prijzenoverzicht 2026 en de ontwerpdocumenten in de projectmap.
+ * Velden met `null` zijn nog niet bekend en worden NIET aan bezoekers getoond.
+ *
+ * LET OP — niets in dit bestand mag worden verzonnen. Vul een veld alleen met een
+ * waarde die uit een van de bovenstaande bronnen komt.
  */
+
+import { SITE_URL } from './url';
 
 export const siteConfig = {
   /** Merknaam zoals op de website getoond */
@@ -13,12 +19,22 @@ export const siteConfig = {
   shortName: 'MERIT',
   /** Handelsnaam volgens KvK */
   legalName: 'Merit Administratie en Advies',
-  tagline: 'Wij regelen de cijfers, u realiseert de groei.',
-  /** Tweede positioneringszin (uit het prijzenoverzicht) */
-  taglineSecondary: 'Uw financiële partner in AFAS.',
+
+  /* --- Positionering --------------------------------------------------------- */
+  /** Centrale merkbelofte */
+  tagline: 'Meer capaciteit. Minder administratieve druk. Meer ruimte voor uw klanten.',
+  /** Tweede positioneringszin */
+  taglineSecondary: 'Uw financiële backoffice- en AFAS-partner.',
   description:
-    'MERIT Administratie & Advies ondersteunt ondernemers en MKB-bedrijven met administratie, boekhouding, aangiften, jaarwerk en AFAS.',
-  url: 'https://meritadministratie.nl',
+    'MERIT Administratie & Advies ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering.',
+
+  /**
+   * Voorkeursdomein (canonical). Dit MOET overeenkomen met de live productieconfiguratie.
+   * De huidige productie-opzet gebruikt het apex-domein zonder "www": zie public/CNAME
+   * en het Vercel-project. Wijzig dit uitsluitend samen met CNAME, de Vercel-domein-
+   * instellingen, de sitemap, robots.txt en de redirects — anders ontstaan dubbele URL's.
+   */
+  url: SITE_URL,
   locale: 'nl_NL',
   language: 'nl',
 
@@ -58,8 +74,8 @@ export const siteConfig = {
   },
 
   /**
-   * Aanvullende informatie voor de pagina "Over ons".
-   * Alleen ingevulde velden worden getoond.
+   * Aanvullende informatie voor de pagina "Over MERIT".
+   * Alleen ingevulde velden worden getoond; niets hiervan wordt verzonnen.
    */
   about: {
     teamText: null as string | null,
@@ -68,30 +84,37 @@ export const siteConfig = {
 
   /** Topbar bovenaan de site. `enabled: false` verbergt de balk. */
   announcement: {
-    enabled: true,
-    text: 'Uw financiële partner in AFAS — plan vrijblijvend een kennismaking.',
+    enabled: false,
+    text: 'Financiële backoffice en AFAS-ondersteuning voor administratie- en accountantskantoren.',
     linkLabel: 'Plan een kennismaking',
     linkTo: '/kennismaking',
   },
 
   /** Integraties */
   integrations: {
-    /** Boekhoudsoftware waarmee wordt gewerkt (getoond op de site) */
+    /** Software waarmee gewerkt wordt (getoond op de site) */
     software: ['AFAS'] as string[],
     /** Agenda-/boekingslink (bijv. Calendly of Microsoft Bookings). null = formulier gebruiken. */
     bookingUrl: null as string | null,
   },
 
-  /** Prijzen — algemene voorwaarden bij alle tarieven (Prijzenoverzicht 2026) */
+  /** Prijzen — algemene voorwaarden bij alle tarieven */
   pricing: {
     year: 2026,
-    vatNote: 'Alle prijzen zijn vanaf-tarieven en exclusief 21% btw.',
+    vatNote: 'Alle genoemde tarieven zijn exclusief 21% btw.',
     finalPriceNote:
-      'Het definitieve tarief wordt afgestemd op de omvang en complexiteit van uw administratie: het aantal mutaties, administraties, medewerkers en de gewenste dienstverlening.',
-    customQuoteNote: 'Voor meer dan 150 mutaties per maand maken wij een maatwerkvoorstel.',
+      'Het definitieve tarief wordt afgestemd op de aard, omvang en complexiteit van de werkzaamheden en op de afspraken die wij met uw kantoor maken.',
+    customQuoteNote:
+      'Specialistische werkzaamheden, herstelopdrachten en automatiseringsprojecten worden afzonderlijk beoordeeld en geoffreerd.',
+    /**
+     * De uurtarieven en urenbundels voor administratie- en accountantskantoren zijn een
+     * VOORSTEL en moeten intern worden bevestigd voordat ze definitief zijn. Zolang dit
+     * `true` is, toont de tarievenpagina daar een zichtbare toelichting bij.
+     */
+    kantorenTariffsProvisional: true,
   },
 
-  /** Formulieren — zie ook .env.example en src/lib/forms/provider.ts */
+  /** Formulieren — zie ook src/lib/forms/provider.ts */
   forms: {
     provider: (import.meta.env.VITE_FORM_PROVIDER as 'api' | 'mailto' | 'webhook' | undefined) ?? 'api',
     endpoint: (import.meta.env.VITE_FORM_ENDPOINT as string | undefined) ?? '',

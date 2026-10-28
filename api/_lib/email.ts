@@ -5,29 +5,42 @@
 
 import {
   branches,
-  contactOnderwerpen,
+  gewensteDiensten,
   gewensteOndersteuning,
   huidigeSituaties,
   kennismakingDiensten,
+  offerteDiensten,
+  organisatieTypes,
   rechtsvormen,
+  startMomenten,
+  urenPerMaand,
 } from '../../src/data/forms.js'; // expliciete .js-extensie verplicht (ESM/nodenext, zie api/contact.ts)
 
 export type FormKind = 'contact' | 'offerte' | 'kennismaking';
 
 /** Keuzewaarden (bijv. 'afas') → leesbare labels, per veld */
 const optionLabels: Record<string, Map<string, string>> = {
-  onderwerp: new Map(contactOnderwerpen.map((o) => [o.value, o.label])),
+  organisatieType: new Map(organisatieTypes.map((o) => [o.value, o.label])),
+  // Het contactformulier en het kennismakingsformulier gebruiken deels andere lijsten;
+  // beide waarden moeten een leesbaar label krijgen, dus de lijsten worden samengevoegd.
+  gewensteDienst: new Map(
+    [...gewensteDiensten, ...kennismakingDiensten, ...offerteDiensten].map((o) => [
+      o.value,
+      o.label,
+    ]),
+  ),
+  urenPerMaand: new Map(urenPerMaand.map((o) => [o.value, o.label])),
+  gewensteStart: new Map(startMomenten.map((o) => [o.value, o.label])),
   rechtsvorm: new Map(rechtsvormen.map((o) => [o.value, o.label])),
   branche: new Map(branches.map((o) => [o.value, o.label])),
   huidigeSituatie: new Map(huidigeSituaties.map((o) => [o.value, o.label])),
   gewensteOndersteuning: new Map(gewensteOndersteuning.map((o) => [o.value, o.label])),
-  gewensteDienst: new Map(kennismakingDiensten.map((o) => [o.value, o.label])),
 };
 
 export const SITE_NAME = 'MERIT Administratie & Advies';
 export const SITE_DOMAIN = 'meritadministratie.nl';
-export const TAGLINE_AFAS = 'Uw financiële partner in AFAS.';
-export const TAGLINE = 'Wij regelen de cijfers, u realiseert de groei.';
+export const TAGLINE_AFAS = 'Uw financiële backoffice- en AFAS-partner.';
+export const TAGLINE = 'Meer capaciteit. Minder administratieve druk. Meer ruimte voor uw klanten.';
 
 /** Onderwerpregel van de interne melding, per formulier */
 export const internalSubjects: Record<FormKind, string> = {
@@ -42,19 +55,23 @@ export const confirmationSubject = `Bedankt voor uw bericht aan ${SITE_NAME}`;
 /** Leesbare labels voor velden in de interne e-mail (volgorde = weergavevolgorde) */
 const fieldLabels: Record<string, string> = {
   naam: 'Naam',
-  bedrijfsnaam: 'Bedrijfsnaam',
+  bedrijfsnaam: 'Organisatie',
+  organisatieType: 'Type organisatie',
   email: 'E-mailadres',
   telefoon: 'Telefoonnummer',
-  onderwerp: 'Onderwerp',
+  gewensteDienst: 'Gewenste dienst',
+  gewensteOndersteuning: 'Gewenste ondersteuning',
+  urenPerMaand: 'Gewenst aantal uren per maand',
+  gewensteStart: 'Gewenste startdatum',
+  pakket: 'Gekozen bundel of pakket',
   rechtsvorm: 'Rechtsvorm',
   branche: 'Branche',
   huidigeSituatie: 'Huidige situatie',
-  pakket: 'Gekozen pakket',
-  gewensteOndersteuning: 'Gewenste ondersteuning',
-  gewensteDienst: 'Gewenste dienst',
-  transactiesPerMaand: 'Transacties per maand',
-  verkoopfacturen: 'Verkoopfacturen per maand',
-  inkoopfacturen: 'Inkoopfacturen per maand',
+  aantalAdministraties: 'Aantal administraties',
+  boekhoudsoftware: 'Boekhoudsoftware',
+  periode: 'Gewenste periode of deadline',
+  omschrijving: 'Omschrijving van de werkzaamheden',
+  transactiesPerMaand: 'Mutaties per maand',
   bericht: 'Bericht',
   privacyAkkoord: 'Akkoord privacybeleid',
 };

@@ -62,7 +62,7 @@ export function PackageCard({ pkg }: PackageCardProps) {
       {/* 6. CTA-container: volledige breedte, altijd onderaan, knop gecentreerd en nooit afgesneden */}
       <div className="mt-auto w-full pt-7">
         <Button
-          to={`${routes.offerte.path}?pakket=${pkg.id}`}
+          to={`${routes.offerte.path}?pakket=mkb-${pkg.id}`}
           variant={highlighted ? 'primary' : 'outline'}
           size="compact"
           fullWidth

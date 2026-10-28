@@ -62,7 +62,7 @@ for (const { url, files } of targets) {
 
 // Oude paden: klein redirect-bestand (meta refresh + canonical naar het nieuwe pad).
 // GitHub Pages kent geen server-side redirects; de router doet daarnaast een client-side Navigate.
-const SITE_URL = 'https://meritadministratie.nl';
+const { SITE_URL } = await import(pathToFileURL(join(root, 'src/config/url.ts')).href);
 const basePath = (process.env.VITE_BASE_PATH ?? '').trim().replace(/\/$/, '');
 let redirectCount = 0;
 for (const [from, to] of Object.entries(redirects)) {
