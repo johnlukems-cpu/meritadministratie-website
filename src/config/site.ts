@@ -107,11 +107,12 @@ export const siteConfig = {
     customQuoteNote:
       'Specialistische werkzaamheden, herstelopdrachten en automatiseringsprojecten worden afzonderlijk beoordeeld en geoffreerd.',
     /**
-     * De uurtarieven en urenbundels voor administratie- en accountantskantoren zijn een
-     * VOORSTEL en moeten intern worden bevestigd voordat ze definitief zijn. Zolang dit
-     * `true` is, toont de tarievenpagina daar een zichtbare toelichting bij.
+     * De uurtarieven en urenbundels voor administratie- en accountantskantoren zijn
+     * intern bevestigd en gelden als definitief. Zet dit op `true` om op de
+     * tarievenpagina weer een zichtbaar voorbehoud te tonen, bijvoorbeeld wanneer een
+     * nieuwe tariefstructuur nog niet is vastgesteld.
      */
-    kantorenTariffsProvisional: true,
+    kantorenTariffsProvisional: false,
   },
 
   /** Formulieren — zie ook src/lib/forms/provider.ts */
