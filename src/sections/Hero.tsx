@@ -2,79 +2,122 @@ import { ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
 import { routes } from '@/config/routes';
-import { HeroDashboard } from './visuals/HeroDashboard';
 
 /** De vier kernwaarden, subtiel onder de knoppen. */
 const values = ['Betrouwbaar', 'Nauwkeurig', 'Betaalbaar', 'Flexibel'];
 
-/** Donkere hero van de homepage. */
+/**
+ * Hero van de homepage.
+ *
+ * De achtergrond is een zakelijke kantoorfoto (laptop met financieel dashboard,
+ * documenten en kantooraccessoires — geen mensen). De foto is 2:1 en heeft links
+ * een donkere wand; daar staat de tekst. Een marineblauw verloop over de linkerzijde
+ * zorgt voor voldoende contrast, ook als de foto ooit wordt vervangen.
+ *
+ * Varianten staan in public/hero/; `sizes` is 100vw omdat de foto de volle breedte
+ * van de sectie beslaat.
+ */
+const HERO_SRC = '/hero/kantoor-dashboard-1400.webp';
+const HERO_SRCSET = [
+  '/hero/kantoor-dashboard-700.webp 700w',
+  '/hero/kantoor-dashboard-1000.webp 1000w',
+  '/hero/kantoor-dashboard-1400.webp 1400w',
+  '/hero/kantoor-dashboard-1600.webp 1600w',
+  '/hero/kantoor-dashboard-1774.webp 1774w',
+].join(', ');
+
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-surface-dark text-on-dark">
-      {/* Diepte in de achtergrond, zonder drukke gradient */}
+    <section className="relative isolate overflow-hidden bg-surface-dark text-on-dark">
+      {/* Achtergrondfoto */}
+      <img
+        src={HERO_SRC}
+        srcSet={HERO_SRCSET}
+        sizes="100vw"
+        width={1774}
+        height={887}
+        alt=""
+        aria-hidden="true"
+        decoding="async"
+        fetchPriority="high"
+        className="absolute inset-0 -z-20 size-full object-cover object-[72%_center] lg:object-[64%_center]"
+      />
+
+      {/* Marineblauw verloop: links dekkend voor leesbare tekst, rechts open zodat
+          het bureau met het dashboard zichtbaar blijft. */}
+      {/* Tot lg staat de tekst óver de foto: daar is een dekkende sluier nodig. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 lg:hidden"
         style={{
           background:
-            'radial-gradient(90% 120% at 78% 18%, #15325c 0%, transparent 60%), radial-gradient(70% 90% at 0% 100%, #0a1a31 0%, transparent 55%), var(--brand-primary)',
+            'linear-gradient(to bottom, rgba(11,31,58,.93) 0%, rgba(11,31,58,.88) 60%, rgba(11,31,58,.95) 100%)',
         }}
       />
-      <Container className="py-12 md:py-16 lg:py-20">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.02fr_1fr] lg:gap-14 [&>*]:min-w-0">
-          {/* Tekstkolom */}
-          <div className="min-w-0">
-            <p className="mb-5 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-light uppercase sm:text-xs">
-              Financiële backoffice voor administratie- en accountantskantoren
-            </p>
+      {/* Vanaf lg staat de tekst links: alleen daar dekkend, rechts blijft het
+          bureau met het dashboard goed zichtbaar. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 hidden lg:block"
+        style={{
+          background:
+            'linear-gradient(100deg, rgba(11,31,58,.97) 0%, rgba(11,31,58,.95) 38%, rgba(11,31,58,.92) 53%, rgba(11,31,58,.6) 64%, rgba(11,31,58,.22) 80%, rgba(11,31,58,.06) 100%)',
+        }}
+      />
+      {/* Heel lichte sluier over het geheel, zodat de foto rustig blijft en de
+          goudtinten in de interface niet met de merkkleur concurreren. */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 -z-10 hidden bg-[rgba(11,31,58,.18)] lg:block"
+      />
 
-            <h1 className="text-[1.9375rem] leading-[1.16] text-on-dark sm:text-[2.375rem] lg:text-[2.875rem] lg:leading-[1.12]">
-              Uw betrouwbare partner voor{' '}
-              <span className="text-accent-light">financiële backoffice</span> en{' '}
-              <span className="text-accent-light">AFAS-ondersteuning</span>.
-            </h1>
+      <Container className="py-14 md:py-20 lg:py-28">
+        <div className="max-w-xl lg:max-w-[30rem] xl:max-w-[34rem]">
+          <p className="mb-5 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-light uppercase sm:text-xs">
+            Financiële backoffice voor administratie- en accountantskantoren
+          </p>
 
-            <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-on-dark-muted">
-              Wij ondersteunen Nederlandse administratie- en accountantskantoren met financiële
-              verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en
-              procesverbetering. Zo creëert uw kantoor meer capaciteit, meer grip op de
-              administratie en ruimte voor klantadvies.
-            </p>
+          <h1 className="text-[1.9375rem] leading-[1.16] text-on-dark sm:text-[2.375rem] lg:text-[2.875rem] lg:leading-[1.12]">
+            Uw betrouwbare partner voor{' '}
+            <span className="text-accent-light">financiële backoffice</span> en{' '}
+            <span className="text-accent-light">AFAS-ondersteuning</span>.
+          </h1>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
-              <Button
-                to={routes.kennismaking.path}
-                size="lg"
-                variant="secondary"
-                iconRight={<ArrowRight />}
-              >
-                Plan een kennismaking
-              </Button>
-              <Button to={routes.diensten.path} size="lg" variant="onDarkOutline">
-                Bekijk onze diensten
-              </Button>
-            </div>
+          <p className="mt-6 text-[1.0625rem] leading-relaxed text-on-dark-muted">
+            Wij ondersteunen Nederlandse administratie- en accountantskantoren met financiële
+            verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en
+            procesverbetering. Zo creëert uw kantoor meer capaciteit, meer grip op de administratie
+            en ruimte voor klantadvies.
+          </p>
 
-            {/* Kernwaarden */}
-            <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-on-dark-border pt-7">
-              {values.map((value) => (
-                <li key={value} className="flex items-center gap-2 text-[0.9375rem] text-on-dark">
-                  <span
-                    aria-hidden="true"
-                    className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-accent text-accent-contrast"
-                  >
-                    <Check className="size-3" strokeWidth={3.5} />
-                  </span>
-                  {value}
-                </li>
-              ))}
-            </ul>
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
+            <Button
+              to={routes.kennismaking.path}
+              size="lg"
+              variant="secondary"
+              iconRight={<ArrowRight />}
+            >
+              Plan een kennismaking
+            </Button>
+            <Button to={routes.diensten.path} size="lg" variant="onDarkOutline">
+              Bekijk onze diensten
+            </Button>
           </div>
 
-          {/* Visuele kolom */}
-          <div className="min-w-0 lg:pl-2">
-            <HeroDashboard />
-          </div>
+          {/* Kernwaarden */}
+          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-on-dark-border pt-7">
+            {values.map((value) => (
+              <li key={value} className="flex items-center gap-2 text-[0.9375rem] text-on-dark">
+                <span
+                  aria-hidden="true"
+                  className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-accent text-accent-contrast"
+                >
+                  <Check className="size-3" strokeWidth={3.5} />
+                </span>
+                {value}
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>
