@@ -13,11 +13,16 @@
 import { SITE_URL } from './url';
 
 export const siteConfig = {
-  /** Merknaam zoals op de website getoond */
-  name: 'MERIT Administratie & Advies',
+  /** Merk- en handelsnaam zoals op de website getoond */
+  name: 'MERIT Administratie & Support',
   /** Korte naam (bijv. in de titel-suffix en het menu) */
   shortName: 'MERIT',
-  /** Handelsnaam volgens KvK */
+  /**
+   * Naam zoals die in het KvK-register staat. Dit is NIET de merknaam: de onderneming
+   * handelt onder de naam in `name` hierboven. Wijzig dit veld uitsluitend nadat de
+   * naam bij de KvK daadwerkelijk is gewijzigd — het wordt gebruikt in juridische
+   * context (structured data, privacyverklaring, bedrijfsgegevens).
+   */
   legalName: 'Merit Administratie en Advies',
 
   /* --- Positionering --------------------------------------------------------- */
@@ -26,7 +31,7 @@ export const siteConfig = {
   /** Tweede positioneringszin */
   taglineSecondary: 'Uw financiële backoffice- en AFAS-partner.',
   description:
-    'MERIT Administratie & Advies ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering.',
+    'MERIT Administratie & Support ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering.',
 
   /**
    * Voorkeursdomein (canonical). Dit MOET overeenkomen met de live productieconfiguratie.

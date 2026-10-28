@@ -1,6 +1,6 @@
-# MERIT Administratie & Advies — website
+# MERIT Administratie & Support — website
 
-Bedrijfswebsite van **MERIT Administratie & Advies** · https://meritadministratie.nl · info@meritadministratie.nl
+Bedrijfswebsite van **MERIT Administratie & Support** · https://meritadministratie.nl · info@meritadministratie.nl
 
 Statische, geprerenderde website die MERIT positioneert als **externe financiële backoffice- en
 AFAS-partner voor Nederlandse administratie- en accountantskantoren**. Mkb-ondernemingen vormen de
@@ -50,6 +50,8 @@ Alleen bevestigde gegevens worden getoond. Niets op deze site is verzonnen: geen
 testimonials, keurmerken, certificeringen of aantallen.
 
 - **KvK-uittreksel** — KvK 42106520, adres Frankenstraat 27, 6231 AK Meerssen, telefoon.
+  De onderneming staat daar ingeschreven als *Merit Administratie en Advies* en handelt onder
+  de naam **MERIT Administratie & Support** (`siteConfig.legalName` respectievelijk `name`).
 - **Mijn Belastingdienst Zakelijk** — btw-identificatienummer NL005497990B94.
 - **Prijzenoverzicht 2026** — de mkb-pakketten en de losse tarieven voor aangiften en jaarwerk.
 
@@ -148,7 +150,7 @@ variabelen zijn uitsluitend server-side en worden in Vercel ingesteld
 | Variabele            | Scope       | Doel                                                                        |
 | -------------------- | ----------- | --------------------------------------------------------------------------- |
 | `RESEND_API_KEY`     | server      | **Verplicht.** API-key van Resend voor `api/contact.ts`                     |
-| `RESEND_FROM`        | server      | Afzender, bijv. `MERIT Administratie & Advies <noreply@meritadministratie.nl>` |
+| `RESEND_FROM`        | server      | Afzender, bijv. `MERIT Administratie & Support <noreply@meritadministratie.nl>` |
 | `CONTACT_TO`         | server      | Ontvanger interne melding (standaard `info@meritadministratie.nl`)          |
 | `VITE_FORM_PROVIDER` | browser     | `api` (standaard), `mailto` of `webhook`                                    |
 | `VITE_FORM_ENDPOINT` | browser     | URL bij `webhook`                                                           |

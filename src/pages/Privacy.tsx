@@ -25,7 +25,10 @@ function CompanyDetails() {
   return (
     <ul>
       <li>
-        <strong>Bedrijfsnaam:</strong> {siteConfig.name}
+        <strong>Handelsnaam:</strong> {siteConfig.name}
+      </li>
+      <li>
+        <strong>Naam in het KvK-register:</strong> {siteConfig.legalName}
       </li>
       <li>
         <strong>Website:</strong> {siteConfig.url}
@@ -56,8 +59,9 @@ const sections: LegalSection[] = [
       <>
         <p>
           Deze privacyverklaring is van toepassing op de website {siteConfig.url} en op de
-          verwerking van persoonsgegevens door {siteConfig.name} (hierna: "wij"). Wij zijn de
-          verwerkingsverantwoordelijke voor de persoonsgegevens die via deze website worden
+          verwerking van persoonsgegevens door {siteConfig.name} (hierna: "wij"), handelsnaam van
+          de onderneming die in het KvK-register staat ingeschreven als {siteConfig.legalName}. Wij
+          zijn de verwerkingsverantwoordelijke voor de persoonsgegevens die via deze website worden
           verzameld.
         </p>
         <CompanyDetails />
@@ -315,7 +319,7 @@ export default function Privacy() {
     <>
       <Seo
         title="Privacyverklaring"
-        description="Lees hoe MERIT Administratie & Advies omgaat met uw persoonsgegevens: welke gegevens wij via de website verwerken, waarvoor, hoe lang en welke rechten u heeft."
+        description="Lees hoe MERIT Administratie & Support omgaat met uw persoonsgegevens: welke gegevens wij via de website verwerken, waarvoor, hoe lang en welke rechten u heeft."
       />
       <PageHero
         eyebrow="Juridisch"

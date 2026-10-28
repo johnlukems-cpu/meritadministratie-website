@@ -1,11 +1,11 @@
 /**
- * Officiële MERIT-logo's (afgeleid van src/assets/brand/merit-logo-origineel.jpg
+ * Officiële MERIT-logo's (afgeleid van src/assets/brand/merit-logo-origineel.png
  * via scripts/assets/generate.html). Paden zijn relatief aan de base van de site.
  */
 const base = import.meta.env.BASE_URL;
 
 export const logoFiles = {
-  /** Horizontaal: embleem + MERIT + Administratie & Advies (navy/goud, transparant) */
+  /** Horizontaal: embleem + MERIT + Administratie & Support (navy/goud, transparant) */
   horizontal: `${base}brand/logo-merit.png`,
   /** Horizontaal, witte variant voor donkere achtergronden */
   horizontalWhite: `${base}brand/logo-merit-wit.png`,
@@ -16,4 +16,4 @@ export const logoFiles = {
 } as const;
 
 /** Verhouding van het horizontale logo (breedte / hoogte) — voor layout zonder verspringen */
-export const LOGO_HORIZONTAL_RATIO = 900 / 184;
+export const LOGO_HORIZONTAL_RATIO = 900 / 213;

@@ -37,7 +37,7 @@ const optionLabels: Record<string, Map<string, string>> = {
   gewensteOndersteuning: new Map(gewensteOndersteuning.map((o) => [o.value, o.label])),
 };
 
-export const SITE_NAME = 'MERIT Administratie & Advies';
+export const SITE_NAME = 'MERIT Administratie & Support';
 export const SITE_DOMAIN = 'meritadministratie.nl';
 export const TAGLINE_AFAS = 'Uw financiële backoffice- en AFAS-partner.';
 export const TAGLINE = 'Meer capaciteit. Minder administratieve druk. Meer ruimte voor uw klanten.';

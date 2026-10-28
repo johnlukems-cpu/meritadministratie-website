@@ -2,7 +2,7 @@
   "name": "meritadministratie-website",
   "private": true,
   "version": "0.1.0",
-  "description": "Bedrijfswebsite van Merit Administratie — meritadministratie.nl",
+  "description": "Bedrijfswebsite van MERIT Administratie & Support — meritadministratie.nl",
   "type": "module",
   "scripts": {
     "dev": "vite",

@@ -5,7 +5,7 @@ import { useHeadCollector, type HeadData } from '@/lib/seo/head-context';
 import { serializeJsonLd } from '@/lib/seo/render-head';
 
 export interface SeoProps {
-  /** Paginatitel zonder site-naam; wordt automatisch aangevuld met " | Merit Administratie" */
+  /** Paginatitel zonder site-naam; wordt automatisch aangevuld met " | " + siteConfig.name */
   title: string;
   description: string;
   /** Overschrijft de canonical (standaard: huidige route) */

@@ -65,7 +65,7 @@ export default function OverOns() {
       <PageHero
         eyebrow="Over MERIT"
         title="Een vaste backofficepartner voor financiële administratie"
-        intro="MERIT Administratie & Advies ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering."
+        intro="MERIT Administratie & Support ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering."
         breadcrumbs={[{ name: 'Over MERIT', path: routes.overMerit.path }]}
       />
 
@@ -137,8 +137,8 @@ export default function OverOns() {
             <div className="reveal">
               <dl className="overflow-hidden rounded-lg border border-default bg-surface">
                 {[
-                  { term: 'Handelsnaam', value: siteConfig.legalName },
-                  { term: 'Merknaam', value: siteConfig.name },
+                  { term: 'Handelsnaam', value: siteConfig.name },
+                  { term: 'Naam in het KvK-register', value: siteConfig.legalName },
                   ...(contact.kvk ? [{ term: 'KvK-nummer', value: contact.kvk }] : []),
                   ...(contact.btw ? [{ term: 'Btw-identificatienummer', value: contact.btw }] : []),
                   ...(contact.address
@@ -167,7 +167,10 @@ export default function OverOns() {
               </dl>
 
               <Notice tone="info" className="mt-8">
-                Wij publiceren uitsluitend gegevens die wij kunnen onderbouwen. U vindt op deze
+                Wij handelen onder de naam {siteConfig.name}. In het KvK-register staat de
+                onderneming nog ingeschreven onder {siteConfig.legalName}; op facturen en in
+                overeenkomsten kunt u die naam daarom tegenkomen. Wij publiceren uitsluitend
+                gegevens die wij kunnen onderbouwen. U vindt op deze
                 website geen klantnamen, klantbeoordelingen, keurmerken of certificeringen, omdat
                 wij daarover geen onbevestigde uitspraken doen. MERIT presenteert zich niet als
                 accountantsorganisatie die wettelijke controles uitvoert en claimt geen officieel

@@ -35,7 +35,7 @@ if (!template.includes('<!--app-html-->') || !template.includes('<!--app-head-->
 function fill(html, head) {
   return template
     .replace('<!--app-head-->', head)
-    .replace(/\s*<title>Merit Administratie<\/title>/, '') // fallback-title uit template weghalen
+    .replace(/\s*<title>MERIT Administratie &amp; Support<\/title>/, '') // fallback-title uit template weghalen
     .replace('<!--app-html-->', html);
 }
 

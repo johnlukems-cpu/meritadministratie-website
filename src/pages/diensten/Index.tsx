@@ -22,7 +22,7 @@ export default function Diensten() {
           {
             '@context': 'https://schema.org',
             '@type': 'ItemList',
-            name: 'Diensten van MERIT Administratie & Advies',
+            name: 'Diensten van MERIT Administratie & Support',
             itemListElement: services.map((service, index) => ({
               '@type': 'ListItem',
               position: index + 1,

@@ -17,7 +17,7 @@ const ALLOWED = new Set([
   'favicon-32.png',
   'favicon-16.png',
   'favicon.ico',
-  // Logo-varianten, afgeleid van het originele logo (src/assets/brand/merit-logo-origineel.jpg)
+  // Logo-varianten, afgeleid van het originele logo (src/assets/brand/merit-logo-origineel.png)
   'brand/logo-merit.png',
   'brand/logo-merit-wit.png',
   'brand/logo-merit-staand.png',

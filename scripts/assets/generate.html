@@ -12,7 +12,7 @@
   <body>
     <h1>Asset generator</h1>
     <p>
-      Genereert uit het originele logo (<code>src/assets/brand/merit-logo-origineel.jpg</code>) de
+      Genereert uit het originele logo (<code>src/assets/brand/merit-logo-origineel.png</code>) de
       logo-varianten, <code>og-image.png</code>, icons en <code>favicon.ico</code>, en schrijft ze
       naar <code>public/</code> via de dev-server. Open met <code>npm run dev</code> →
       <code>/scripts/assets/generate.html</code> en klik op de knop.
@@ -23,12 +23,20 @@
 
     <script type="module">
       import '@fontsource-variable/inter';
+      import '@fontsource-variable/source-serif-4';
+      // Teksten op de OG-afbeelding komen uit de centrale siteconfiguratie, zodat ze
+      // niet uit de pas kunnen lopen met de website zelf.
+      import { siteConfig } from '/src/config/site.ts';
 
       // Kleuren = design tokens (src/styles/tokens.css)
       const NAVY = '#0b1f3a';
-      const GOLD = '#c8a34a';
+      const NAVY_ALT = '#132d50';
+      const GOLD = '#c9a24c';
       const WHITE = '#ffffff';
       const MUTED = '#b9c2d4';
+
+      const SANS = '"Inter Variable", Inter, system-ui, sans-serif';
+      const DISPLAY = '"Source Serif 4 Variable", "Source Serif 4", Georgia, serif';
 
       const log = (m) => { document.getElementById('log').textContent += '\n' + m; };
       const out = document.getElementById('out');
@@ -45,7 +53,7 @@
 
       async function loadOriginal() {
         const img = new Image();
-        img.src = '/src/assets/brand/merit-logo-origineel.jpg';
+        img.src = '/src/assets/brand/merit-logo-origineel.png';
         await img.decode();
         const c = document.createElement('canvas');
         c.width = img.naturalWidth;
@@ -78,75 +86,141 @@
         return c;
       }
 
-      /** Horizontale "banden" met inhoud (embleem, MERIT, subtitel, tagline). */
-      function findBands(alphaCanvas) {
-        const ctx = alphaCanvas.getContext('2d');
+      /** Leest de alfa-laag uit als een hulpstructuur voor de blokdetectie. */
+      function alphaGrid(alphaCanvas) {
         const { width, height } = alphaCanvas;
-        const d = ctx.getImageData(0, 0, width, height).data;
+        const d = alphaCanvas.getContext('2d').getImageData(0, 0, width, height).data;
+        const colHas = new Array(width).fill(false);
         const rowHas = new Array(height).fill(false);
         for (let y = 0; y < height; y++) {
-          for (let x = 0; x < width; x += 2) {
-            if (d[(y * width + x) * 4 + 3] > 40) { rowHas[y] = true; break; }
+          for (let x = 0; x < width; x++) {
+            if (d[(y * width + x) * 4 + 3] > 40) { colHas[x] = true; rowHas[y] = true; }
           }
         }
-        const bands = [];
-        let start = null;
-        for (let y = 0; y <= height; y++) {
-          const has = y < height && rowHas[y];
-          if (has && start === null) start = y;
-          if (!has && start !== null) {
-            if (y - start > 8) bands.push({ y0: start, y1: y });
+        return { width, height, data: d, colHas, rowHas };
+      }
+
+      /** Exacte begrenzing van de inhoud binnen een kolombereik. */
+      function boxWithin(grid, xa, xb) {
+        const { width, height, data } = grid;
+        let x0 = width, y0 = height, x1 = -1, y1 = -1;
+        for (let y = 0; y < height; y++) {
+          for (let x = xa; x <= xb; x++) {
+            if (data[(y * width + x) * 4 + 3] > 40) {
+              if (x < x0) x0 = x;
+              if (x > x1) x1 = x;
+              if (y < y0) y0 = y;
+              if (y > y1) y1 = y;
+            }
+          }
+        }
+        return { x0, y0, w: x1 - x0 + 1, h: y1 - y0 + 1 };
+      }
+
+      /**
+       * Het bronlogo is een horizontale lockup: embleem links, woordmerk rechts,
+       * gescheiden door een lege kolomzone. Deze functie vindt beide blokken.
+       */
+      function findBlocks(alphaCanvas) {
+        const grid = alphaGrid(alphaCanvas);
+        const { width, colHas } = grid;
+        const first = colHas.indexOf(true);
+        const last = width - 1 - [...colHas].reverse().indexOf(true);
+        if (first < 0) throw new Error('Leeg bronlogo.');
+
+        // Breedste lege kolomzone tussen embleem en woordmerk
+        let best = null, start = null;
+        for (let x = first; x <= last + 1; x++) {
+          const has = x <= last && colHas[x];
+          if (!has && start === null) start = x;
+          if (has && start !== null) {
+            const run = { x0: start, x1: x - 1, w: x - start };
+            if (!best || run.w > best.w) best = run;
             start = null;
           }
         }
-        // Kolomgrenzen per band
-        for (const b of bands) {
-          let x0 = width, x1 = 0;
-          for (let y = b.y0; y < b.y1; y++) {
-            for (let x = 0; x < width; x++) {
-              if (d[(y * width + x) * 4 + 3] > 40) { if (x < x0) x0 = x; if (x > x1) x1 = x; }
-            }
-          }
-          b.x0 = x0; b.x1 = x1 + 1; b.w = b.x1 - b.x0; b.h = b.y1 - b.y0;
-        }
-        return bands;
+        if (!best || best.w < 10) throw new Error('Geen scheiding tussen embleem en woordmerk gevonden.');
+
+        return {
+          grid,
+          full: boxWithin(grid, first, last),
+          emblem: boxWithin(grid, first, best.x0 - 1),
+          wordmark: boxWithin(grid, best.x1 + 1, last),
+          gap: best.w,
+        };
       }
 
-      function crop(src, b, pad = 0) {
-        const c = document.createElement('canvas');
-        c.width = b.w + pad * 2;
-        c.height = b.h + pad * 2;
-        c.getContext('2d').drawImage(src, b.x0, b.y0, b.w, b.h, pad, pad, b.w, b.h);
+      /** Schaalt en tekent een blok uit het broncanvas. */
+      function drawBlock(ctx, src, box, x, y, w, h) {
+        ctx.drawImage(src, box.x0, box.y0, box.w, box.h, x, y, w, h);
+      }
+
+      /** Horizontaal logo: het bronlogo strak bijgesneden. */
+      function composeHorizontal(src, blocks, targetWidth = 900) {
+        const { full } = blocks;
+        const scale = targetWidth / full.w;
+        const c = makeCanvas(targetWidth, Math.round(full.h * scale));
+        const ctx = c.getContext('2d');
+        ctx.imageSmoothingQuality = 'high';
+        drawBlock(ctx, src, full, 0, 0, c.width, c.height);
         return c;
       }
 
-      /** Horizontaal logo: embleem links, MERIT + subtitel rechts. */
-      function composeHorizontal(src, bands, height = 400) {
-        const [emblem, word, sub] = bands;
-        const ctx0 = document.createElement('canvas');
-        const scaleE = height / emblem.h;
-        const eW = Math.round(emblem.w * scaleE);
-        // Tekstblok: MERIT + subtitel gestapeld, breedte gelijk aan MERIT
-        const textBlockH = height * 0.74;
-        const wordScale = (textBlockH * 0.68) / word.h;
-        const wordW = word.w * wordScale;
-        const subScale = wordW / sub.w;
-        const subH = sub.h * subScale;
-        const gap = Math.round(height * 0.13);
-        const c = makeCanvas(Math.round(eW + gap + wordW) + 4, height);
+      /** Staand logo: embleem boven het woordmerk, beide gecentreerd. */
+      function composeStacked(src, blocks, targetWidth = 800) {
+        const { emblem, wordmark } = blocks;
+        const pad = Math.round(targetWidth * 0.025);
+        const inner = targetWidth - pad * 2;
+
+        const wordW = inner;
+        const wordH = Math.round(wordmark.h * (wordW / wordmark.w));
+        const embW = Math.round(inner * 0.52);
+        const embH = Math.round(emblem.h * (embW / emblem.w));
+        const gap = Math.round(inner * 0.055);
+
+        const c = makeCanvas(targetWidth, pad * 2 + embH + gap + wordH);
         const ctx = c.getContext('2d');
         ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(src, emblem.x0, emblem.y0, emblem.w, emblem.h, 0, 0, eW, height);
-        const tx = eW + gap;
-        const totalText = word.h * wordScale + height * 0.06 + subH;
-        const ty = (height - totalText) / 2 + height * 0.02;
-        ctx.drawImage(src, word.x0, word.y0, word.w, word.h, tx, ty, wordW, word.h * wordScale);
-        ctx.drawImage(src, sub.x0, sub.y0, sub.w, sub.h, tx, ty + word.h * wordScale + height * 0.06, wordW, subH);
-        void ctx0;
+        drawBlock(ctx, src, emblem, Math.round((targetWidth - embW) / 2), pad, embW, embH);
+        drawBlock(ctx, src, wordmark, pad, pad + embH + gap, wordW, wordH);
+        return c;
+      }
+
+      /** Alleen het embleem, met een kleine transparante marge. */
+      function composeEmblem(src, blocks, targetWidth = 400) {
+        const { emblem } = blocks;
+        const scale = targetWidth / emblem.w;
+        const pad = Math.round(targetWidth * 0.02);
+        const w = targetWidth - pad * 2;
+        const h = Math.round(emblem.h * (w / emblem.w));
+        const c = makeCanvas(targetWidth, h + pad * 2);
+        const ctx = c.getContext('2d');
+        ctx.imageSmoothingQuality = 'high';
+        drawBlock(ctx, src, emblem, pad, pad, w, h);
+        void scale;
         return c;
       }
 
       /* ---------------- OG-image 1200×630 ---------------- */
+
+      /** Breekt een zin op in regels die binnen maxWidth passen. */
+      function wrapLines(ctx, text, maxWidth) {
+        const words = text.split(' ');
+        const lines = [];
+        let line = '';
+        for (const word of words) {
+          const next = line ? `${line} ${word}` : word;
+          if (ctx.measureText(next).width > maxWidth && line) {
+            lines.push(line);
+            line = word;
+          } else {
+            line = next;
+          }
+        }
+        if (line) lines.push(line);
+        return lines;
+      }
+
       function drawOg(logoWhite) {
         const c = makeCanvas(1200, 630);
         const ctx = c.getContext('2d');
@@ -160,32 +234,39 @@
         ctx.fillRect(0, 0, 1200, 8);
 
         // Echt logo (witte variant)
-        const lh = 96;
+        const lh = 104;
         const lw = lh * (logoWhite.width / logoWhite.height);
-        ctx.drawImage(logoWhite, 80, 64, lw, lh);
+        ctx.drawImage(logoWhite, 80, 56, lw, lh);
 
-        ctx.fillStyle = WHITE;
-        ctx.font = '600 66px "Inter Variable", Inter, system-ui, sans-serif';
-        ctx.letterSpacing = '-1.5px';
-        ctx.fillText('Wij regelen de cijfers,', 80, 330);
-        ctx.fillStyle = GOLD;
-        ctx.fillText('u realiseert de groei.', 80, 410);
-        ctx.letterSpacing = '0px';
+        // Merkbelofte uit siteConfig.tagline — elke zin op een eigen regel,
+        // de laatste in goud.
+        const sentences = siteConfig.tagline.split('.').map((s) => s.trim()).filter(Boolean);
+        ctx.font = `600 58px ${DISPLAY}`;
+        let y = 300;
+        sentences.forEach((sentence, i) => {
+          ctx.fillStyle = i === sentences.length - 1 ? GOLD : WHITE;
+          ctx.fillText(`${sentence}.`, 80, y);
+          y += 72;
+        });
+
         ctx.fillStyle = MUTED;
-        ctx.font = '400 26px "Inter Variable", Inter, system-ui, sans-serif';
-        ctx.fillText('Administratie, boekhouding, aangiften, jaarwerk en AFAS voor ondernemers', 80, 470);
+        ctx.font = `400 26px ${SANS}`;
+        wrapLines(ctx, siteConfig.taglineSecondary, 1040).forEach((line, i) => {
+          ctx.fillText(line, 80, y + 14 + i * 36);
+        });
 
+        // Voettekst met domein en e-mailadres
         ctx.fillStyle = 'rgba(255,255,255,0.08)';
         ctx.fillRect(0, 556, 1200, 74);
         ctx.fillStyle = GOLD;
         ctx.beginPath(); ctx.arc(96, 593, 6, 0, Math.PI * 2); ctx.fill();
         ctx.fillStyle = WHITE;
-        ctx.font = '600 24px "Inter Variable", Inter, system-ui, sans-serif';
-        ctx.fillText('meritadministratie.nl', 116, 602);
+        ctx.font = `600 24px ${SANS}`;
+        ctx.fillText(siteConfig.url.replace(/^https?:\/\//, ''), 116, 602);
         ctx.fillStyle = MUTED;
-        ctx.font = '400 22px "Inter Variable", Inter, system-ui, sans-serif';
+        ctx.font = `400 22px ${SANS}`;
         ctx.textAlign = 'right';
-        ctx.fillText('info@meritadministratie.nl', 1120, 602);
+        ctx.fillText(siteConfig.contact.email, 1120, 602);
         ctx.textAlign = 'left';
         return c;
       }
@@ -244,41 +325,36 @@
         log(`${res.ok ? '✓' : '✗'} ${name} (${Math.round(buffer.byteLength / 1024)} kB) ${res.ok ? '' : await res.text()}`);
       }
 
-      /** Schaal een canvas naar een maximale breedte (voor compacte PNG's). */
-      function scaled(src, maxW) {
-        const s = Math.min(1, maxW / src.width);
-        const c = makeCanvas(Math.round(src.width * s), Math.round(src.height * s));
-        const ctx = c.getContext('2d');
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(src, 0, 0, c.width, c.height);
-        return c;
-      }
-
       async function run() {
-        await document.fonts.load('600 66px "Inter Variable"');
-        await document.fonts.load('400 26px "Inter Variable"');
+        await Promise.all([
+          document.fonts.load('600 58px "Source Serif 4 Variable"'),
+          document.fonts.load('600 24px "Inter Variable"'),
+          document.fonts.load('400 26px "Inter Variable"'),
+        ]);
         out.innerHTML = '';
 
         const original = await loadOriginal();
         const transparent = toTransparent(original);
         const transparentWhite = toTransparent(original, { navyToWhite: true });
-        const bands = findBands(transparent);
-        log(`Banden gevonden: ${bands.length} (${bands.map((b) => `${b.w}×${b.h}`).join(', ')})`);
-        if (bands.length < 3) throw new Error('Verwacht minimaal 3 banden (embleem, MERIT, subtitel).');
+        const blocks = findBlocks(transparent);
+        log(
+          `Blokken: embleem ${blocks.emblem.w}×${blocks.emblem.h}, ` +
+            `woordmerk ${blocks.wordmark.w}×${blocks.wordmark.h}, tussenruimte ${blocks.gap}px`
+        );
 
         // Logo-varianten
-        const horizontal = composeHorizontal(transparent, bands, 400);
-        const horizontalWhite = composeHorizontal(transparentWhite, bands, 400);
-        const stackedBox = { x0: Math.min(bands[0].x0, bands[1].x0, bands[2].x0), y0: bands[0].y0, x1: Math.max(bands[0].x1, bands[1].x1, bands[2].x1), y1: bands[2].y1 };
-        stackedBox.w = stackedBox.x1 - stackedBox.x0; stackedBox.h = stackedBox.y1 - stackedBox.y0;
-        const stacked = scaled(crop(transparent, stackedBox, 20), 800);
-        const emblem = crop(transparent, bands[0], 8);
-        const emblemWhite = crop(transparentWhite, bands[0], 8);
+        const horizontal = composeHorizontal(transparent, blocks, 900);
+        const horizontalWhite = composeHorizontal(transparentWhite, blocks, 900);
+        const stacked = composeStacked(transparent, blocks, 800);
+        const emblem = composeEmblem(transparent, blocks, 400);
+        const emblemWhite = composeEmblem(transparentWhite, blocks, 400);
+        log(`Horizontaal: ${horizontal.width}×${horizontal.height} (ratio ${(horizontal.width / horizontal.height).toFixed(4)})`);
+        log(`Staand: ${stacked.width}×${stacked.height} — embleem: ${emblem.width}×${emblem.height}`);
 
-        await save('brand/logo-merit.png', await canvasPng(scaled(horizontal, 900)));
-        await save('brand/logo-merit-wit.png', await canvasPng(scaled(horizontalWhite, 900)));
+        await save('brand/logo-merit.png', await canvasPng(horizontal));
+        await save('brand/logo-merit-wit.png', await canvasPng(horizontalWhite));
         await save('brand/logo-merit-staand.png', await canvasPng(stacked));
-        await save('brand/logo-merit-embleem.png', await canvasPng(scaled(emblem, 400)));
+        await save('brand/logo-merit-embleem.png', await canvasPng(emblem));
 
         // OG-image en icons op basis van het echte logo
         await save('og-image.png', await canvasPng(drawOg(horizontalWhite)));
@@ -286,11 +362,13 @@
         await save('icon-192.png', await canvasPng(drawIcon(emblemWhite, 192)));
         await save('apple-touch-icon.png', await canvasPng(drawIcon(emblemWhite, 180, { rounded: false })));
         await save('favicon.ico', await makeIco([drawIcon(emblemWhite, 16), drawIcon(emblemWhite, 32), drawIcon(emblemWhite, 48)]));
+        log(`RATIO=${horizontal.width}/${horizontal.height}`);
         log('Klaar.');
       }
 
       document.getElementById('run').addEventListener('click', run);
       window.__generateAssets = run;
+      void NAVY_ALT;
     </script>
   </body>
 </html>
