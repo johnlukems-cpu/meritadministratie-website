@@ -16,4 +16,4 @@ export const logoFiles = {
 } as const;
 
 /** Verhouding van het horizontale logo (breedte / hoogte) — voor layout zonder verspringen */
-export const LOGO_HORIZONTAL_RATIO = 900 / 213;
+export const LOGO_HORIZONTAL_RATIO = 900 / 209;

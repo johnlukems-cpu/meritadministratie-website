@@ -117,16 +117,37 @@
         return { x0, y0, w: x1 - x0 + 1, h: y1 - y0 + 1 };
       }
 
+      /** Exacte begrenzing binnen een kolom- én rijbereik. */
+      function boxWithinRows(grid, xa, xb, ya, yb) {
+        const { width, data } = grid;
+        let x0 = width, y0 = yb, x1 = -1, y1 = -1;
+        for (let y = ya; y <= yb; y++) {
+          for (let x = xa; x <= xb; x++) {
+            if (data[(y * width + x) * 4 + 3] > 40) {
+              if (x < x0) x0 = x;
+              if (x > x1) x1 = x;
+              if (y < y0) y0 = y;
+              if (y > y1) y1 = y;
+            }
+          }
+        }
+        return { x0, y0, w: x1 - x0 + 1, h: y1 - y0 + 1 };
+      }
+
       /**
        * Het bronlogo is een horizontale lockup: embleem links, woordmerk rechts,
-       * gescheiden door een lege kolomzone. Deze functie vindt beide blokken.
+       * gescheiden door een lege kolomzone. Onder de lockup kan een payoffregel
+       * staan; die wordt apart gehouden, omdat hij op kleine formaten (header,
+       * footer) onleesbaar wordt.
        */
       function findBlocks(alphaCanvas) {
         const grid = alphaGrid(alphaCanvas);
-        const { width, colHas } = grid;
+        const { width, colHas, rowHas } = grid;
         const first = colHas.indexOf(true);
         const last = width - 1 - [...colHas].reverse().indexOf(true);
         if (first < 0) throw new Error('Leeg bronlogo.');
+        const top = rowHas.indexOf(true);
+        const bottom = rowHas.length - 1 - [...rowHas].reverse().indexOf(true);
 
         // Breedste lege kolomzone tussen embleem en woordmerk
         let best = null, start = null;
@@ -141,11 +162,30 @@
         }
         if (!best || best.w < 10) throw new Error('Geen scheiding tussen embleem en woordmerk gevonden.');
 
+        // Lege rijzone onder de lockup: alles daaronder is de payoffregel.
+        let split = null, rStart = null;
+        for (let y = top; y <= bottom + 1; y++) {
+          const has = y <= bottom && rowHas[y];
+          if (!has && rStart === null) rStart = y;
+          if (has && rStart !== null) {
+            const h = y - rStart;
+            if (h >= 8 && rStart - top > (bottom - top) * 0.55) split = { y0: rStart, y1: y - 1 };
+            rStart = null;
+          }
+        }
+
+        const lockupBottom = split ? split.y0 - 1 : bottom;
         return {
           grid,
+          /** Volledige artwork, inclusief payoffregel */
           full: boxWithin(grid, first, last),
-          emblem: boxWithin(grid, first, best.x0 - 1),
-          wordmark: boxWithin(grid, best.x1 + 1, last),
+          /** Lockup zonder payoffregel — voor header, footer en og-afbeelding */
+          lockup: boxWithinRows(grid, first, last, top, lockupBottom),
+          emblem: boxWithinRows(grid, first, best.x0 - 1, top, lockupBottom),
+          wordmark: boxWithinRows(grid, best.x1 + 1, last, top, lockupBottom),
+          /** Woordmerk mét payoffregel — voor het staande logo */
+          wordmarkFull: boxWithin(grid, best.x1 + 1, last),
+          payoff: split ? boxWithinRows(grid, first, last, split.y1 + 1, bottom) : null,
           gap: best.w,
         };
       }
@@ -155,20 +195,24 @@
         ctx.drawImage(src, box.x0, box.y0, box.w, box.h, x, y, w, h);
       }
 
-      /** Horizontaal logo: het bronlogo strak bijgesneden. */
+      /**
+       * Horizontaal logo voor header en footer: de lockup zonder payoffregel.
+       * Op 40 px hoogte zou die regel maar een paar pixels hoog zijn.
+       */
       function composeHorizontal(src, blocks, targetWidth = 900) {
-        const { full } = blocks;
-        const scale = targetWidth / full.w;
-        const c = makeCanvas(targetWidth, Math.round(full.h * scale));
+        const { lockup } = blocks;
+        const scale = targetWidth / lockup.w;
+        const c = makeCanvas(targetWidth, Math.round(lockup.h * scale));
         const ctx = c.getContext('2d');
         ctx.imageSmoothingQuality = 'high';
-        drawBlock(ctx, src, full, 0, 0, c.width, c.height);
+        drawBlock(ctx, src, lockup, 0, 0, c.width, c.height);
         return c;
       }
 
-      /** Staand logo: embleem boven het woordmerk, beide gecentreerd. */
+      /** Staand logo: embleem boven het volledige woordmerk, inclusief payoffregel. */
       function composeStacked(src, blocks, targetWidth = 800) {
-        const { emblem, wordmark } = blocks;
+        const { emblem } = blocks;
+        const wordmark = blocks.wordmarkFull ?? blocks.wordmark;
         const pad = Math.round(targetWidth * 0.025);
         const inner = targetWidth - pad * 2;
 
@@ -339,7 +383,8 @@
         const blocks = findBlocks(transparent);
         log(
           `Blokken: embleem ${blocks.emblem.w}×${blocks.emblem.h}, ` +
-            `woordmerk ${blocks.wordmark.w}×${blocks.wordmark.h}, tussenruimte ${blocks.gap}px`
+            `woordmerk ${blocks.wordmark.w}×${blocks.wordmark.h}, tussenruimte ${blocks.gap}px, ` +
+            `payoffregel ${blocks.payoff ? `${blocks.payoff.w}×${blocks.payoff.h}` : 'geen'}`
         );
 
         // Logo-varianten
