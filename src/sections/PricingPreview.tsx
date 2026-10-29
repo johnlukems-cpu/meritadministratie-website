@@ -50,8 +50,8 @@ export function PricingPreview() {
     <Section id="tarieven" tone="alt" aria-labelledby="tarieven-title">
       <Container>
         <div className="reveal flex flex-wrap items-end justify-between gap-4">
-          <div className="min-w-0">
-            <p className="mb-4 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-text uppercase sm:text-xs">
+          <div className="min-w-0 max-w-2xl">
+            <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-accent-text uppercase">
               Tarieven
             </p>
             <h2
@@ -76,14 +76,16 @@ export function PricingPreview() {
               key={item.name}
               className="reveal flex min-w-0 flex-col rounded-xl border border-default bg-surface p-6"
             >
-              <div className="flex items-center gap-3">
+              {/* Vaste hoogte voor de kopregel: een naam van twee regels mag de
+                  prijs eronder niet uit lijn duwen met de andere kaarten. */}
+              <div className="flex min-h-12 items-center gap-3">
                 <span
                   aria-hidden="true"
                   className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent-soft text-accent-text"
                 >
                   <item.icon className="size-5" />
                 </span>
-                <h3 className="ui-heading min-w-0 text-[1.0625rem] font-semibold text-primary">
+                <h3 className="ui-heading min-w-0 text-[1.0625rem] leading-snug font-semibold text-primary">
                   {item.name}
                 </h3>
               </div>
@@ -110,7 +112,7 @@ export function PricingPreview() {
           ))}
 
           {/* Knoppen in de vierde kolom, zoals in het ontwerp */}
-          <div className="reveal flex min-w-0 flex-col justify-center gap-3">
+          <div className="reveal flex min-w-0 flex-col gap-3 lg:justify-end">
             <Button to={routes.tarieven.path} variant="secondary" fullWidth iconRight={<ArrowRight />}>
               Bekijk alle tarieven
             </Button>
@@ -120,7 +122,7 @@ export function PricingPreview() {
           </div>
         </div>
 
-        <p className="reveal mt-8 text-[0.9375rem] text-muted">
+        <p className="reveal measure-wide mt-8 text-[0.9375rem] text-muted">
           <strong className="font-semibold text-text">Btw-aangiften en jaarrekeningen:</strong>{' '}
           {QUOTED_LABEL.toLowerCase()}. De prijs hangt af van het aantal administraties en de omvang
           van de werkzaamheden.{' '}

@@ -165,17 +165,25 @@ export function PanelCluster() {
 
         {/* Automatisering */}
         <Panel title="Automatisering" className="sm:col-span-2">
-          <ol className="mt-3 flex items-start gap-1.5">
+          {/* Op een smal scherm krijgt elke stap in een rij van vier maar zo'n
+              45 px; daar past geen enkel label in. Onder sm staan de stappen
+              daarom onder elkaar, met het label naast het icoon. */}
+          <ol className="mt-3 flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-1.5">
             {flow.map((step, i) => (
-              <li key={step.label} className="flex min-w-0 flex-1 items-start gap-1.5">
-                <div className="flex min-w-0 flex-1 flex-col items-center gap-1.5 text-center">
+              <li
+                key={step.label}
+                className="flex min-w-0 items-center gap-2 sm:flex-1 sm:items-start sm:gap-1.5"
+              >
+                <div className="flex min-w-0 flex-1 items-center gap-2 sm:flex-col sm:gap-1.5 sm:text-center">
                   <span className="inline-flex size-8 shrink-0 items-center justify-center rounded-md bg-primary-soft text-primary">
                     <step.icon className="size-4" />
                   </span>
-                  <span className="w-full text-[0.625rem] leading-tight text-muted">{step.label}</span>
+                  <span className="min-w-0 text-xs leading-tight text-muted sm:w-full sm:text-[0.6875rem]">
+                    {step.label}
+                  </span>
                 </div>
                 {i < flow.length - 1 && (
-                  <ArrowRight className="mt-2 size-3 shrink-0 text-accent" />
+                  <ArrowRight className="hidden size-3 shrink-0 text-accent sm:mt-2 sm:block" />
                 )}
               </li>
             ))}
@@ -183,7 +191,7 @@ export function PanelCluster() {
         </Panel>
       </div>
 
-      <p className="mt-3 text-center text-[0.6875rem] text-on-dark-muted">
+      <p className="mt-3 text-center text-xs text-on-dark-muted">
         Illustratief voorbeeld — geen klantgegevens
       </p>
     </div>

@@ -30,16 +30,19 @@ export function CapacitySection() {
             'radial-gradient(85% 110% at 85% 15%, #15325c 0%, transparent 58%), var(--brand-primary)',
         }}
       />
-      <Container className="py-16 md:py-20 lg:py-24">
-        <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16 [&>*]:min-w-0">
-          <div className="min-w-0">
-            <p className="mb-5 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-light uppercase sm:text-xs">
+      <Container className="py-14 md:py-16 lg:py-20">
+        {/* De tekstkolom krijgt iets meer ruimte dan de visual, zodat de drie
+            zinnen van de kop elk op één regel passen en de twee knoppen naast
+            elkaar staan in plaats van onder elkaar. */}
+        <div className="grid items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-12 [&>*]:min-w-0">
+          <div className="@container min-w-0">
+            <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-accent-light uppercase">
               Voor administratie- en accountantskantoren
             </p>
 
             <h2
               id="capaciteit-title"
-              className="text-[1.875rem] leading-[1.18] text-on-dark sm:text-[2.25rem] lg:text-[2.625rem] lg:leading-[1.14]"
+              className="text-[1.875rem] leading-[1.18] text-on-dark sm:text-[2.125rem] lg:text-[2.375rem] lg:leading-[1.16]"
             >
               Meer capaciteit.
               <br />
@@ -48,12 +51,12 @@ export function CapacitySection() {
               <span className="text-accent-light">Meer ruimte voor uw klanten.</span>
             </h2>
 
-            <p className="mt-6 max-w-xl text-[1.0625rem] leading-relaxed text-on-dark-muted">
+            <p className="mt-5 max-w-[52ch] text-[1.0625rem] leading-relaxed text-on-dark-muted">
               Laat uw financiële backoffice over aan MERIT, zodat uw kantoor zich kan richten op wat
               echt belangrijk is: advies, groei en uw klanten.
             </p>
 
-            <ul className="mt-8 flex flex-col gap-3">
+            <ul className="mt-7 flex flex-col gap-3">
               {benefits.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3 text-[0.9375rem] text-on-dark-muted">
                   <span
@@ -67,7 +70,10 @@ export function CapacitySection() {
               ))}
             </ul>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
+            {/* Containerquery in plaats van een schermbreedte: de knoppen gaan
+                naast elkaar zodra déze kolom breed genoeg is, niet zodra het
+                scherm dat is. */}
+            <div className="mt-8 flex flex-col gap-3 @[33rem]:flex-row @[33rem]:flex-wrap [&>*]:w-full @[33rem]:[&>*]:w-auto">
               <Button
                 to={routes.voorKantoren.path}
                 size="lg"

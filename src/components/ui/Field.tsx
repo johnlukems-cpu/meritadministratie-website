@@ -33,7 +33,7 @@ function FieldWrapper({ id, label, required, hint, error, children, className }:
             *
           </span>
         ) : (
-          <span className="ml-1 font-normal text-subtle">(optioneel)</span>
+          <span className="ml-1 font-normal whitespace-nowrap text-subtle">(optioneel)</span>
         )}
       </label>
       {children}

@@ -112,9 +112,16 @@ export default function Tarieven() {
             className="reveal"
           />
 
-          {/* Compacte vergelijkingstabel */}
-          <div className="reveal mt-10 overflow-hidden rounded-xl border border-default bg-surface">
-            <table className="w-full text-[0.9375rem]">
+          {/* Compacte vergelijkingstabel. Op een smal scherm past de tabel niet
+              binnen de kolom; dan is horizontaal scrollen beter dan afkappen.
+              tabIndex maakt dat scrollgebied ook met het toetsenbord bereikbaar. */}
+          <div
+            role="region"
+            aria-label="Tarieven per dienst"
+            tabIndex={0}
+            className="reveal mt-10 overflow-x-auto rounded-xl border border-default bg-surface"
+          >
+            <table className="w-full min-w-[30rem] text-[0.9375rem]">
               <caption className="sr-only">Tarieven per dienst, exclusief btw</caption>
               <thead>
                 <tr className="border-b border-default bg-surface-alt text-left text-xs font-semibold tracking-wide text-subtle uppercase">
@@ -155,11 +162,16 @@ export default function Tarieven() {
           </div>
 
           <div className="mt-8 grid gap-5 md:grid-cols-2 lg:gap-6">
-            {hourlyRates.map((rate) => (
+            {hourlyRates.map((rate, index) => (
               <div
                 key={rate.id}
                 id={`tarief-${rate.id}`}
-                className="reveal flex h-full scroll-mt-28 flex-col rounded-lg border border-default bg-surface p-6 md:p-7"
+                className={cn(
+                  'reveal flex h-full scroll-mt-28 flex-col rounded-lg border border-default bg-surface p-6 md:p-7',
+                  // Bij een oneven aantal kaarten vult de laatste de hele rij,
+                  // zodat er geen leeg vak naast blijft staan.
+                  hourlyRates.length % 2 === 1 && index === hourlyRates.length - 1 && 'md:col-span-2',
+                )}
               >
                 <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
                   <h3 className="ui-heading text-lg font-semibold text-primary">{rate.name}</h3>
@@ -185,26 +197,33 @@ export default function Tarieven() {
                   size="sm"
                   className="mt-5 border-t border-default pt-5"
                 />
-                {rate.note && (
-                  <p className="mt-5 text-sm leading-relaxed text-subtle">{rate.note}</p>
-                )}
-                {rate.quoted && (
-                  <div className="mt-5">
-                    <Button
-                      to={`${routes.offerte.path}?dienst=${rate.id}`}
-                      size="sm"
-                      variant="outline"
-                      iconRight={<ArrowRight />}
-                    >
-                      Vraag een prijsvoorstel aan
-                    </Button>
+                {/* Toelichting en knop onderaan: kaarten in dezelfde rij zijn
+                    even hoog, dus de restruimte valt bóven dit blok in plaats
+                    van als gat onder de kaart. */}
+                {(rate.note || rate.quoted) && (
+                  <div className="mt-auto pt-5">
+                    {rate.note && (
+                      <p className="text-sm leading-relaxed text-subtle">{rate.note}</p>
+                    )}
+                    {rate.quoted && (
+                      <div className={rate.note ? 'mt-5' : undefined}>
+                        <Button
+                          to={`${routes.offerte.path}?dienst=${rate.id}`}
+                          size="sm"
+                          variant="outline"
+                          iconRight={<ArrowRight />}
+                        >
+                          Vraag een prijsvoorstel aan
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
             ))}
           </div>
 
-          <p className="reveal mt-8 max-w-3xl text-sm leading-relaxed text-muted">
+          <p className="reveal measure mt-8 text-sm leading-relaxed text-muted">
             {siteConfig.pricing.finalPriceNote} {siteConfig.pricing.customQuoteNote}
           </p>
         </Container>
@@ -234,7 +253,7 @@ export default function Tarieven() {
                 )}
               >
                 {bundle.recommended && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-[0.6875rem] font-bold tracking-wide whitespace-nowrap text-accent-contrast uppercase">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-1 text-xs font-bold tracking-wide whitespace-nowrap text-accent-contrast uppercase">
                     Meest gekozen
                   </span>
                 )}
@@ -304,7 +323,7 @@ export default function Tarieven() {
           <div className="reveal mt-12 rounded-xl border border-default bg-surface p-6 md:p-8">
             <h3 className="text-lg font-semibold">Voorwaarden bij een urenbundel</h3>
             <CheckList items={bundleConditions} size="sm" columns={2} className="mt-6" />
-            <p className="mt-6 border-t border-default pt-6 text-sm leading-relaxed text-muted">
+            <p className="measure mt-6 border-t border-default pt-6 text-sm leading-relaxed text-muted">
               {bundleConditionsNote}
             </p>
           </div>
@@ -324,7 +343,7 @@ export default function Tarieven() {
                 className="reveal"
               />
               <CheckList items={projectServices} className="reveal mt-8" />
-              <p className="reveal mt-8 text-[0.9375rem] leading-relaxed text-muted">
+              <p className="reveal measure mt-8 text-[0.9375rem] leading-relaxed text-muted">
                 {projectServicesNote}
               </p>
             </div>
@@ -388,7 +407,7 @@ export default function Tarieven() {
       {/* F. Veelgestelde vragen over prijzen */}
       <Section tone="default" id="prijsvragen" aria-labelledby="prijsvragen-title">
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 [&>*]:min-w-0">
             <div>
               <SectionHeading
                 id="prijsvragen-title"

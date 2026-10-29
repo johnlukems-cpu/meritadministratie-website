@@ -72,7 +72,7 @@ export default function OverOns() {
       <TextSection
         id="waar-wij-voor-staan"
         eyebrow="Waar wij voor staan"
-        title="Financiële backofficeondersteuning, als vast onderdeel van uw kantoor"
+        title="Financiële backoffice­ondersteuning, als vast onderdeel van uw kantoor"
       >
         <p>
           Bij veel kantoren is er meer werk dan uren. Niet omdat het werk niet goed gaat, maar omdat
@@ -112,7 +112,7 @@ export default function OverOns() {
       {/* Bedrijfsgegevens — uitsluitend bevestigde gegevens */}
       <Section tone="alt" id="bedrijfsgegevens" aria-labelledby="bedrijfsgegevens-title">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20 [&>*]:min-w-0">
             <div>
               <SectionHeading
                 id="bedrijfsgegevens-title"

@@ -74,7 +74,7 @@ export function PageHero({
           {eyebrow && <p className={cn('eyebrow mb-4', dark && 'text-accent')}>{eyebrow}</p>}
           <h1
             className={cn(
-              'text-4xl font-semibold sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]',
+              'text-[2rem] font-semibold sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]',
               dark && 'text-on-dark',
             )}
           >

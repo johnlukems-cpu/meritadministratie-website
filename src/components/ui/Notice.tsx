@@ -43,7 +43,12 @@ export function Notice({ title, children, tone = 'info', className }: NoticeProp
       <Icon aria-hidden="true" className={cn('mt-0.5 size-5 shrink-0', icon)} />
       <div className="min-w-0">
         {title && <p className="font-semibold text-primary">{title}</p>}
-        <div className={cn('text-[0.9375rem] leading-relaxed text-muted', title && 'mt-1.5')}>
+        <div
+          className={cn(
+            'measure-wide text-[0.9375rem] leading-relaxed text-muted',
+            title && 'mt-1.5',
+          )}
+        >
           {children}
         </div>
       </div>

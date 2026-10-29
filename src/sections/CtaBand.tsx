@@ -39,15 +39,18 @@ export function CtaBand({
       />
       <Container className="py-14 md:py-16 lg:py-20">
         <div className="reveal flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
-          <div className="min-w-0">
+          <div className="min-w-0 lg:flex-1">
             {eyebrow && (
-              <p className="mb-4 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-light uppercase sm:text-xs">
+              <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-accent-light uppercase">
                 {eyebrow}
               </p>
             )}
             <h2
               id="cta-title"
-              className="max-w-2xl text-[1.625rem] leading-[1.22] text-on-dark sm:text-[2rem] lg:text-[2.25rem] lg:leading-[1.18]"
+              /* Naast de knoppenkolom blijft hier zo'n 440 px over; op 36 px
+                 past een lange samenstelling als "backofficewerkzaamheden" daar
+                 niet op één regel. Vandaar 32 px vanaf lg. */
+              className="max-w-2xl text-[1.625rem] leading-[1.22] text-on-dark sm:text-[1.875rem] lg:text-[2rem] lg:leading-[1.2]"
             >
               {title}
             </h2>

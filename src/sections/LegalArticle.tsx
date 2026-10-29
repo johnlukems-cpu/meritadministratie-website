@@ -61,7 +61,7 @@ export function LegalArticle({ updated, intro, sections, footnote }: LegalArticl
               ))}
             </div>
             {footnote && (
-              <div className="mt-14 rounded-lg border border-warning/30 bg-warning-soft p-5 text-sm text-text">
+              <div className="mt-14 rounded-lg border border-warning/30 bg-warning-soft p-5 text-sm text-text [&>p]:max-w-[40em]">
                 {footnote}
               </div>
             )}

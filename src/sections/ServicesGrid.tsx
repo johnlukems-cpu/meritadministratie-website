@@ -86,7 +86,7 @@ export function ServicesGrid({
           <div className="reveal grid gap-6 lg:grid-cols-[1.1fr_1fr] lg:items-end lg:gap-16">
             <div className="min-w-0">
               {heading.eyebrow && (
-                <p className="mb-4 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-text uppercase sm:text-xs">
+                <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-accent-text uppercase">
                   {heading.eyebrow}
                 </p>
               )}
@@ -100,7 +100,7 @@ export function ServicesGrid({
             {(heading.description || headerLink) && (
               <div className="min-w-0 lg:pb-1">
                 {heading.description && (
-                  <p className="text-[0.9375rem] leading-relaxed text-muted">
+                  <p className="measure text-[0.9375rem] leading-relaxed text-muted">
                     {heading.description}
                   </p>
                 )}

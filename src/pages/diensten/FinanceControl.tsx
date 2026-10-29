@@ -119,7 +119,7 @@ export default function FinanceControl() {
 
       <PageHero
         eyebrow="Finance Control"
-        title="Administratieve kwaliteitscontrole en afwijkingssignalering"
+        title="Administratieve kwaliteitscontrole en afwijkings­signalering"
         intro="Wij controleren of de administratie sluit en brengen in beeld wat afwijkt. Zo komt er minder uitzoekwerk terecht bij uw eigen medewerkers en gaat de beoordeling over de inhoud."
         breadcrumbs={[
           { name: 'Diensten', path: routes.diensten.path },

@@ -22,6 +22,16 @@ export default tseslint.config(
     },
     rules: {
       '@typescript-eslint/consistent-type-imports': 'error',
+      /**
+       * Een horizontaal scrollbaar gebied moet met het toetsenbord bereikbaar
+       * zijn. De aanbevolen oplossing is role="region" + aria-label + tabindex=0
+       * (zie de WAI-richtlijn voor scrollbare tabellen). Daarom is `region`
+       * hier een toegestane rol voor tabindex.
+       */
+      'jsx-a11y/no-noninteractive-tabindex': [
+        'error',
+        { tags: [], roles: ['tabpanel', 'region'], allowExpressionValues: true },
+      ],
     },
   },
   {

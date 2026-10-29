@@ -34,11 +34,16 @@
     font-family: var(--font-sans);
     color: var(--text);
     background-color: var(--surface);
-    /* Nederlandse samenstellingen ("jaarrekeningvoorbereiding",
-       "backofficeondersteuning") zijn langer dan een smalle kolom. `anywhere`
-       verlaagt ook de min-content-breedte, waardoor grid- en flexkolommen écht
-       kunnen krimpen; een woord breekt alleen af als het anders buiten beeld valt. */
-    overflow-wrap: anywhere;
+    /* Woorden breken alleen af als ze écht niet passen.
+       - `break-word` is het vangnet: een woord dat in zijn eentje breder is dan
+         de kolom wordt gebroken in plaats van buiten beeld te lopen.
+       - `hyphens: manual` zet automatische afbreekstreepjes uit. De browser
+         breekt Nederlandse samenstellingen niet betrouwbaar op de juiste
+         lettergreep af ("jaarr-ekening" in plaats van "jaar-rekening"), dus
+         liever geen streepjes dan verkeerde. Een zachte afbreekstreep (&shy;)
+         in de tekst zelf wordt nog steeds gevolgd. */
+    overflow-wrap: break-word;
+    hyphens: manual;
     font-feature-settings:
       'cv11' 1,
       'ss01' 1,
@@ -49,6 +54,24 @@
     min-height: 100dvh;
   }
 
+  /* Koppen breken op woordgrenzen.
+     `text-wrap: pretty` in plaats van `balance`: balance kiest soms een
+     regelbreedte die smaller is dan het langste woord, waarna dat woord
+     middenin werd afgebroken ("backofficewerkzaamhede-n"). `pretty` houdt de
+     volle regelbreedte aan en voorkomt alleen een losse staartregel.
+     `break-word` blijft als vangnet staan voor hele lange samenstellingen op
+     een smal scherm — dan is afbreken beter dan buiten beeld lopen. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    hyphens: manual;
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+  }
+
   h1,
   h2,
   h3 {
@@ -56,13 +79,21 @@
     font-weight: 600;
     color: var(--brand-primary);
     letter-spacing: -0.015em;
-    text-wrap: balance;
   }
 
   h4 {
     color: var(--brand-primary);
     letter-spacing: -0.01em;
-    text-wrap: balance;
+  }
+
+  /* Knoplabels, navigatie-items en badges breken nooit middenin een woord. */
+  button,
+  a,
+  label,
+  summary,
+  th,
+  .eyebrow {
+    hyphens: manual;
   }
 
   /* Kaart- en lijstkoppen blijven schreefloos: daar leest Inter rustiger. */
@@ -123,19 +154,31 @@
     }
   }
 
-  /* Verticale sectie-spacing */
+  /* Verticale sectie-spacing. Compact genoeg om pagina's niet onnodig lang te
+     maken, ruim genoeg om secties van elkaar te scheiden. */
   .section {
-    padding-block: 4rem;
+    padding-block: 3.25rem;
   }
   @media (min-width: 768px) {
     .section {
-      padding-block: 5.5rem;
+      padding-block: 4.25rem;
     }
   }
   @media (min-width: 1024px) {
     .section {
-      padding-block: 7rem;
+      padding-block: 5.25rem;
     }
+  }
+
+  /* Leesbare regellengte voor doorlopende tekst: rond de 70 tekens per regel.
+     In `em` en niet in `ch`, omdat `ch` de breedte van het cijfer 0 is en een
+     gemiddelde letter in Inter smaller is — 68ch levert in de praktijk zo'n
+     85 tekens op. 34em komt uit op ongeveer 70 tekens. */
+  .measure {
+    max-width: 34em;
+  }
+  .measure-wide {
+    max-width: 40em;
   }
 
   /* Kleine label boven een kop */
@@ -181,6 +224,50 @@
   }
   .menu-panel {
     animation: menu-panel-in var(--duration-base) var(--ease-out) both;
+  }
+
+  /* Zwevende WhatsApp-knop (components/WhatsAppButton.tsx).
+     - De zijmarges houden rekening met de veilige zone van telefoons met een
+       afgeronde rand of home-indicator.
+     - --cookie-banner-height wordt door CookieConsent gezet zolang de banner
+       open staat; de knop schuift dan precies daarboven.
+     - z-index 40: onder de cookiebanner en het mobiele menu (50), boven de
+       pagina-inhoud. */
+  .whatsapp-fab {
+    position: fixed;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: calc(max(1rem, env(safe-area-inset-bottom)) + var(--cookie-banner-height, 0px));
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: var(--radius-full);
+    /* WhatsApp-groen in de donkere variant. Een wit icoon haalt hierop 4,6:1 en
+       het staat rustiger naast het marineblauw en goud van de huisstijl. */
+    background-color: #128c7e;
+    color: #ffffff;
+    box-shadow: var(--shadow-lg);
+    transition:
+      background-color var(--duration-base) var(--ease-out),
+      transform var(--duration-base) var(--ease-out);
+  }
+  .whatsapp-fab:hover,
+  .whatsapp-fab:focus-visible {
+    background-color: #0f7569;
+    transform: scale(1.06);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .whatsapp-fab:hover,
+    .whatsapp-fab:focus-visible {
+      transform: none;
+    }
+  }
+  @media print {
+    .whatsapp-fab {
+      display: none;
+    }
   }
 
   /* Alleen zichtbaar voor screenreaders, tot focus (skip-link) */

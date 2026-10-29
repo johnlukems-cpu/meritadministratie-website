@@ -187,12 +187,12 @@ export default function VoorMkb() {
                 description="Voor btw-aangiften en jaarrekeningen werken wij met een vast tarief per opdracht in plaats van een standaardprijs."
                 className="reveal"
               />
-              <p className="reveal mt-6 text-[0.9375rem] leading-relaxed text-muted">
+              <p className="reveal measure mt-6 text-[0.9375rem] leading-relaxed text-muted">
                 De prijs hangt af van de omvang van uw administratie, het aantal aangiften per jaar
                 en de complexiteit van de werkzaamheden. Vertel ons kort wat er nodig is; u ontvangt
                 vooraf een duidelijk voorstel met een vast tarief.
               </p>
-              <p className="reveal mt-4 text-[0.9375rem] leading-relaxed text-muted">
+              <p className="reveal measure mt-4 text-[0.9375rem] leading-relaxed text-muted">
                 {quotedServicesNote}
               </p>
             </div>

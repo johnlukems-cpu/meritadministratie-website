@@ -68,6 +68,16 @@ export const siteConfig = {
     } as { street: string; postalCode: string; city: string; country: string } | null,
     /** Openingstijden (vrije tekst), bijv. 'Ma–vr 09:00–17:00'. null = niet tonen. */
     openingHours: null as string | null,
+    /**
+     * WhatsApp-nummer. `number` is het internationale nummer zonder plusteken,
+     * spaties of leestekens — dat formaat verwacht wa.me. `display` is de
+     * schrijfwijze voor bezoekers. Dit is een ander nummer dan `phone`.
+     * null = geen WhatsApp-knop tonen.
+     */
+    whatsapp: {
+      number: '31614856469',
+      display: '+31 6 14856469',
+    } as { number: string; display: string } | null,
   },
 
   /** Social media — vul een URL in om de link te tonen (nog niet bekend). */

@@ -174,7 +174,7 @@ export default function FinancialBackoffice() {
       <RelatedServices currentId="financial-backoffice" tone="default" />
 
       <CtaBand
-        title="Welke backofficewerkzaamheden wilt u uitbesteden?"
+        title="Welke backoffice­werkzaamheden wilt u uitbesteden?"
         text="Bespreek met MERIT welke werkzaamheden zich goed laten overdragen en ontvang een voorstel met tarief, afbakening en controlemomenten."
         primary={{ label: 'Bespreek uw backofficewerkzaamheden', to: routes.kennismaking.path }}
         tone="alt"

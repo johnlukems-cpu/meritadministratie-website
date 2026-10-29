@@ -4,6 +4,7 @@ import { AnnouncementBar } from './AnnouncementBar';
 import { Header } from './Header';
 import { Footer } from './Footer';
 import { CookieConsent } from '@/components/CookieConsent';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 /** Scrollt naar boven bij routewissel (of naar een #anker als dat er is). */
 function ScrollManager() {
@@ -65,6 +66,8 @@ export function RootLayout() {
         <Outlet />
       </main>
       <Footer />
+      {/* Eén gedeelde WhatsApp-knop voor alle publieke pagina's. */}
+      <WhatsAppButton />
       <CookieConsent />
     </div>
   );

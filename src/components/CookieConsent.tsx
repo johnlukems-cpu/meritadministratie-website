@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { Cookie, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -42,6 +42,7 @@ export function CookieConsent() {
   const [dismissed, setDismissed] = useState(false);
   const [forcedOpen, setForcedOpen] = useState(false);
   const [showPrefs, setShowPrefs] = useState(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   // Externe trigger ("Cookie-instellingen") — externe gebeurtenis → setState in callback is toegestaan
   useEffect(() => {
@@ -53,6 +54,31 @@ export function CookieConsent() {
   }, []);
 
   const open = required && !dismissed && (forcedOpen || !state.decidedAt);
+
+  // Publiceert de hoogte van de banner als --cookie-banner-height, zodat de
+  // zwevende WhatsApp-knop er precies boven komt te staan in plaats van erover.
+  useEffect(() => {
+    const root = document.documentElement;
+    const clear = () => root.style.removeProperty('--cookie-banner-height');
+    if (!open) {
+      clear();
+      return;
+    }
+    const el = dialogRef.current;
+    if (!el) return clear;
+    const update = () => {
+      // Hoogte van de banner plus de ruimte eronder (bottom-4 = 1rem).
+      root.style.setProperty('--cookie-banner-height', `${Math.round(el.offsetHeight) + 16}px`);
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      clear();
+    };
+  }, [open, showPrefs]);
+
   if (!open) return null;
 
   const categories = activeCategories();
@@ -65,6 +91,7 @@ export function CookieConsent() {
 
   return (
     <div
+      ref={dialogRef}
       role="dialog"
       aria-modal="false"
       aria-labelledby="cookie-title"

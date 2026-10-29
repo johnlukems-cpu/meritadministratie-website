@@ -35,7 +35,7 @@ export default function Diensten() {
 
       <PageHero
         eyebrow="Diensten"
-        title="Financiële backofficediensten voor administratie- en accountantskantoren"
+        title="Financiële backofficediensten voor administratie- en accountants­kantoren"
         intro="Zes diensten die u afzonderlijk of gecombineerd kunt afnemen. U bepaalt welke werkzaamheden u uitbesteedt en welke binnen uw kantoor blijven; wij leggen de afbakening vooraf schriftelijk vast."
         breadcrumbs={[{ name: 'Diensten', path: routes.diensten.path }]}
       />

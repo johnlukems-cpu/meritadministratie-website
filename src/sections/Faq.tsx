@@ -29,7 +29,7 @@ export function FaqSection({
   return (
     <Section id={id} tone={tone} aria-labelledby={titleId}>
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 [&>*]:min-w-0">
           <div>
             <SectionHeading
               id={titleId}

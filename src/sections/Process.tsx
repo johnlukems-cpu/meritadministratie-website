@@ -19,17 +19,18 @@ export function Process({
   return (
     <Section id="werkwijze" tone={tone} aria-labelledby="werkwijze-title">
       <Container>
-        <div className="reveal text-center">
+        {/* Links uitgelijnd, net als de koppen van de andere secties. */}
+        <div className="reveal">
           <h2
             id="werkwijze-title"
             className="text-[1.75rem] leading-[1.2] sm:text-[2.125rem] lg:text-[2.375rem]"
           >
             {title}
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-[0.9375rem] text-muted">{description}</p>
+          <p className="mt-3 max-w-xl text-[0.9375rem] text-muted">{description}</p>
         </div>
 
-        <ol className="mt-12 grid gap-8 md:grid-cols-3 md:gap-6">
+        <ol className="mt-10 grid gap-8 md:grid-cols-3 md:gap-6">
           {processSteps.map((step, index) => {
             const Icon = icons[index] ?? MessageSquare;
             const last = index === processSteps.length - 1;

@@ -61,7 +61,7 @@ export function Hero() {
         className="absolute inset-0 -z-10 hidden lg:block"
         style={{
           background:
-            'linear-gradient(100deg, rgba(11,31,58,.97) 0%, rgba(11,31,58,.95) 38%, rgba(11,31,58,.92) 53%, rgba(11,31,58,.6) 64%, rgba(11,31,58,.22) 80%, rgba(11,31,58,.06) 100%)',
+            'linear-gradient(100deg, rgba(11,31,58,.97) 0%, rgba(11,31,58,.95) 40%, rgba(11,31,58,.92) 56%, rgba(11,31,58,.6) 67%, rgba(11,31,58,.22) 82%, rgba(11,31,58,.06) 100%)',
         }}
       />
       {/* Heel lichte sluier over het geheel, zodat de foto rustig blijft en de
@@ -71,26 +71,26 @@ export function Hero() {
         className="absolute inset-0 -z-10 hidden bg-[rgba(11,31,58,.18)] lg:block"
       />
 
-      <Container className="py-14 md:py-20 lg:py-28">
-        <div className="max-w-xl lg:max-w-[30rem] xl:max-w-[34rem]">
-          <p className="mb-5 text-[0.6875rem] font-semibold tracking-[0.14em] text-accent-light uppercase sm:text-xs">
+      <Container className="py-12 md:py-16 lg:py-20">
+        <div className="max-w-xl lg:max-w-[32rem] xl:max-w-[37rem]">
+          <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-balance text-accent-light uppercase">
             Financiële backoffice voor administratie- en accountantskantoren
           </p>
 
-          <h1 className="text-[1.9375rem] leading-[1.16] text-on-dark sm:text-[2.375rem] lg:text-[2.875rem] lg:leading-[1.12]">
+          <h1 className="text-[1.9375rem] leading-[1.16] text-on-dark sm:text-[2.25rem] lg:text-[2.625rem] lg:leading-[1.14]">
             Uw betrouwbare partner voor{' '}
             <span className="text-accent-light">financiële backoffice</span> en{' '}
             <span className="text-accent-light">AFAS-ondersteuning</span>.
           </h1>
 
-          <p className="mt-6 text-[1.0625rem] leading-relaxed text-on-dark-muted">
+          <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-on-dark-muted">
             Wij ondersteunen Nederlandse administratie- en accountantskantoren met financiële
             verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en
             procesverbetering. Zo creëert uw kantoor meer capaciteit, meer grip op de administratie
             en ruimte voor klantadvies.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
             <Button
               to={routes.kennismaking.path}
               size="lg"
@@ -105,7 +105,7 @@ export function Hero() {
           </div>
 
           {/* Kernwaarden */}
-          <ul className="mt-10 flex flex-wrap gap-x-6 gap-y-3 border-t border-on-dark-border pt-7">
+          <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 border-t border-on-dark-border pt-6">
             {values.map((value) => (
               <li key={value} className="flex items-center gap-2 text-[0.9375rem] text-on-dark">
                 <span

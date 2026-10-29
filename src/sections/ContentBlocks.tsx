@@ -28,7 +28,7 @@ export function TextSection({
   return (
     <Section tone={tone} aria-labelledby={`${id}-title`}>
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 [&>*]:min-w-0">
           <SectionHeading
             id={`${id}-title`}
             eyebrow={eyebrow}
