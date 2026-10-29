@@ -60,7 +60,7 @@ export function ServiceIntro({
               title={title}
               className="reveal"
             />
-            <div className="reveal mt-6 space-y-4">
+            <div className="reveal measure mt-6 space-y-4">
               {paragraphs.map((paragraph) => (
                 <p key={paragraph.slice(0, 48)} className="text-lg leading-relaxed text-muted">
                   {paragraph}

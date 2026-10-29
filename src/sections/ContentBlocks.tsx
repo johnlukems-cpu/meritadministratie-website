@@ -36,7 +36,7 @@ export function TextSection({
             description={description}
             className="reveal lg:sticky lg:top-28 lg:self-start"
           />
-          <div className="reveal space-y-5 text-[1.0625rem] leading-relaxed text-muted [&_strong]:font-semibold [&_strong]:text-text">
+          <div className="reveal measure space-y-5 text-[1.0625rem] leading-relaxed text-muted [&_strong]:font-semibold [&_strong]:text-text">
             {children}
           </div>
         </div>

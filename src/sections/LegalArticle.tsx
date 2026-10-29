@@ -54,7 +54,7 @@ export function LegalArticle({ updated, intro, sections, footnote }: LegalArticl
                     <span className="mr-2 text-accent-text tabular-nums">{i + 1}.</span>
                     {s.title}
                   </h2>
-                  <div className="mt-4 space-y-4 text-[1.0625rem] leading-relaxed text-muted [&_h3]:mt-6 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-primary [&_li]:mt-1.5 [&_strong]:font-semibold [&_strong]:text-text [&_ul]:list-disc [&_ul]:pl-5">
+                  <div className="measure mt-4 space-y-4 text-[1.0625rem] leading-relaxed text-muted [&_h3]:mt-6 [&_h3]:text-base [&_h3]:font-semibold [&_h3]:text-primary [&_li]:mt-1.5 [&_strong]:font-semibold [&_strong]:text-text [&_ul]:list-disc [&_ul]:pl-5">
                     {s.content}
                   </div>
                 </section>

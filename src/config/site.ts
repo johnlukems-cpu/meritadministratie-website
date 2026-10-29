@@ -71,12 +71,13 @@ export const siteConfig = {
     /**
      * WhatsApp-nummer. `number` is het internationale nummer zonder plusteken,
      * spaties of leestekens — dat formaat verwacht wa.me. `display` is de
-     * schrijfwijze voor bezoekers. Dit is een ander nummer dan `phone`.
+     * schrijfwijze voor bezoekers. Dit is nu hetzelfde nummer als `phone`;
+     * het staat apart zodat WhatsApp later een eigen nummer kan krijgen.
      * null = geen WhatsApp-knop tonen.
      */
     whatsapp: {
-      number: '31614856469',
-      display: '+31 6 14856469',
+      number: '31643641178',
+      display: '06 43 64 11 78',
     } as { number: string; display: string } | null,
   },
 
