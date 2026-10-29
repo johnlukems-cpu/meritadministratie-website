@@ -21,7 +21,7 @@ export default function Contact() {
       <PageHero
         eyebrow="Contact"
         title="Neem contact met ons op"
-        intro="Wilt u werkzaamheden uitbesteden, een urenbundel afnemen of eerst vrijblijvend kennismaken? Laat ons weten waar het om gaat; wij reageren zo snel mogelijk."
+        intro="Wilt u uw administratie uit handen geven, een prijsvoorstel ontvangen of eerst vrijblijvend kennismaken? Laat ons weten waar het om gaat; wij reageren zo snel mogelijk."
         breadcrumbs={[{ name: 'Contact', path: routes.contact.path }]}
       />
       <ContactBlock

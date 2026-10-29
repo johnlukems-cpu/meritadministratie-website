@@ -96,7 +96,7 @@ export function ContactForm() {
         required
         rows={6}
         error={errors.bericht}
-        placeholder="Welke werkzaamheden wilt u uitbesteden, en waar loopt het nu vast?"
+        placeholder="Waar kunnen wij u mee helpen? Vertel kort hoe uw administratie er nu voor staat."
       />
 
       {status === 'error' && <FormError text={message} />}

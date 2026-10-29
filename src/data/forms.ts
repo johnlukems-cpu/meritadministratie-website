@@ -13,37 +13,35 @@ export interface SelectOption {
  * en wordt gebruikt om de bijbehorende dienstpagina te herkennen.
  */
 
-/* --- Type organisatie (primair onderscheid kantoor vs. mkb) ------------------ */
+/* --- Type onderneming -------------------------------------------------------- */
 
 export const organisatieTypes: SelectOption[] = [
-  { value: 'administratiekantoor', label: 'Administratiekantoor' },
-  { value: 'accountantskantoor', label: 'Accountantskantoor' },
-  { value: 'mkb-onderneming', label: 'Mkb-onderneming' },
+  { value: 'zzp', label: 'Zzp\u2019er / eenmanszaak' },
+  { value: 'vof-maatschap', label: 'Vof of maatschap' },
+  { value: 'bv', label: 'Bv' },
+  { value: 'stichting-vereniging', label: 'Stichting of vereniging' },
   { value: 'anders', label: 'Anders' },
 ];
 
 /* --- Gewenste dienst --------------------------------------------------------- */
-/** Waarden gelijk aan de dienst-id's in src/data/services.ts, plus mkb en anders. */
+/** Waarden gelijk aan de dienst-id's in src/data/services.ts, plus anders. */
 export const gewensteDiensten: SelectOption[] = [
-  { value: 'financial-backoffice', label: 'Financial Backoffice' },
+  { value: 'financiele-administratie', label: 'Financiële administratie' },
   { value: 'btw-aangiften', label: 'Btw-aangiften' },
-  { value: 'jaarrekeningen', label: 'Jaarrekeningen & Jaarafsluiting' },
-  { value: 'afas-software-support', label: 'AFAS & Software Support' },
-  { value: 'finance-control', label: 'Finance Control' },
-  { value: 'automatisering', label: 'Automatisering' },
-  { value: 'mkb-administratie', label: 'Mkb-administratie' },
+  { value: 'jaarrekeningen', label: 'Jaarrekeningen & jaarafsluiting' },
+  { value: 'volledige-ontzorging', label: 'Alles samen: administratie, btw en jaarwerk' },
   { value: 'anders', label: 'Anders' },
 ];
 
-/* --- Gewenst aantal uren per maand (optioneel) ------------------------------- */
+/* --- Omvang van de administratie (optioneel) --------------------------------- */
+/** Aantal boekingen per maand; bepaalt samen met de werkzaamheden het pakket. */
 
 export const urenPerMaand: SelectOption[] = [
-  { value: '1-10', label: '1 – 10 uur per maand' },
-  { value: '10-20', label: '10 – 20 uur per maand' },
-  { value: '20-40', label: '20 – 40 uur per maand' },
-  { value: '40-80', label: '40 – 80 uur per maand' },
-  { value: '80-plus', label: 'Meer dan 80 uur per maand' },
-  { value: 'eenmalig-project', label: 'Eenmalig project, geen vaste uren' },
+  { value: 'tot-25', label: 'Tot 25 boekingen per maand' },
+  { value: '25-50', label: '25 – 50 boekingen per maand' },
+  { value: '50-100', label: '50 – 100 boekingen per maand' },
+  { value: '100-plus', label: 'Meer dan 100 boekingen per maand' },
+  { value: 'alleen-jaarwerk', label: 'Alleen jaarwerk, geen maandelijkse verwerking' },
   { value: 'nog-niet-bekend', label: 'Nog niet bekend' },
 ];
 
@@ -53,8 +51,9 @@ export const startMomenten: SelectOption[] = [
   { value: 'zo-snel-mogelijk', label: 'Zo snel mogelijk' },
   { value: 'binnen-1-maand', label: 'Binnen een maand' },
   { value: 'binnen-3-maanden', label: 'Binnen drie maanden' },
-  { value: 'komende-aangifteperiode', label: 'Voor de komende aangifteperiode' },
+  { value: 'komende-aangifteperiode', label: 'Voor de komende btw-aangifte' },
   { value: 'komende-jaarafsluiting', label: 'Voor de komende jaarafsluiting' },
+  { value: 'nieuw-boekjaar', label: 'Vanaf het nieuwe boekjaar' },
   { value: 'nog-niet-bekend', label: 'Nog niet bekend' },
 ];
 
@@ -70,12 +69,10 @@ export const kennismakingDiensten: SelectOption[] = [
 
 /** Diensten in het prijsvoorstelformulier, in de volgorde uit het ontwerp. */
 export const offerteDiensten: SelectOption[] = [
+  { value: 'financiele-administratie', label: 'Financiële administratie' },
   { value: 'btw-aangiften', label: 'Btw-aangiften' },
-  { value: 'jaarrekeningen', label: 'Jaarrekeningen & Jaarafsluiting' },
-  { value: 'financial-backoffice', label: 'Financial Backoffice' },
-  { value: 'afas-software-support', label: 'AFAS & Software Support' },
-  { value: 'finance-control', label: 'Finance Control' },
-  { value: 'automatisering', label: 'Automatisering' },
+  { value: 'jaarrekeningen', label: 'Jaarrekeningen & jaarafsluiting' },
+  { value: 'volledige-ontzorging', label: 'Alles samen: administratie, btw en jaarwerk' },
   { value: 'anders', label: 'Anders' },
 ];
 
@@ -90,10 +87,8 @@ export const rechtsvormen: SelectOption[] = [
 ];
 
 export const branches: SelectOption[] = [
-  { value: 'administratiekantoor', label: 'Administratiekantoor' },
-  { value: 'accountantskantoor', label: 'Accountantskantoor' },
-  { value: 'belastingadvies', label: 'Belastingadvies' },
   { value: 'zakelijke-dienstverlening', label: 'Zakelijke dienstverlening' },
+  { value: 'horeca', label: 'Horeca' },
   { value: 'bouw-techniek', label: 'Bouw en techniek' },
   { value: 'ict', label: 'ICT en software' },
   { value: 'retail-webshop', label: 'Retail of webshop' },
@@ -103,28 +98,24 @@ export const branches: SelectOption[] = [
 ];
 
 export const huidigeSituaties: SelectOption[] = [
-  { value: 'eigen-team', label: 'Wij voeren de werkzaamheden nu met eigen medewerkers uit' },
-  { value: 'besteedt-al-uit', label: 'Wij besteden al werkzaamheden uit aan een andere partij' },
-  { value: 'achterstanden', label: 'Wij hebben achterstanden die moeten worden ingelopen' },
-  { value: 'piekbelasting', label: 'Wij zoeken capaciteit voor piekperioden' },
-  { value: 'vacature', label: 'Wij hebben een openstaande vacature' },
+  { value: 'doe-het-zelf', label: 'Ik doe de administratie nu zelf' },
+  { value: 'ander-kantoor', label: 'Ik werk nu met een ander administratiekantoor' },
+  { value: 'achterstanden', label: 'Mijn administratie loopt achter' },
+  { value: 'startende-ondernemer', label: 'Ik ben net gestart als ondernemer' },
+  { value: 'alleen-jaarwerk', label: 'Ik regel het jaar rond zelf en zoek hulp bij het jaarwerk' },
   { value: 'anders', label: 'Anders' },
 ];
 
-/** Meervoudige keuze: welke werkzaamheden wilt u uitbesteden? */
+/** Meervoudige keuze: waarbij wilt u geholpen worden? */
 export const gewensteOndersteuning: SelectOption[] = [
-  { value: 'financiele-verwerking', label: 'Financiële verwerking (facturen, bank)' },
-  { value: 'debiteuren-crediteuren', label: 'Debiteuren- en crediteurenbeheer' },
-  { value: 'grootboekcontroles', label: 'Grootboekcontroles en aansluitingen' },
-  { value: 'btw-aangiften', label: 'Btw-aangiften voorbereiden' },
-  { value: 'icp-opgaven', label: 'ICP-opgaven voorbereiden' },
-  { value: 'maandafsluiting', label: 'Maandafsluiting' },
-  { value: 'jaarafsluiting', label: 'Jaarafsluiting en balansdossiers' },
-  { value: 'jaarrekening-voorbereiding', label: 'Jaarrekening voorbereiden' },
-  { value: 'achterstanden', label: 'Administratieve achterstanden wegwerken' },
-  { value: 'afas-support', label: 'AFAS- of softwareondersteuning' },
-  { value: 'finance-control', label: 'Finance Control en kwaliteitscontroles' },
-  { value: 'automatisering', label: 'Procesverbetering of automatisering' },
-  { value: 'mkb-administratie', label: 'Mkb-administratie' },
+  { value: 'financiele-verwerking', label: 'Facturen en bankmutaties verwerken' },
+  { value: 'debiteuren-crediteuren', label: 'Openstaande facturen bijhouden' },
+  { value: 'btw-aangiften', label: 'Btw-aangifte' },
+  { value: 'icp-opgaven', label: 'ICP-opgave' },
+  { value: 'inzicht-cijfers', label: 'Periodiek inzicht in mijn cijfers' },
+  { value: 'jaarafsluiting', label: 'Jaarafsluiting' },
+  { value: 'jaarrekening', label: 'Jaarrekening' },
+  { value: 'achterstanden', label: 'Een achterstand inhalen' },
+  { value: 'overstappen', label: 'Overstappen van een ander kantoor of pakket' },
   { value: 'anders', label: 'Anders' },
 ];

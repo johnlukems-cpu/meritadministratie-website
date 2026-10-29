@@ -5,7 +5,7 @@
 const base = import.meta.env.BASE_URL;
 
 export const logoFiles = {
-  /** Horizontaal: embleem + MERIT + Administratie & Support (navy/goud, transparant) */
+  /** Horizontaal: embleem + MERIT + Administratie & Advies (navy/goud, transparant) */
   horizontal: `${base}brand/logo-merit.png`,
   /** Horizontaal, witte variant voor donkere achtergronden */
   horizontalWhite: `${base}brand/logo-merit-wit.png`,
@@ -16,4 +16,4 @@ export const logoFiles = {
 } as const;
 
 /** Verhouding van het horizontale logo (breedte / hoogte) — voor layout zonder verspringen */
-export const LOGO_HORIZONTAL_RATIO = 900 / 209;
+export const LOGO_HORIZONTAL_RATIO = 900 / 217;

@@ -69,7 +69,7 @@ const points = [
   {
     title: 'Tijdige aanlevering',
     description:
-      'Wij spreken per aangifteperiode af wanneer het werk klaar is, zodat uw kantoor voldoende tijd heeft om te beoordelen en in te dienen.',
+      'Wij spreken per aangifteperiode af wanneer het werk klaar is, zodat de aangifte ruim voor de uiterste datum kan worden ingediend.',
     icon: AlarmClock,
   },
   {
@@ -87,7 +87,7 @@ const points = [
   {
     title: 'Binnen uw procedures',
     description:
-      'Wij werken volgens de procedures van het opdrachtgeverkantoor en leggen onze stappen zo vast dat ze navolgbaar zijn.',
+      'Wij leggen onze stappen zo vast dat u kunt zien wat is gecontroleerd en waarop een melding is gebaseerd.',
     icon: ScaleIcon,
   },
   {
@@ -107,16 +107,16 @@ const roles = [
       'Verwerken, controleren van coderingen en rekeningen, aansluiten op het grootboek, signaleren van ontbrekende documenten en afwijkingen, en het opbouwen van de onderbouwing en controledocumentatie.',
   },
   {
-    title: 'Fiscale beoordeling',
-    who: 'Uw kantoor, tenzij anders overeengekomen',
+    title: 'Bijzondere situaties',
+    who: 'In overleg',
     description:
-      'Het fiscaal beoordelen van posten, standpunten en bijzondere situaties. MERIT signaleert en onderbouwt; de beoordeling vindt plaats volgens de afspraken die wij met uw kantoor maken.',
+      'Posten waarover twijfel bestaat of die een fiscaal standpunt vragen, leggen wij aan u voor met een onderbouwing. Valt een vraagstuk buiten onze deskundigheid, dan geven wij dat aan.',
   },
   {
     title: 'Goedkeuring en indiening',
-    who: 'Uw kantoor, tenzij anders overeengekomen',
+    who: 'Volgens de afspraak met u',
     description:
-      'Het controleren, goedkeuren en indienen van de aangifte bij de Belastingdienst. Wij leggen per samenwerking schriftelijk vast wie deze stappen uitvoert.',
+      'Het controleren, goedkeuren en indienen van de aangifte bij de Belastingdienst. Wij leggen vooraf schriftelijk vast of u dat zelf doet of dat wij dat voor u verzorgen.',
   },
 ];
 
@@ -124,14 +124,14 @@ export default function BtwAangiften() {
   return (
     <>
       <Seo
-        title="Btw-aangiften en fiscale administratieve ondersteuning"
-        description="Btw-aangifte uitbesteden: MERIT bereidt periodieke btw-aangiften voor, controleert btw-coderingen en -rekeningen, sluit de btw-administratie aan op het grootboek en bereidt ICP-opgaven voor. Vaste tarieven op afspraak."
+        title="Btw-aangifte voor zzp’ers en mkb-ondernemers"
+        description="Uw btw-aangifte uitbesteden: MERIT bereidt uw btw-aangifte voor, controleert de btw-coderingen en sluit uw btw-administratie aan op uw boekhouding. Vaste tarieven op afspraak."
         canonicalPath={routes.btwAangiften.path}
         jsonLd={[
           serviceJsonLd({
-            name: 'Btw-aangiften en fiscale administratieve ondersteuning',
+            name: 'Btw-aangiften',
             description:
-              'Voorbereiden en verwerken van periodieke btw-aangiften voor administratie- en accountantskantoren: controle van btw-coderingen en btw-rekeningen, aansluiting op het grootboek, voorbereiding van ICP-opgaven en controledocumentatie.',
+              'Voorbereiden en verwerken van periodieke btw-aangiften voor zzp’ers en mkb-ondernemers: controle van btw-coderingen en btw-rekeningen, aansluiting op de boekhouding, voorbereiding van ICP-opgaven en controledocumentatie.',
             path: routes.btwAangiften.path,
           }),
           breadcrumbJsonLd([
@@ -143,8 +143,8 @@ export default function BtwAangiften() {
 
       <PageHero
         eyebrow="Btw-aangiften"
-        title="Btw-aangiften en fiscale administratieve ondersteuning"
-        intro="Voor Nederlandse administratie- en accountantskantoren die btw-gerelateerde werkzaamheden willen uitbesteden. Wij verzorgen de voorbereiding, verwerking en controle; uw kantoor houdt de fiscale beoordeling en de indiening in de hand."
+        title="Uw btw-aangifte op tijd en zonder zorgen"
+        intro="Elk kwartaal of elke maand moet de aangifte er weer zijn. Wij bereiden die voor, controleren de btw-verwerking en zorgen dat alles aansluit op uw boekhouding."
         breadcrumbs={[
           { name: 'Diensten', path: routes.diensten.path },
           { name: 'Btw-aangiften', path: routes.btwAangiften.path },
@@ -152,11 +152,11 @@ export default function BtwAangiften() {
       />
 
       <ServiceIntro
-        title="Minder druk rond elke aangifteperiode"
+        title="Elke aangifteperiode op tijd klaar"
         paragraphs={[
-          'Elke aangifteperiode komt er een piek bij: controleren, aansluiten en op tijd aanleveren, voor een groot aantal administraties tegelijk. Wij nemen dat voorbereidende en verwerkende werk over, zodat uw kantoor de tijd houdt voor de beoordeling.',
-          'Wij controleren de btw-verwerking in de onderliggende administratie, sluiten de btw-administratie aan op het grootboek en bouwen de onderbouwing op. Wat afwijkt of ontbreekt, melden wij met de onderbouwing erbij.',
-          'Wij werken met een vast tarief per opdracht in plaats van een uurtarief. De prijs wordt afgestemd op het aantal administraties, de complexiteit van de btw-verwerking en de omvang van de werkzaamheden; u ontvangt vooraf een duidelijk voorstel.',
+          'De btw-aangifte komt altijd op een moment dat het u slecht uitkomt. Wij zorgen dat uw btw-administratie op orde is en dat de aangifte ruim voor de uiterste datum klaarligt, zodat u er niet op het laatste moment achteraan hoeft.',
+          'Wij controleren de btw-verwerking in uw administratie, sluiten die aan op uw boekhouding en bouwen de onderbouwing op. Ontbreekt er een factuur of valt er iets op, dan hoort u dat van ons met de onderbouwing erbij.',
+          'Wij werken met een vast tarief per opdracht in plaats van een uurtarief. De prijs hangt af van het aantal aangiften per jaar en de omvang van uw administratie; u ontvangt vooraf een duidelijk voorstel.',
         ]}
         priceFrom={QUOTED_LABEL}
         quoted
@@ -171,7 +171,7 @@ export default function BtwAangiften() {
           eyebrow: 'Werkzaamheden',
           title: 'Welke btw-werkzaamheden wij uitvoeren',
           description:
-            'Van de periodieke aangifte tot het herstellen van eerdere perioden. U bepaalt welke onderdelen u uitbesteedt.',
+            'Van de periodieke aangifte tot het herstellen van eerdere perioden. U bepaalt welke onderdelen u uit handen geeft.',
         }}
       />
 
@@ -204,11 +204,10 @@ export default function BtwAangiften() {
             ))}
           </ol>
           <Notice tone="scope" title="Vastgelegd per samenwerking" className="reveal mt-10">
-            MERIT verzorgt de administratieve voorbereiding en verwerking. De fiscale beoordeling,
-            de goedkeuring en het indienen van de aangifte vinden plaats volgens de afspraken die
-            wij met uw kantoor maken. Standaard ligt de controle, goedkeuring en indiening bij het
-            opdrachtgeverkantoor. Afwijkende afspraken zijn mogelijk en worden schriftelijk
-            vastgelegd voordat de werkzaamheden starten.
+            MERIT verzorgt de voorbereiding, de verwerking en de controle van uw btw-administratie.
+            Of wij de aangifte ook indienen leggen wij vooraf schriftelijk met u vast. Wij doen geen
+            toezeggingen over fiscale uitkomsten of over de hoogte van de af te dragen btw: wat u
+            verschuldigd bent volgt uit uw omzet en kosten.
           </Notice>
         </Container>
       </Section>
@@ -220,15 +219,15 @@ export default function BtwAangiften() {
           eyebrow: 'Waar wij op letten',
           title: 'Nauwkeurig, tijdig en navolgbaar',
           description:
-            'Btw-werk is detailwerk. Wij richten het zo in dat uw kantoor kan zien wat is gecontroleerd en waarop een melding is gebaseerd.',
+            'Btw-werk is detailwerk. Wij richten het zo in dat u kunt zien wat is gecontroleerd en waarop een melding is gebaseerd.',
         }}
       />
 
       <RelatedServices currentId="btw-aangiften" tone="default" />
 
       <CtaBand
-        title="Btw-werkzaamheden uitbesteden?"
-        text="Vertel ons om hoeveel administraties het gaat en wat de werkzaamheden omvatten. U ontvangt vooraf een voorstel met een vast tarief."
+        title="Uw btw-aangifte uit handen geven?"
+        text="Vertel ons hoeveel aangiften u per jaar doet en hoe uw administratie eruitziet. U ontvangt vooraf een voorstel met een vast tarief."
         primary={{ label: 'Vraag een prijsvoorstel aan', to: `${routes.offerte.path}?dienst=btw-aangiften` }}
         secondary={{ label: 'Plan een kennismaking', to: routes.kennismaking.path }}
         tone="alt"

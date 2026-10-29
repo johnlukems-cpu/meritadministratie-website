@@ -89,7 +89,7 @@ interface ContactBlockProps {
 export function ContactBlock({
   title = 'Neem contact op',
   eyebrow = 'Contact',
-  intro = 'Wilt u werkzaamheden uitbesteden, een urenbundel afnemen of een vraag stellen over onze werkwijze? Stuur ons een bericht; wij reageren zo snel mogelijk.',
+  intro = 'Wilt u uw administratie uit handen geven, een prijsvoorstel ontvangen of een vraag stellen over onze werkwijze? Stuur ons een bericht; wij reageren zo snel mogelijk.',
   tone = 'default',
   id = 'contact',
 }: ContactBlockProps) {

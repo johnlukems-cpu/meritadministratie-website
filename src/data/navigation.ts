@@ -17,38 +17,23 @@ export const mainNav: NavItem[] = [
     to: routes.diensten.path,
     children: [
       {
-        label: 'Financial Backoffice',
-        to: routes.financialBackoffice.path,
-        hint: 'Dagelijkse financiële verwerking',
+        label: 'Financiële administratie',
+        to: routes.financieleAdministratie.path,
+        hint: 'Facturen, bankmutaties en overzicht',
       },
       {
         label: 'Btw-aangiften',
         to: routes.btwAangiften.path,
-        hint: 'Voorbereiden, verwerken en aansluiten',
+        hint: 'Voorbereiden, controleren en indienen',
       },
       {
         label: 'Jaarrekeningen',
         to: routes.jaarrekeningen.path,
-        hint: 'Jaarafsluiting en balansdossiers',
-      },
-      {
-        label: 'AFAS & Software Support',
-        to: routes.afasSupport.path,
-        hint: 'Ondersteuning binnen uw AFAS-processen',
-      },
-      {
-        label: 'Finance Control',
-        to: routes.financeControl.path,
-        hint: 'Controles en afwijkingssignalering',
-      },
-      {
-        label: 'Automatisering',
-        to: routes.automatisering.path,
-        hint: 'Minder handmatig werk',
+        hint: 'Jaarafsluiting en jaarrekening',
       },
     ],
   },
-  { label: 'Voor kantoren', to: routes.voorKantoren.path },
+  { label: 'Voor zzp’ers', to: routes.voorZzp.path },
   { label: 'Voor mkb', to: routes.voorMkb.path },
   { label: 'Tarieven', to: routes.tarieven.path },
   { label: 'Over ons', to: routes.overMerit.path },
@@ -64,17 +49,13 @@ export const headerCta = {
 /** Kolommen in de footer */
 export const footerNav = {
   diensten: [
-    { label: 'Financial Backoffice', to: routes.financialBackoffice.path },
+    { label: 'Financiële administratie', to: routes.financieleAdministratie.path },
     { label: 'Btw-aangiften', to: routes.btwAangiften.path },
     { label: 'Jaarrekeningen', to: routes.jaarrekeningen.path },
-    { label: 'AFAS & Software Support', to: routes.afasSupport.path },
-    { label: 'Finance Control', to: routes.financeControl.path },
-    { label: 'Automatisering', to: routes.automatisering.path },
     { label: 'Alle diensten', to: routes.diensten.path },
   ],
   navigatie: [
-    { label: 'Voor administratiekantoren', to: routes.voorKantoren.path },
-    { label: 'Voor accountantskantoren', to: routes.voorKantoren.path },
+    { label: 'Voor zzp’ers', to: routes.voorZzp.path },
     { label: 'Voor mkb-ondernemers', to: routes.voorMkb.path },
     { label: 'Tarieven', to: routes.tarieven.path },
     { label: 'Over ons', to: routes.overMerit.path },

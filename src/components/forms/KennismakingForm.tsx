@@ -96,7 +96,7 @@ export function KennismakingForm() {
         label="Bericht"
         name="bericht"
         rows={4}
-        placeholder="Vertel kort iets over uw kantoor of uw vraag (optioneel)."
+        placeholder="Vertel kort iets over uw onderneming of uw vraag (optioneel)"
         error={errors.bericht}
       />
 

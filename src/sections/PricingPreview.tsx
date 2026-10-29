@@ -1,46 +1,47 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router';
-import { FolderKanban, Layers, ShieldCheck } from 'lucide-react';
+import { Calculator, FileSpreadsheet, FolderKanban } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Container, Section } from '@/components/ui/Container';
 import { routes } from '@/config/routes';
 import { siteConfig } from '@/config/site';
 import { QUOTED_LABEL } from '@/data/pricing';
+import { cn } from '@/lib/cn';
 
 /**
  * Tarievenpreview op de homepage.
  *
- * Toont alleen de diensten met een gepubliceerd tarief. Btw-aangiften en
- * jaarrekeningen krijgen nergens een bedrag: daarvoor verwijst de regel onder de
- * kaarten naar een prijsvoorstel. Wijzig bedragen uitsluitend in src/data/pricing.ts.
+ * Alleen de maandpakketten krijgen een bedrag; dat komt uit het Prijzenoverzicht
+ * 2026 (src/data/packages.ts). Btw-aangiften en jaarrekeningen krijgen nergens een
+ * bedrag: daarvoor verwijst de regel onder de kaarten naar een prijsvoorstel.
  */
 const highlights = [
   {
-    name: 'Financial Backoffice',
+    name: 'Financiële administratie',
     icon: FolderKanban,
     prefix: 'vanaf',
-    price: '€ 35',
-    unit: 'per uur',
-    description: 'Voor standaard administratieve werkzaamheden.',
-    to: routes.financialBackoffice.path,
-  },
-  {
-    name: 'Finance Control',
-    icon: ShieldCheck,
-    prefix: 'vanaf',
-    price: '€ 45',
-    unit: 'per uur',
-    description: 'Voor controles, aansluitingen en rapportagevoorbereiding.',
-    to: routes.financeControl.path,
-  },
-  {
-    name: 'Maandelijkse urenbundels',
-    icon: Layers,
-    prefix: 'vanaf',
-    price: '€ 350',
+    price: '€ 125',
     unit: 'per maand',
-    description: '10 uur ondersteuning per maand. Schaal eenvoudig op.',
-    to: `${routes.tarieven.path}#urenbundels`,
+    description: 'Uw facturen en bankmutaties periodiek verwerkt.',
+    to: routes.financieleAdministratie.path,
+  },
+  {
+    name: 'Btw-aangiften',
+    icon: Calculator,
+    prefix: '',
+    price: 'Op afspraak',
+    unit: 'vast tarief per opdracht',
+    description: 'Voorbereid, gecontroleerd en aangesloten op uw boekhouding.',
+    to: routes.btwAangiften.path,
+  },
+  {
+    name: 'Jaarrekeningen',
+    icon: FileSpreadsheet,
+    prefix: '',
+    price: 'Op afspraak',
+    unit: 'vast tarief per opdracht',
+    description: 'Uw boekjaar afgesloten en de jaarrekening samengesteld.',
+    to: routes.jaarrekeningen.path,
   },
 ];
 
@@ -58,7 +59,7 @@ export function PricingPreview() {
               id="tarieven-title"
               className="text-[1.75rem] leading-[1.2] sm:text-[2.125rem] lg:text-[2.375rem]"
             >
-              Professionele ondersteuning tegen toegankelijke tarieven.
+              Duidelijke tarieven, vooraf vastgelegd.
             </h2>
           </div>
           <Link
@@ -90,9 +91,17 @@ export function PricingPreview() {
                 </h3>
               </div>
 
-              <p className="mt-5 text-sm text-muted">{item.prefix}</p>
+              <p className="mt-5 text-sm text-muted">{item.prefix || '\u00a0'}</p>
               <p className="mt-0.5 flex items-baseline gap-2">
-                <span className="text-[2.25rem] font-semibold leading-none text-accent-text tabular-nums">
+                <span
+                  className={cn(
+                    'font-semibold leading-none text-accent-text',
+                    // "Op afspraak" is geen bedrag en past niet op 36 px in de kaart.
+                    /\d/.test(item.price)
+                      ? 'text-[2.25rem] tabular-nums'
+                      : 'text-[1.5rem]',
+                  )}
+                >
                   {item.price}
                 </span>
               </p>

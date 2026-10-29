@@ -29,7 +29,7 @@ export default function Kennismaking() {
     <>
       <Seo
         title="Plan een kennismaking"
-        description="Plan een vrijblijvende kennismaking met MERIT en bespreek welke financiële backofficewerkzaamheden uw kantoor wil uitbesteden en hoe de afspraken worden vastgelegd."
+        description="Plan een vrijblijvende kennismaking met MERIT en bespreek hoe uw administratie er nu voor staat en wat u uit handen wilt geven."
         jsonLd={[
           breadcrumbJsonLd([{ name: 'Plan een kennismaking', path: routes.kennismaking.path }]),
         ]}
@@ -37,7 +37,7 @@ export default function Kennismaking() {
       <PageHero
         eyebrow="Kennismaking"
         title="Plan een kennismaking"
-        intro="Maak vrijblijvend kennis en bespreek welke werkzaamheden u wilt uitbesteden. Na het gesprek ontvangt u een voorstel met werkzaamheden, tarief en controlemomenten."
+        intro="Maak vrijblijvend kennis en bespreek hoe uw administratie er nu voor staat. Na het gesprek ontvangt u een voorstel met de werkzaamheden, het maandbedrag en de afspraken."
         breadcrumbs={[{ name: 'Plan een kennismaking', path: routes.kennismaking.path }]}
       />
 

@@ -88,18 +88,13 @@
       "permanent": true
     },
     {
-      "source": "/afas",
-      "destination": "/diensten/afas-software-support",
-      "permanent": true
-    },
-    {
       "source": "/voor-ondernemers",
       "destination": "/voor-mkb",
       "permanent": true
     },
     {
       "source": "/diensten/administratie",
-      "destination": "/diensten/financial-backoffice",
+      "destination": "/diensten/financiele-administratie",
       "permanent": true
     },
     {
@@ -109,12 +104,42 @@
     },
     {
       "source": "/diensten/startende-ondernemers",
-      "destination": "/voor-mkb",
+      "destination": "/voor-zzp",
       "permanent": true
     },
     {
       "source": "/diensten/overstappen",
-      "destination": "/diensten/financial-backoffice",
+      "destination": "/diensten/financiele-administratie",
+      "permanent": true
+    },
+    {
+      "source": "/afas",
+      "destination": "/diensten/financiele-administratie",
+      "permanent": true
+    },
+    {
+      "source": "/diensten/financial-backoffice",
+      "destination": "/diensten/financiele-administratie",
+      "permanent": true
+    },
+    {
+      "source": "/diensten/afas-software-support",
+      "destination": "/diensten/financiele-administratie",
+      "permanent": true
+    },
+    {
+      "source": "/diensten/finance-control",
+      "destination": "/diensten/financiele-administratie",
+      "permanent": true
+    },
+    {
+      "source": "/diensten/automatisering",
+      "destination": "/diensten/financiele-administratie",
+      "permanent": true
+    },
+    {
+      "source": "/voor-accountantskantoren",
+      "destination": "/",
       "permanent": true
     }
   ]

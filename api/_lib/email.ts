@@ -37,10 +37,11 @@ const optionLabels: Record<string, Map<string, string>> = {
   gewensteOndersteuning: new Map(gewensteOndersteuning.map((o) => [o.value, o.label])),
 };
 
-export const SITE_NAME = 'MERIT Administratie & Support';
+export const SITE_NAME = 'MERIT Administratie & Advies';
 export const SITE_DOMAIN = 'meritadministratie.nl';
-export const TAGLINE_AFAS = 'Uw financiële backoffice- en AFAS-partner.';
-export const TAGLINE = 'Meer capaciteit. Minder administratieve druk. Meer ruimte voor uw klanten.';
+export const TAGLINE = 'Wij regelen de cijfers, u realiseert de groei.';
+export const TAGLINE_POSITIONERING =
+  'Uw financiële administratie, btw en jaarrekening in vertrouwde handen.';
 
 /** Onderwerpregel van de interne melding, per formulier */
 export const internalSubjects: Record<FormKind, string> = {
@@ -55,15 +56,15 @@ export const confirmationSubject = `Bedankt voor uw bericht aan ${SITE_NAME}`;
 /** Leesbare labels voor velden in de interne e-mail (volgorde = weergavevolgorde) */
 const fieldLabels: Record<string, string> = {
   naam: 'Naam',
-  bedrijfsnaam: 'Organisatie',
-  organisatieType: 'Type organisatie',
+  bedrijfsnaam: 'Onderneming',
+  organisatieType: 'Type onderneming',
   email: 'E-mailadres',
   telefoon: 'Telefoonnummer',
   gewensteDienst: 'Gewenste dienst',
   gewensteOndersteuning: 'Gewenste ondersteuning',
-  urenPerMaand: 'Gewenst aantal uren per maand',
+  urenPerMaand: 'Omvang van de administratie',
   gewensteStart: 'Gewenste startdatum',
-  pakket: 'Gekozen bundel of pakket',
+  pakket: 'Gekozen pakket',
   rechtsvorm: 'Rechtsvorm',
   branche: 'Branche',
   huidigeSituatie: 'Huidige situatie',
@@ -156,7 +157,7 @@ export function buildConfirmationEmail(name: string) {
     'Met vriendelijke groet,',
     '',
     SITE_NAME,
-    TAGLINE_AFAS,
+    TAGLINE_POSITIONERING,
     TAGLINE,
   ].join('\n');
 
@@ -171,7 +172,7 @@ export function buildConfirmationEmail(name: string) {
       <p style="margin:0 0 24px;">Wij nemen zo spoedig mogelijk contact met u op.</p>
       <p style="margin:0 0 4px;">Met vriendelijke groet,</p>
       <p style="margin:0;font-weight:600;color:#0b1f3a;">${escapeHtml(SITE_NAME)}</p>
-      <p style="margin:4px 0 0;color:#5b6473;">${escapeHtml(TAGLINE_AFAS)}</p>
+      <p style="margin:4px 0 0;color:#5b6473;">${escapeHtml(TAGLINE_POSITIONERING)}</p>
       <p style="margin:0;color:#876a1c;font-style:italic;">${escapeHtml(TAGLINE)}</p>
     </td></tr>
   </table>

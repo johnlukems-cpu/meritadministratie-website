@@ -22,17 +22,17 @@ const principles = [
   },
   {
     title: 'Transparantie',
-    text: 'Wat wij doen, wat het kost en waar de verantwoordelijkheid ligt, leggen wij vooraf schriftelijk vast. Ook wat buiten de afbakening valt.',
+    text: 'Wat wij doen, wat het kost en wat u zelf blijft doen, leggen wij vooraf schriftelijk vast. Ook wat buiten de afspraak valt.',
     icon: FileText,
   },
   {
-    title: 'Aansluiten op uw werkwijze',
-    text: 'Wij werken binnen de software, procedures en werkafspraken van uw kantoor. U hoeft uw manier van werken niet aan te passen.',
+    title: 'Begrijpelijke taal',
+    text: 'Wij leggen uit wat er in uw cijfers gebeurt zonder vakjargon, zodat u weet waar u aan toe bent en zelf kunt beslissen.',
     icon: Workflow,
   },
   {
-    title: 'Flexibiliteit',
-    text: 'U kunt klein beginnen, opschalen en rond piekperioden extra capaciteit inzetten voor afgebakende werkzaamheden.',
+    title: 'Meegroeien',
+    text: 'U begint met wat past bij uw huidige omvang. Groeit uw onderneming, dan passen wij het pakket in overleg aan.',
     icon: ClipboardCheck,
   },
   {
@@ -42,7 +42,7 @@ const principles = [
   },
   {
     title: 'Eén vast aanspreekpunt',
-    text: `MERIT is gevestigd in ${siteConfig.founded.city} en werkt met één vast aanspreekpunt, zodat afspraken en terugkoppeling via dezelfde lijn lopen.`,
+    text: `MERIT is gevestigd in ${siteConfig.founded.city} en werkt met één vast aanspreekpunt, zodat u uw situatie niet telkens opnieuw hoeft uit te leggen.`,
     icon: MapPin,
   },
 ];
@@ -54,7 +54,7 @@ export default function OverOns() {
     <>
       <Seo
         title="Over MERIT"
-        description={`${siteConfig.name} is een Nederlandse dienstverlener die administratie- en accountantskantoren ondersteunt als externe financiële backoffice: verwerking, btw-aangiften, jaarrekeningvoorbereiding, controles en procesverbetering.`}
+        description={`${siteConfig.name} verzorgt de financiële administratie, btw-aangiften en jaarrekeningen van zzp’ers en mkb-ondernemers in Nederland. Eén vast aanspreekpunt, duidelijke afspraken en begrijpelijke taal.`}
         canonicalPath={routes.overMerit.path}
         jsonLd={[
           organizationJsonLd(),
@@ -64,36 +64,35 @@ export default function OverOns() {
 
       <PageHero
         eyebrow="Over MERIT"
-        title="Een vaste backofficepartner voor financiële administratie"
-        intro="MERIT Administratie & Support ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering."
+        title="Een vast aanspreekpunt voor uw administratie"
+        intro="MERIT Administratie &amp; Advies verzorgt de financiële administratie, de btw-aangiften en het jaarwerk van zzp’ers en mkb-ondernemers. Nauwkeurig, duidelijk en in begrijpelijke taal."
         breadcrumbs={[{ name: 'Over MERIT', path: routes.overMerit.path }]}
       />
 
       <TextSection
         id="waar-wij-voor-staan"
         eyebrow="Waar wij voor staan"
-        title="Financiële backoffice­ondersteuning, als vast onderdeel van uw kantoor"
+        title="Uw cijfers op orde, zodat u kunt ondernemen"
       >
         <p>
-          Bij veel kantoren is er meer werk dan uren. Niet omdat het werk niet goed gaat, maar omdat
-          de werkvoorraad groeit, aangifteperioden en jaarafsluitingen pieken opleveren en geschikte
-          medewerkers moeilijk te vinden zijn. Juist uitvoerende werkzaamheden die elke periode
-          terugkomen laten zich dan goed afbakenen en overdragen.
+          Ondernemen doet u omdat u goed bent in uw vak. De administratie die erbij komt kijken is
+          zelden de reden dat iemand voor zichzelf begint. Toch bepaalt die administratie wel of u
+          weet hoe uw onderneming ervoor staat, of uw aangiften kloppen en of u op tijd bent.
         </p>
         <p>
-          <strong>Daar richten wij ons op.</strong> Wij nemen financiële verwerking, controles,
-          btw-voorbereiding en jaarwerkvoorbereiding over als afgebakende werkzaamheden, werken
-          binnen uw procedures en koppelen terug wat is verwerkt en wat aandacht vraagt. Uw kantoor
-          houdt de regie, de beoordeling en het klantcontact.
+          <strong>Daar richten wij ons op.</strong> Wij verzorgen uw financiële administratie,
+          bereiden uw btw-aangiften voor en stellen uw jaarrekening samen. U levert uw facturen en
+          bonnen aan; wij zorgen dat het klopt en laten u weten als er iets ontbreekt of opvalt.
         </p>
         <p>
           Wij werken graag aan samenwerkingen die blijven staan. Daarom leggen wij vooraf vast wat
-          wij doen, wat bij uw kantoor blijft, welk tarief geldt en op welke momenten wordt
-          gecontroleerd en afgestemd — ook wat buiten de afbakening valt.
+          wij doen, wat u zelf blijft doen, welk tarief geldt en op welke momenten u iets van ons
+          hoort — ook wat buiten de afspraak valt.
         </p>
         <p>
-          Naast kantoren ondersteunen wij mkb-ondernemingen met hun financiële administratie. Onze
-          hoofdpositionering blijft de ondersteuning van administratie- en accountantskantoren.
+          Wij werken voor zzp’ers en voor mkb-ondernemers. Wat u nodig heeft hangt af van de omvang
+          van uw onderneming; wat u krijgt is in beide gevallen hetzelfde: één vast aanspreekpunt
+          dat uw cijfers kent.
         </p>
       </TextSection>
 
@@ -101,7 +100,7 @@ export default function OverOns() {
         id="kernwaarden"
         eyebrow="Kernwaarden"
         title="Hoe wij werken"
-        description="Zes uitgangspunten die bepalen hoe wij een samenwerking inrichten."
+        description="Zes uitgangspunten die bepalen hoe wij met u samenwerken."
         items={principles}
         columns={3}
         tone="alt"

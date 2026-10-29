@@ -8,7 +8,7 @@
  *
  * Omgevingsvariabelen (Vercel → Settings → Environment Variables; NOOIT met VITE_-prefix):
  *   RESEND_API_KEY   verplicht — API-key van Resend (server-side)
- *   RESEND_FROM      optioneel — afzender, bijv. "MERIT Administratie & Support <noreply@meritadministratie.nl>"
+ *   RESEND_FROM      optioneel — afzender, bijv. "MERIT Administratie & Advies <noreply@meritadministratie.nl>"
  *                    (vereist een geverifieerd domein in Resend; voor testen: "onboarding@resend.dev")
  *   CONTACT_TO       optioneel — ontvanger van de interne melding (standaard info@meritadministratie.nl)
  *

@@ -4,10 +4,9 @@
  * Bron: MERIT Prijzenoverzicht 2026. Alle bedragen zijn vanaf-tarieven en exclusief
  * 21% btw (zie siteConfig.pricing). Wijzig deze prijzen uitsluitend hier.
  *
- * Deze pakketten en tarieven gelden voor MKB-ONDERNEMINGEN (de secundaire doelgroep)
- * en staan los van de uurtarieven en urenbundels voor administratie- en accountants-
- * kantoren in src/data/pricing.ts. Houd de twee structuren gescheiden: ze horen bij
- * verschillende doelgroepen en verschillende soorten werkzaamheden.
+ * Deze pakketten en tarieven gelden voor zzp'ers en mkb-ondernemers: de doelgroep van
+ * MERIT. De gedeelde prijsweergave voor werkzaamheden die per opdracht worden
+ * afgesproken staat in src/data/pricing.ts.
  *
  * De `includes`-lijsten komen uit het Prijzenoverzicht 2026. Voeg hier niets aan toe
  * dat niet in die bron staat: geen inbegrepen uren, transactielimieten, aangiften of

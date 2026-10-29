@@ -21,9 +21,9 @@ interface CtaBandProps {
 
 /** Afsluitende call-to-action in een donkere band. Herbruikbaar op alle pagina's. */
 export function CtaBand({
-  eyebrow = 'Klaar voor extra capaciteit?',
-  title = 'Meer weten over wat MERIT voor uw kantoor kan betekenen?',
-  text = 'Bespreek uw werkzaamheden en ontvang een passend voorstel.',
+  eyebrow = 'Uw administratie uit handen geven?',
+  title = 'Meer weten over wat MERIT voor u kan betekenen?',
+  text = 'Bespreek uw situatie en ontvang een passend voorstel.',
   primary = { label: 'Plan een kennismaking', to: routes.kennismaking.path },
   secondary = { label: 'Neem contact op', to: routes.contact.path },
 }: CtaBandProps) {

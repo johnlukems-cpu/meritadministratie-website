@@ -4,7 +4,7 @@ import { Container } from '@/components/ui/Container';
 import { routes } from '@/config/routes';
 
 /** De vier kernwaarden, subtiel onder de knoppen. */
-const values = ['Betrouwbaar', 'Nauwkeurig', 'Betaalbaar', 'Flexibel'];
+const values = ['Eén vast aanspreekpunt', 'Vast bedrag per maand', 'Duidelijke afspraken'];
 
 /**
  * Hero van de homepage.
@@ -74,20 +74,19 @@ export function Hero() {
       <Container className="py-12 md:py-16 lg:py-20">
         <div className="max-w-xl lg:max-w-[32rem] xl:max-w-[37rem]">
           <p className="mb-4 text-xs font-semibold tracking-[0.14em] text-balance text-accent-light uppercase">
-            Financiële backoffice voor administratie- en accountantskantoren
+            Administratiekantoor voor zzp’ers en mkb-ondernemers
           </p>
 
-          <h1 className="text-[1.9375rem] leading-[1.16] text-on-dark sm:text-[2.25rem] lg:text-[2.625rem] lg:leading-[1.14]">
-            Uw betrouwbare partner voor{' '}
-            <span className="text-accent-light">financiële backoffice</span> en{' '}
-            <span className="text-accent-light">AFAS-ondersteuning</span>.
+          <h1 className="text-[1.9375rem] leading-[1.16] text-on-dark sm:text-[2.25rem] lg:text-[2.5rem] lg:leading-[1.15]">
+            Uw financiële administratie, btw en jaarrekening in{' '}
+            <span className="text-accent-light">vertrouwde handen</span>.
           </h1>
 
           <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-on-dark-muted">
-            Wij ondersteunen Nederlandse administratie- en accountantskantoren met financiële
-            verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en
-            procesverbetering. Zo creëert uw kantoor meer capaciteit, meer grip op de administratie
-            en ruimte voor klantadvies.
+            Als ondernemer wilt u grip houden op uw cijfers zonder onnodige administratieve zorgen.
+            MERIT Administratie &amp; Advies ondersteunt zzp’ers en mkb-bedrijven met financiële
+            administratie, btw-aangiften en jaarrekeningwerkzaamheden. Zo houdt u overzicht en kunt
+            u met vertrouwen ondernemen.
           </p>
 
           <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">

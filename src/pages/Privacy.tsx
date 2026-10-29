@@ -97,7 +97,7 @@ const sections: LegalSection[] = [
           <li>Welke boekhoudsoftware u gebruikt (optioneel)</li>
           <li>Gewenste periode of deadline (optioneel)</li>
           <li>Uw omschrijving van de werkzaamheden</li>
-          <li>Een eerder gekozen urenbundel of pakket, als u via zo'n knop bent gekomen</li>
+          <li>Een eerder gekozen pakket, als u via zo'n knop bent gekomen</li>
         </ul>
         <h3>Kennismakingsaanvraag</h3>
         <ul>
@@ -319,7 +319,7 @@ export default function Privacy() {
     <>
       <Seo
         title="Privacyverklaring"
-        description="Lees hoe MERIT Administratie & Support omgaat met uw persoonsgegevens: welke gegevens wij via de website verwerken, waarvoor, hoe lang en welke rechten u heeft."
+        description="Lees hoe MERIT Administratie & Advies omgaat met uw persoonsgegevens: welke gegevens wij via de website verwerken, waarvoor, hoe lang en welke rechten u heeft."
       />
       <PageHero
         eyebrow="Juridisch"

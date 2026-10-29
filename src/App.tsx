@@ -4,13 +4,10 @@ import { redirects, routes } from '@/config/routes';
 
 import Home from '@/pages/Home';
 import Diensten from '@/pages/diensten/Index';
-import FinancialBackoffice from '@/pages/diensten/FinancialBackoffice';
+import FinancieleAdministratie from '@/pages/diensten/FinancieleAdministratie';
 import BtwAangiften from '@/pages/diensten/BtwAangiften';
 import Jaarrekeningen from '@/pages/diensten/Jaarrekeningen';
-import AfasSupport from '@/pages/diensten/AfasSupport';
-import FinanceControl from '@/pages/diensten/FinanceControl';
-import Automatisering from '@/pages/diensten/Automatisering';
-import VoorKantoren from '@/pages/VoorKantoren';
+import VoorZzp from '@/pages/VoorZzp';
 import VoorMkb from '@/pages/VoorMkb';
 import Tarieven from '@/pages/Tarieven';
 import OverOns from '@/pages/OverOns';
@@ -33,17 +30,14 @@ export function App() {
         <Route path={routes.home.path} element={<Home />} />
 
         {/* Doelgroepen */}
-        <Route path={routes.voorKantoren.path} element={<VoorKantoren />} />
+        <Route path={routes.voorZzp.path} element={<VoorZzp />} />
         <Route path={routes.voorMkb.path} element={<VoorMkb />} />
 
         {/* Diensten */}
         <Route path={routes.diensten.path} element={<Diensten />} />
-        <Route path={routes.financialBackoffice.path} element={<FinancialBackoffice />} />
+        <Route path={routes.financieleAdministratie.path} element={<FinancieleAdministratie />} />
         <Route path={routes.btwAangiften.path} element={<BtwAangiften />} />
         <Route path={routes.jaarrekeningen.path} element={<Jaarrekeningen />} />
-        <Route path={routes.afasSupport.path} element={<AfasSupport />} />
-        <Route path={routes.financeControl.path} element={<FinanceControl />} />
-        <Route path={routes.automatisering.path} element={<Automatisering />} />
 
         {/* Tarieven & bedrijf */}
         <Route path={routes.tarieven.path} element={<Tarieven />} />

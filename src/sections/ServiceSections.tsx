@@ -245,7 +245,7 @@ export function RelatedServices({ currentId, limit = 3, tone = 'alt' }: RelatedS
         <SectionHeading
           id="verwant-title"
           eyebrow="Ook interessant"
-          title="Andere diensten voor uw kantoor"
+          title="Onze andere diensten"
           className="reveal"
         />
         <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">

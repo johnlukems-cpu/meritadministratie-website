@@ -1,10 +1,12 @@
 import { Seo } from '@/components/Seo';
-import { CapacitySection } from '@/sections/CapacitySection';
+import { AudienceSection } from '@/sections/AudienceSection';
 import { CtaBand } from '@/sections/CtaBand';
+import { FaqSection } from '@/sections/Faq';
 import { Hero } from '@/sections/Hero';
 import { PricingPreview } from '@/sections/PricingPreview';
 import { Process } from '@/sections/Process';
 import { ServicesGrid } from '@/sections/ServicesGrid';
+import { WhyMerit } from '@/sections/WhyMerit';
 import { siteConfig } from '@/config/site';
 import { homeFaq } from '@/data/faq';
 import { faqJsonLd, organizationJsonLd, websiteJsonLd } from '@/lib/seo/json-ld';
@@ -13,9 +15,9 @@ export default function Home() {
   return (
     <>
       <Seo
-        title={`${siteConfig.name} — financiële backoffice en AFAS-ondersteuning`}
+        title={`${siteConfig.name} — administratie, btw en jaarrekening`}
         rawTitle
-        description="MERIT ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering. Backoffice vanaf € 35 per uur."
+        description="MERIT Administratie & Advies verzorgt de financiële administratie, btw-aangiften en jaarrekeningen van zzp’ers en mkb-ondernemers. Een vast aanspreekpunt en een vast bedrag per maand, vanaf € 125."
         canonicalPath="/"
         jsonLd={[organizationJsonLd(), websiteJsonLd(), faqJsonLd(homeFaq)]}
       />
@@ -23,19 +25,25 @@ export default function Home() {
       {/* 1. Hero */}
       <Hero />
 
-      {/* 2. Dienstenoverzicht */}
+      {/* 2. Voor wie wij werken: zzp en mkb */}
+      <AudienceSection />
+
+      {/* 3. Onze drie hoofddiensten */}
       <ServicesGrid tone="default" />
 
-      {/* 3. Voor administratie- en accountantskantoren */}
-      <CapacitySection />
+      {/* 4. Waarom kiezen voor MERIT? */}
+      <WhyMerit tone="alt" />
 
-      {/* 4. Tarievenpreview */}
-      <PricingPreview />
-
-      {/* 5. Samenwerkingsproces */}
+      {/* 5. Onze werkwijze */}
       <Process tone="default" />
 
-      {/* 6. Afsluitende CTA */}
+      {/* 6. Tarieven */}
+      <PricingPreview />
+
+      {/* 7. Veelgestelde vragen */}
+      <FaqSection tone="default" />
+
+      {/* 8. Afsluitende CTA */}
       <CtaBand />
     </>
   );

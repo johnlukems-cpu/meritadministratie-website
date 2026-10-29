@@ -17,13 +17,14 @@ export function WhyMerit({ tone = 'default' }: WhyMeritProps) {
             <SectionHeading
               id="waarom-merit-title"
               eyebrow="Waarom MERIT?"
-              title="Een partner die binnen uw manier van werken past"
-              description="Wij nemen geen werkwijze over, maar sluiten aan op de uwe. Dat maakt uitbesteden overzichtelijk en terugkoppeling bruikbaar."
+              title="Een vast aanspreekpunt dat uw cijfers kent"
+              description="Geen wisselende contactpersonen en geen vakjargon. U weet wat wij doen, wat het kost en hoe uw onderneming ervoor staat."
               className="reveal"
             />
             <Notice className="reveal mt-8" tone="info">
-              Wij noemen geen gegarandeerde besparingen of resultaten. Wat wij vastleggen zijn de
-              werkzaamheden, de tarieven en de controlemomenten — zodat u weet waar u aan toe bent.
+              Wij beloven geen belastingvoordeel of gegarandeerde besparingen. Wat wij vastleggen
+              zijn de werkzaamheden, het tarief en de momenten waarop u iets van ons hoort — zodat
+              u weet waar u aan toe bent.
             </Notice>
           </div>
 

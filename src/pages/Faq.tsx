@@ -13,7 +13,7 @@ export default function Faq() {
     <>
       <Seo
         title="Veelgestelde vragen"
-        description="Antwoorden op veelgestelde vragen over samenwerken met MERIT: werkzaamheden uitbesteden, verantwoordelijkheden, btw-aangiften, jaarafsluitingen, AFAS, tarieven en urenbundels."
+        description="Antwoorden op veelgestelde vragen over samenwerken met MERIT: uw administratie uit handen geven, btw-aangiften, de jaarafsluiting, tarieven en afspraken."
         jsonLd={[
           breadcrumbJsonLd([
             { name: 'Home', path: '/' },
@@ -25,7 +25,7 @@ export default function Faq() {
       <PageHero
         eyebrow="FAQ"
         title="Veelgestelde vragen"
-        intro="Antwoord op de vragen die kantoren ons het meest stellen over samenwerken, uitbesteden, verantwoordelijkheden en tarieven. Staat uw vraag er niet bij? Neem gerust contact op."
+        intro="Antwoord op de vragen die ondernemers ons het meest stellen over samenwerken, uw administratie, aangiften en tarieven. Staat uw vraag er niet bij? Neem gerust contact op."
         breadcrumbs={[{ name: 'FAQ', path: routes.faq.path }]}
       />
 

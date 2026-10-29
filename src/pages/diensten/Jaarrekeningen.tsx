@@ -51,7 +51,7 @@ const groups: ScopeGroup[] = [
     title: 'Afronding en correcties',
     intro: 'De laatste stappen, volgens uw instructies.',
     items: [
-      'Correcties verwerken volgens de instructies van het opdrachtgeverkantoor',
+      'Correcties verwerken na afstemming met u',
       'Aansluitingen na correcties opnieuw controleren',
       'Ondersteunen bij het samenstellen van conceptjaarrekeningen, voor zover dit binnen de expertise en opdracht valt',
       'Vastleggen wat is gecontroleerd en wat openstaat',
@@ -87,7 +87,7 @@ const points = [
   {
     title: 'Volgens uw instructies',
     description:
-      'Correcties en aansluitingen voeren wij uit volgens de instructies van het opdrachtgeverkantoor, niet op eigen interpretatie.',
+      'Correcties en aansluitingen stemmen wij eerst met u af; wij vullen niets in op eigen interpretatie.',
     icon: ClipboardCheck,
   },
   {
@@ -136,39 +136,39 @@ export default function Jaarrekeningen() {
   return (
     <>
       <Seo
-        title="Jaarafsluiting en ondersteuning bij jaarrekeningen"
-        description="Jaarafsluiting uitbesteden: MERIT bereidt administraties voor op de jaarafsluiting, controleert balansposten, stelt specificaties op en bereidt balansdossiers voor de jaarrekening voor. Vaste tarieven op afspraak."
+        title="Jaarrekening en jaarafsluiting voor zzp en mkb"
+        description="Uw boekjaar laten afsluiten: MERIT controleert de volledigheid van uw administratie, sluit de grootboekrekeningen aan en bereidt uw jaarrekening voor en stelt die samen. Vaste tarieven op afspraak."
         canonicalPath={routes.jaarrekeningen.path}
         jsonLd={[
           serviceJsonLd({
-            name: 'Jaarafsluiting en ondersteuning bij jaarrekeningen',
+            name: 'Jaarrekeningen & jaarafsluiting',
             description:
-              'Administratieve jaarafsluiting en jaarrekeningvoorbereiding voor administratie- en accountantskantoren: controle van grootboek- en balansposten, aansluitingen, specificaties van balansrekeningen en het voorbereiden van balansdossiers.',
+              'Administratieve jaarafsluiting en het voorbereiden en samenstellen van de jaarrekening voor zzp’ers en mkb-ondernemers: controle van grootboek- en balansposten, aansluitingen en specificaties van balansrekeningen.',
             path: routes.jaarrekeningen.path,
           }),
           breadcrumbJsonLd([
             { name: 'Diensten', path: routes.diensten.path },
-            { name: 'Jaarrekeningen & Jaarafsluiting', path: routes.jaarrekeningen.path },
+            { name: 'Jaarrekeningen & jaarafsluiting', path: routes.jaarrekeningen.path },
           ]),
         ]}
       />
 
       <PageHero
-        eyebrow="Jaarrekeningen & Jaarafsluiting"
-        title="Jaarafsluiting en ondersteuning bij jaarrekeningen"
-        intro="Voor Nederlandse administratie- en accountantskantoren die ondersteuning nodig hebben bij het voorbereiden en afronden van financiële administraties. Wij maken de administratie controleerbaar en bouwen het dossier op; de beoordeling blijft bij uw kantoor."
+        eyebrow="Jaarrekeningen & jaarafsluiting"
+        title="Uw boekjaar netjes afgesloten"
+        intro="Aan het einde van het boekjaar moet uw administratie kloppen en compleet zijn. Wij controleren, sluiten aan en bereiden uw jaarrekening voor en stellen die samen."
         breadcrumbs={[
           { name: 'Diensten', path: routes.diensten.path },
-          { name: 'Jaarrekeningen & Jaarafsluiting', path: routes.jaarrekeningen.path },
+          { name: 'Jaarrekeningen & jaarafsluiting', path: routes.jaarrekeningen.path },
         ]}
       />
 
       <ServiceIntro
-        title="Voorbereidend jaarwerk dat u kunt overdragen"
+        title="Het jaarwerk uit handen, zonder zoekwerk achteraf"
         paragraphs={[
-          'In het jaarwerkseizoen moet veel tegelijk gebeuren: posten controleren, aansluitingen maken, specificaties opstellen en dossiers opbouwen. Dat werk is omvangrijk, maar laat zich goed afbakenen en overdragen.',
-          'Wij verzorgen de administratieve voorbereiding: wij controleren grootboekrekeningen, sluiten bankadministraties aan, controleren debiteuren, crediteuren en tussenrekeningen, stellen specificaties van balansrekeningen op en bereiden het balansdossier voor. Correcties verwerken wij volgens de instructies van uw kantoor.',
-          'Zo gaan uw eigen uren naar de beoordeling en het klantgesprek, en niet naar het uitzoekwerk eromheen. Wij werken met een vast tarief per opdracht: de prijs wordt bepaald op basis van de omvang van de administratie, de complexiteit van de jaarafsluiting en de gewenste werkzaamheden.',
+          'Aan het einde van het boekjaar blijkt pas wat er ontbreekt. Een factuur die nooit is aangeleverd, een bankregel die niet klopt, een post die niet aansluit. Het achteraf uitzoeken daarvan kost onnodig veel tijd.',
+          'Wij controleren de volledigheid van uw administratie, sluiten de grootboekrekeningen aan, controleren debiteuren, crediteuren en tussenrekeningen en stellen de specificaties op. Ontbreekt er iets, dan vragen wij dat tijdig bij u op in plaats van het later te moeten reconstrueren.',
+          'Daarna bereiden wij uw jaarrekening voor en stellen die samen binnen de dienstverlening die wij met u afspreken. Wij werken met een vast tarief per opdracht: de prijs hangt af van uw rechtsvorm, de omvang van de administratie en de staat waarin het boekjaar wordt aangeleverd.',
         ]}
         priceFrom={QUOTED_LABEL}
         quoted

@@ -51,8 +51,8 @@ export function Challenges({ tone = 'default', showCta = true }: ChallengesProps
           <p className="text-lg leading-relaxed text-text">{challengesConclusion}</p>
           {showCta && (
             <div className="mt-7 flex justify-center">
-              <Button to={routes.voorKantoren.path} variant="outline" iconRight={<ArrowRight />}>
-                Zo werken wij voor kantoren
+              <Button to={routes.diensten.path} variant="outline" iconRight={<ArrowRight />}>
+                Bekijk wat wij voor u doen
               </Button>
             </div>
           )}

@@ -22,24 +22,24 @@ export const routes = {
   home: { path: '/', label: 'Home', priority: 1.0, changefreq: 'weekly' },
 
   /* --- Doelgroepen ---------------------------------------------------------- */
-  voorKantoren: {
-    path: '/voor-accountantskantoren',
-    label: 'Voor administratie- en accountantskantoren',
-    priority: 0.95,
+  voorZzp: {
+    path: '/voor-zzp',
+    label: 'Voor zzp\u2019ers',
+    priority: 0.9,
     changefreq: 'monthly',
   },
   voorMkb: {
     path: '/voor-mkb',
-    label: 'Voor mkb-ondernemingen',
-    priority: 0.8,
+    label: 'Voor mkb-ondernemers',
+    priority: 0.9,
     changefreq: 'monthly',
   },
 
   /* --- Diensten ------------------------------------------------------------- */
   diensten: { path: '/diensten', label: 'Diensten', priority: 0.9, changefreq: 'monthly' },
-  financialBackoffice: {
-    path: '/diensten/financial-backoffice',
-    label: 'Financial Backoffice',
+  financieleAdministratie: {
+    path: '/diensten/financiele-administratie',
+    label: 'Financiële administratie',
     priority: 0.9,
     changefreq: 'monthly',
   },
@@ -51,26 +51,8 @@ export const routes = {
   },
   jaarrekeningen: {
     path: '/diensten/jaarrekeningen-jaarafsluiting',
-    label: 'Jaarrekeningen & Jaarafsluiting',
+    label: 'Jaarrekeningen & jaarafsluiting',
     priority: 0.9,
-    changefreq: 'monthly',
-  },
-  afasSupport: {
-    path: '/diensten/afas-software-support',
-    label: 'AFAS & Software Support',
-    priority: 0.85,
-    changefreq: 'monthly',
-  },
-  financeControl: {
-    path: '/diensten/finance-control',
-    label: 'Finance Control',
-    priority: 0.85,
-    changefreq: 'monthly',
-  },
-  automatisering: {
-    path: '/diensten/automatisering',
-    label: 'Automatisering',
-    priority: 0.85,
     changefreq: 'monthly',
   },
 
@@ -117,14 +99,24 @@ export const redirects: Record<string, string> = {
   '/privacy': routes.privacy.path,
   '/cookies': routes.cookies.path,
 
-  /* Herpositionering: oude dienst- en doelgroeppaden → nieuwe structuur */
+  /* Oude dienst- en doelgroeppaden van vóór de herbouw */
   '/pakketten': routes.tarieven.path,
-  '/afas': routes.afasSupport.path,
   '/voor-ondernemers': routes.voorMkb.path,
-  '/diensten/administratie': routes.financialBackoffice.path,
+  '/diensten/administratie': routes.financieleAdministratie.path,
   '/diensten/belastingaangifte': routes.btwAangiften.path,
-  '/diensten/startende-ondernemers': routes.voorMkb.path,
-  '/diensten/overstappen': routes.financialBackoffice.path,
+  '/diensten/startende-ondernemers': routes.voorZzp.path,
+  '/diensten/overstappen': routes.financieleAdministratie.path,
+
+  /* Herpositionering naar zzp en mkb: de backoffice-dienstverlening voor
+     administratie- en accountantskantoren is vervallen. De dienstpaden gaan naar
+     de dienst die er inhoudelijk het dichtst bij ligt; de kantorenpagina heeft geen
+     opvolger en gaat naar de homepage, waar de nieuwe doelgroep meteen duidelijk is. */
+  '/afas': routes.financieleAdministratie.path,
+  '/diensten/financial-backoffice': routes.financieleAdministratie.path,
+  '/diensten/afas-software-support': routes.financieleAdministratie.path,
+  '/diensten/finance-control': routes.financieleAdministratie.path,
+  '/diensten/automatisering': routes.financieleAdministratie.path,
+  '/voor-accountantskantoren': routes.home.path,
 };
 
 /** Alle paden als platte lijst (voor prerender & sitemap) */

@@ -3,10 +3,9 @@ import {
   AlarmClock,
   CalendarClock,
   ClipboardCheck,
-  Layers,
-  MessageSquareWarning,
-  UserMinus,
-  Users,
+  FileQuestion,
+  Receipt,
+  TrendingUp,
 } from 'lucide-react';
 
 export interface Challenge {
@@ -16,56 +15,50 @@ export interface Challenge {
 }
 
 /**
- * Herkenbare uitdagingen bij administratie- en accountantskantoren.
- * Sectie "Meer werk, dezelfde capaciteit?" op de homepage en op de kantorenpagina.
+ * Herkenbare situaties bij zzp’ers en mkb-ondernemers rond hun administratie.
+ * Sectie op de homepage en op de doelgroeppagina's.
  *
- * Dit zijn situaties die wij bij kantoren tegenkomen; er worden geen uitspraken gedaan
- * over aantallen, marktcijfers of resultaten.
+ * Dit zijn situaties die wij in de praktijk tegenkomen; er worden geen uitspraken
+ * gedaan over aantallen, marktcijfers of resultaten.
  */
 export const challenges: Challenge[] = [
   {
-    title: 'Een groeiende werkvoorraad',
+    title: 'De administratie blijft liggen',
     description:
-      'Het werk neemt toe, maar de bezetting blijft gelijk. Nieuwe opdrachten vragen capaciteit die er op dat moment niet is.',
-    icon: Layers,
-  },
-  {
-    title: 'Achterstanden in administraties',
-    description:
-      'Een aantal dossiers loopt achter. Het inhalen kost tijd die ten koste gaat van het lopende werk.',
+      'Facturen en bonnen stapelen zich op. Het werk voor uw klanten gaat voor, en de boekhouding schuift steeds een week op.',
     icon: CalendarClock,
   },
   {
-    title: 'Drukte rond btw-aangiften',
+    title: 'Btw-aangifte schiet er bijna doorheen',
     description:
-      'Elke aangifteperiode komt er een piek bij: controleren, aansluiten en op tijd aanleveren voor een groot aantal administraties.',
+      'Elk kwartaal moet de aangifte er weer zijn. Het verzamelen en controleren kost tijd die u op dat moment niet had ingepland.',
     icon: AlarmClock,
   },
   {
-    title: 'Piekbelasting tijdens jaarafsluitingen',
+    title: 'Geen scherp beeld van uw cijfers',
     description:
-      'In het jaarwerkseizoen moet veel tegelijk gebeuren: controleren, specificeren en dossiers opbouwen.',
+      'U weet wat er op de rekening staat, maar niet precies wat u hebt verdiend, wat er nog binnenkomt en wat u opzij moet zetten.',
+    icon: TrendingUp,
+  },
+  {
+    title: 'Facturen die te lang openstaan',
+    description:
+      'Er staat geld open, maar het bijhouden en opvolgen van openstaande facturen komt er telkens niet van.',
+    icon: Receipt,
+  },
+  {
+    title: 'Spanning rond de jaarafsluiting',
+    description:
+      'Aan het einde van het boekjaar blijkt pas wat er ontbreekt. Het achteraf verzamelen van stukken kost onnodig veel tijd.',
     icon: ClipboardCheck,
   },
   {
-    title: 'Tekort aan personeel',
+    title: 'Twijfel of het klopt',
     description:
-      'Geschikte medewerkers zijn moeilijk te vinden. Een vacature openhouden betekent dat het werk ergens anders terechtkomt.',
-    icon: UserMinus,
-  },
-  {
-    title: 'Te weinig tijd voor klantadvies',
-    description:
-      'De uitvoerende werkzaamheden vragen zoveel aandacht dat er weinig ruimte overblijft voor het gesprek met de klant.',
-    icon: Users,
-  },
-  {
-    title: 'Veel handmatige controles',
-    description:
-      'Terugkerende controles worden nog grotendeels met de hand gedaan, terwijl ze deels te standaardiseren zijn.',
-    icon: MessageSquareWarning,
+      'U doet uw best, maar weet niet zeker of alles goed is verwerkt en of u iets over het hoofd ziet.',
+    icon: FileQuestion,
   },
 ];
 
 export const challengesConclusion =
-  'MERIT helpt uw kantoor om werkzaamheden flexibel uit te besteden en de beschikbare capaciteit beter te benutten.';
+  'MERIT neemt deze werkzaamheden van u over, zodat uw administratie bij is en u weet waar u staat.';

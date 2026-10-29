@@ -68,9 +68,9 @@ export function ServicesGrid({
   items = services,
   heading = {
     eyebrow: 'Onze diensten',
-    title: 'Complete ondersteuning voor uw financiële processen',
+    title: 'Alles voor uw administratie, onder één dak',
     description:
-      'Van dagelijkse administratie tot btw-aangiften en jaarrekeningvoorbereiding. MERIT ondersteunt uw kantoor flexibel, nauwkeurig en volgens uw werkwijze.',
+      'Van uw dagelijkse boekhouding tot de btw-aangifte en de jaarrekening. Alles onder één dak, met één vast aanspreekpunt.',
   },
   linkLabel,
   showPrice = false,

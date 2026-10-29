@@ -1,47 +1,48 @@
-# MERIT Administratie & Support — website
+# MERIT Administratie & Advies — website
 
-Bedrijfswebsite van **MERIT Administratie & Support** · https://meritadministratie.nl · info@meritadministratie.nl
+Bedrijfswebsite van **MERIT Administratie & Advies** · https://meritadministratie.nl · info@meritadministratie.nl
 
-Statische, geprerenderde website die MERIT positioneert als **externe financiële backoffice- en
-AFAS-partner voor Nederlandse administratie- en accountantskantoren**. Mkb-ondernemingen vormen de
-secundaire doelgroep. Gehost op Vercel.
+Statische, geprerenderde website van een **administratiekantoor voor zzp'ers en
+mkb-ondernemers**. MERIT verzorgt de financiële administratie, de btw-aangiften en het jaarwerk.
+Gehost op Vercel.
 
 **Positionering**
 
-> Uw betrouwbare partner voor financiële backoffice en AFAS-ondersteuning.
-> Meer capaciteit. Minder administratieve druk. Meer ruimte voor uw klanten.
+> Uw financiële administratie, btw en jaarrekening in vertrouwde handen.
+> Wij regelen de cijfers, u realiseert de groei.
 
 ## Paginastructuur
 
-| Pagina                                   | Pad                                             |
-| ---------------------------------------- | ----------------------------------------------- |
-| Home                                     | `/`                                             |
-| Voor administratie- en accountantskantoren | `/voor-accountantskantoren`                   |
-| Voor mkb-ondernemingen                   | `/voor-mkb`                                     |
-| Diensten (overzicht)                     | `/diensten`                                     |
-| Financial Backoffice                     | `/diensten/financial-backoffice`                |
-| Btw-aangiften                            | `/diensten/btw-aangiften`                       |
-| Jaarrekeningen & Jaarafsluiting          | `/diensten/jaarrekeningen-jaarafsluiting`       |
-| AFAS & Software Support                  | `/diensten/afas-software-support`               |
-| Finance Control                          | `/diensten/finance-control`                     |
-| Finance Automation                       | `/diensten/finance-automation`                  |
-| Tarieven                                 | `/tarieven`                                     |
-| Over MERIT                               | `/over-ons`                                     |
-| Veelgestelde vragen                      | `/faq`                                          |
-| Contact                                  | `/contact`                                      |
-| Plan een kennismaking                    | `/kennismaking`                                 |
-| Offerte aanvragen                        | `/offerte`                                      |
-| Privacyverklaring                        | `/privacy-policy`                               |
-| Cookiebeleid                             | `/cookiebeleid`                                 |
+| Pagina                          | Pad                                       |
+| ------------------------------- | ----------------------------------------- |
+| Home                            | `/`                                       |
+| Voor zzp'ers                    | `/voor-zzp`                               |
+| Voor mkb-ondernemers            | `/voor-mkb`                               |
+| Diensten (overzicht)            | `/diensten`                               |
+| Financiële administratie        | `/diensten/financiele-administratie`      |
+| Btw-aangiften                   | `/diensten/btw-aangiften`                 |
+| Jaarrekeningen & jaarafsluiting | `/diensten/jaarrekeningen-jaarafsluiting` |
+| Tarieven                        | `/tarieven`                               |
+| Over MERIT                      | `/over-ons`                               |
+| Veelgestelde vragen             | `/faq`                                    |
+| Contact                         | `/contact`                                |
+| Plan een kennismaking           | `/kennismaking`                           |
+| Offerte aanvragen               | `/offerte`                                |
+| Privacyverklaring               | `/privacy-policy`                         |
+| Cookiebeleid                    | `/cookiebeleid`                           |
 
 **Permanente redirects (301)** van oude paden staan op drie plekken in sync:
 `src/config/routes.ts` (router + prerender) en `vercel.json` (echte HTTP 301).
 
-`/pakketten` → `/tarieven` · `/afas` → `/diensten/afas-software-support` ·
-`/voor-ondernemers` → `/voor-mkb` · `/diensten/administratie` → `/diensten/financial-backoffice` ·
+De herpositionering naar zzp en mkb heeft de backoffice-dienstverlening voor administratie- en
+accountantskantoren laten vervallen; die paden verwijzen nu naar de dichtstbijzijnde dienst.
+
+`/pakketten` → `/tarieven` · `/voor-ondernemers` → `/voor-mkb` ·
+`/diensten/administratie`, `/diensten/overstappen`, `/afas`,
+`/diensten/financial-backoffice`, `/diensten/afas-software-support`,
+`/diensten/finance-control`, `/diensten/automatisering` → `/diensten/financiele-administratie` ·
 `/diensten/belastingaangifte` → `/diensten/btw-aangiften` ·
-`/diensten/startende-ondernemers` → `/voor-mkb` ·
-`/diensten/overstappen` → `/diensten/financial-backoffice` ·
+`/diensten/startende-ondernemers` → `/voor-zzp` · `/voor-accountantskantoren` → `/` ·
 `/privacy` → `/privacy-policy` · `/cookies` → `/cookiebeleid`
 
 ## Bronnen voor bedrijfsgegevens
@@ -50,18 +51,20 @@ Alleen bevestigde gegevens worden getoond. Niets op deze site is verzonnen: geen
 testimonials, keurmerken, certificeringen of aantallen.
 
 - **KvK-uittreksel** — KvK 42106520, adres Frankenstraat 27, 6231 AK Meerssen, telefoon.
-  De onderneming staat daar ingeschreven als *Merit Administratie en Advies* en handelt onder
-  de naam **MERIT Administratie & Support** (`siteConfig.legalName` respectievelijk `name`).
+  De onderneming staat daar ingeschreven als *Merit Administratie en Advies*; de merknaam op de
+  site is **MERIT Administratie & Advies** (`siteConfig.legalName` respectievelijk `name`).
 - **Mijn Belastingdienst Zakelijk** — btw-identificatienummer NL005497990B94.
 - **Prijzenoverzicht 2026** — de mkb-pakketten en de losse tarieven voor aangiften en jaarwerk.
 
 Velden die nog niet bekend zijn staan in `src/config/site.ts` op `null` en worden dan **niet**
 getoond.
 
-> **Let op — tarieven voor kantoren.** De uurtarieven en urenbundels in `src/data/pricing.ts`
-> zijn een **voorstel** en moeten intern worden bevestigd. Zolang
-> `siteConfig.pricing.kantorenTariffsProvisional` op `true` staat, toont `/tarieven` daar een
-> zichtbare toelichting bij. Zet die vlag op `false` zodra de tarieven definitief zijn.
+> **Let op — niet-gepubliceerde tarieven.** `src/data/packages.ts` bevat naast de gepubliceerde
+> maandpakketten ook `priceGroups` (losse tarieven voor aangiften, jaarwerk en AFAS) en
+> `mutationTiers` (staffel op aantal mutaties) uit het Prijzenoverzicht 2026. Die worden
+> **nergens op de site getoond**: btw-aangiften en jaarrekeningen krijgen overal
+> "Vaste tarieven op afspraak". Laat dat zo, of bevestig eerst dat die bedragen gepubliceerd
+> mogen worden.
 
 ## Technologie
 
@@ -106,7 +109,7 @@ lokaal `VITE_FORM_PROVIDER=mailto`, of draai `vercel dev`.
 | Pagina's / URL's / redirects                              | `src/config/routes.ts` + `src/App.tsx` + `vercel.json` |
 | Navigatie (header/footer)                                 | `src/data/navigation.ts`                          |
 | De zes diensten (kaarten, instaptarieven)                 | `src/data/services.ts`                            |
-| **Uurtarieven, urenbundels, projecten, prijs-FAQ**        | `src/data/pricing.ts`                             |
+| **Prijsweergave op afspraak en prijs-FAQ**                | `src/data/pricing.ts`                             |
 | **Mkb-pakketten en losse tarieven (Prijzenoverzicht)**    | `src/data/packages.ts`                            |
 | Uitdagingen, werkwijze, voordelen, FAQ                    | `src/data/challenges.ts`, `process.ts`, `faq.ts`  |
 | Formulieropties (organisatietype, diensten, uren, start)  | `src/data/forms.ts`                               |
@@ -150,7 +153,7 @@ variabelen zijn uitsluitend server-side en worden in Vercel ingesteld
 | Variabele            | Scope       | Doel                                                                        |
 | -------------------- | ----------- | --------------------------------------------------------------------------- |
 | `RESEND_API_KEY`     | server      | **Verplicht.** API-key van Resend voor `api/contact.ts`                     |
-| `RESEND_FROM`        | server      | Afzender, bijv. `MERIT Administratie & Support <noreply@meritadministratie.nl>` |
+| `RESEND_FROM`        | server      | Afzender, bijv. `MERIT Administratie & Advies <noreply@meritadministratie.nl>` |
 | `CONTACT_TO`         | server      | Ontvanger interne melding (standaard `info@meritadministratie.nl`)          |
 | `VITE_FORM_PROVIDER` | browser     | `api` (standaard), `mailto` of `webhook`                                    |
 | `VITE_FORM_ENDPOINT` | browser     | URL bij `webhook`                                                           |
@@ -216,8 +219,7 @@ productiedomein `www.meritadministratie.nl` / `meritadministratie.nl`.
 
 ## Checklist vóór livegang
 
-- [ ] Uurtarieven en urenbundels intern bevestigen; daarna `kantorenTariffsProvisional` op `false`
-- [ ] Contractvoorwaarden bij de urenbundels juridisch laten controleren
+- [ ] Bevestigen of de losse tarieven uit het Prijzenoverzicht 2026 gepubliceerd mogen worden
 - [ ] Privacyverklaring en cookiebeleid laten controleren (bewaartermijn staat nog als placeholder)
 - [ ] `RESEND_API_KEY`, `RESEND_FROM` en `CONTACT_TO` in Vercel controleren
 - [ ] Resend-domeinverificatie afronden voor verzending vanaf het eigen domein

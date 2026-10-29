@@ -1,23 +1,17 @@
 import type { LucideIcon } from 'lucide-react';
-import {
-  Calculator,
-  FileSpreadsheet,
-  FolderKanban,
-  Settings2,
-  ShieldCheck,
-  Workflow,
-} from 'lucide-react';
+import { Calculator, FileSpreadsheet, FolderKanban } from 'lucide-react';
 import { routes } from '@/config/routes';
 import { QUOTED_LABEL } from '@/data/pricing';
 
 /**
- * De zes diensten waarmee MERIT administratie- en accountantskantoren ondersteunt.
+ * De drie diensten waarmee MERIT zzp’ers en mkb-ondernemers ondersteunt.
  * Bron voor het dienstenoverzicht op de homepage, de pagina /diensten, de footer en
  * de keuzelijsten in de formulieren.
  *
- * `priceFrom` moet gelijk blijven aan het tarief in src/data/pricing.ts. Voor diensten
- * met `quoted: true` daar staat hier `QUOTED_LABEL` — die diensten krijgen nergens op
- * de website een uurtarief of vanaf-prijs.
+ * `priceFrom` moet overeenkomen met de tarievenpagina. Financiële administratie loopt
+ * via de maandpakketten uit het Prijzenoverzicht 2026 (src/data/packages.ts); btw en
+ * jaarrekeningen worden per opdracht afgesproken en krijgen daarom nergens op de
+ * website een uurtarief of vanaf-prijs.
  */
 
 export interface ServiceSummary {
@@ -38,61 +32,34 @@ export interface ServiceSummary {
 
 export const services: ServiceSummary[] = [
   {
-    id: 'financial-backoffice',
-    title: 'Financial Backoffice',
+    id: 'financiele-administratie',
+    title: 'Financiële administratie',
     description:
-      'Financiële verwerking, bankmutaties, facturen en debiteuren- en crediteurenbeheer.',
+      'Uw facturen, bankmutaties en debiteuren en crediteuren bijgewerkt, met periodiek inzicht in uw cijfers.',
     icon: FolderKanban,
-    to: routes.financialBackoffice.path,
-    priceFrom: 'vanaf € 35 per uur',
+    to: routes.financieleAdministratie.path,
+    priceFrom: 'vanaf € 125 per maand',
   },
   {
     id: 'btw-aangiften',
     title: 'Btw-aangiften',
-    description: 'Voorbereiden en verwerken van btw-aangiften en btw-controles.',
+    description:
+      'Uw btw-administratie voorbereid, gecontroleerd en aangesloten op uw boekhouding.',
     icon: Calculator,
     to: routes.btwAangiften.path,
     priceFrom: QUOTED_LABEL,
   },
   {
     id: 'jaarrekeningen',
-    title: 'Jaarrekeningen & Jaarafsluiting',
+    title: 'Jaarrekeningen & jaarafsluiting',
     cardTitle: 'Jaarrekeningen',
-    description: 'Ondersteuning bij jaarafsluitingen en voorbereiding van jaarrekeningen.',
+    description:
+      'Uw boekjaar netjes afgesloten en de jaarrekening voorbereid en samengesteld.',
     icon: FileSpreadsheet,
     to: routes.jaarrekeningen.path,
     priceFrom: QUOTED_LABEL,
   },
-  {
-    id: 'afas-software-support',
-    title: 'AFAS & Software Support',
-    description:
-      'Ondersteuning bij dagelijkse verwerking en optimalisatie van werkprocessen.',
-    icon: Workflow,
-    to: routes.afasSupport.path,
-    priceFrom: '€ 45 – € 55 per uur',
-  },
-  {
-    id: 'finance-control',
-    title: 'Finance Control',
-    description: 'Grootboekcontroles, aansluitingen en kwaliteitscontroles.',
-    icon: ShieldCheck,
-    to: routes.financeControl.path,
-    priceFrom: 'vanaf € 45 per uur',
-  },
-  {
-    id: 'automatisering',
-    title: 'Automatisering',
-    description: 'Slimmere processen en minder handmatig werk.',
-    icon: Settings2,
-    to: routes.automatisering.path,
-    priceFrom: 'op offertebasis',
-  },
 ];
 
-/** Naam zoals die op een dienstkaart staat. */
+/** Korte naam voor dienstkaarten en keuzelijsten. */
 export const cardName = (service: ServiceSummary): string => service.cardTitle ?? service.title;
-
-/** Dienst opzoeken op id (voor interne links en formulierwaarden). */
-export const serviceById = (id: string): ServiceSummary | undefined =>
-  services.find((s) => s.id === id);

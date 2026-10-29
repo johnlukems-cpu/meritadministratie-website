@@ -14,24 +14,24 @@ import { SITE_URL } from './url';
 
 export const siteConfig = {
   /** Merk- en handelsnaam zoals op de website getoond */
-  name: 'MERIT Administratie & Support',
+  name: 'MERIT Administratie & Advies',
   /** Korte naam (bijv. in de titel-suffix en het menu) */
   shortName: 'MERIT',
   /**
-   * Naam zoals die in het KvK-register staat. Dit is NIET de merknaam: de onderneming
-   * handelt onder de naam in `name` hierboven. Wijzig dit veld uitsluitend nadat de
-   * naam bij de KvK daadwerkelijk is gewijzigd — het wordt gebruikt in juridische
-   * context (structured data, privacyverklaring, bedrijfsgegevens).
+   * Naam zoals die in het KvK-register staat. Die komt inhoudelijk overeen met de
+   * merknaam hierboven; alleen de schrijfwijze verschilt ("en" in plaats van "&").
+   * Wijzig dit veld uitsluitend nadat de naam bij de KvK daadwerkelijk is gewijzigd —
+   * het wordt gebruikt in juridische context (structured data, privacyverklaring).
    */
   legalName: 'Merit Administratie en Advies',
 
   /* --- Positionering --------------------------------------------------------- */
-  /** Centrale merkbelofte */
-  tagline: 'Meer capaciteit. Minder administratieve druk. Meer ruimte voor uw klanten.',
-  /** Tweede positioneringszin */
-  taglineSecondary: 'Uw financiële backoffice- en AFAS-partner.',
+  /** Slogan van het merk; staat ook in het logo */
+  tagline: 'Wij regelen de cijfers, u realiseert de groei.',
+  /** Centrale positionering: waar MERIT voor staat, in één zin */
+  taglineSecondary: 'Uw financiële administratie, btw en jaarrekening in vertrouwde handen.',
   description:
-    'MERIT Administratie & Support ondersteunt Nederlandse administratie- en accountantskantoren met financiële verwerking, btw-aangiften, jaarrekeningvoorbereiding, kwaliteitscontroles en procesverbetering.',
+    'MERIT Administratie & Advies helpt zzp\u2019ers en mkb-ondernemers met een overzichtelijke financiële administratie, btw-aangiften en de voorbereiding en samenstelling van jaarrekeningen. Wij zorgen voor inzicht in uw cijfers, zodat u zich kunt richten op het ondernemen.',
 
   /**
    * Voorkeursdomein (canonical). Dit MOET overeenkomen met de live productieconfiguratie.
@@ -101,7 +101,7 @@ export const siteConfig = {
   /** Topbar bovenaan de site. `enabled: false` verbergt de balk. */
   announcement: {
     enabled: false,
-    text: 'Financiële backoffice en AFAS-ondersteuning voor administratie- en accountantskantoren.',
+    text: 'Administratie, btw en jaarrekening voor zzp\u2019ers en mkb-ondernemers.',
     linkLabel: 'Plan een kennismaking',
     linkTo: '/kennismaking',
   },
@@ -119,16 +119,9 @@ export const siteConfig = {
     year: 2026,
     vatNote: 'Alle genoemde tarieven zijn exclusief 21% btw.',
     finalPriceNote:
-      'Het definitieve tarief wordt afgestemd op de aard, omvang en complexiteit van de werkzaamheden en op de afspraken die wij met uw kantoor maken.',
+      'Het definitieve tarief wordt afgestemd op de omvang en complexiteit van uw administratie en op de afspraken die wij met u maken.',
     customQuoteNote:
-      'Specialistische werkzaamheden, herstelopdrachten en automatiseringsprojecten worden afzonderlijk beoordeeld en geoffreerd.',
-    /**
-     * De uurtarieven en urenbundels voor administratie- en accountantskantoren zijn
-     * intern bevestigd en gelden als definitief. Zet dit op `true` om op de
-     * tarievenpagina weer een zichtbaar voorbehoud te tonen, bijvoorbeeld wanneer een
-     * nieuwe tariefstructuur nog niet is vastgesteld.
-     */
-    kantorenTariffsProvisional: false,
+      'Werkzaamheden buiten het gekozen pakket worden vooraf afgebakend en afzonderlijk geoffreerd.',
   },
 
   /** Formulieren — zie ook src/lib/forms/provider.ts */

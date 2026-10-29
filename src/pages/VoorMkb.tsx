@@ -15,7 +15,7 @@ import { QUOTED_LABEL } from '@/data/pricing';
 import { breadcrumbJsonLd, serviceJsonLd } from '@/lib/seo/json-ld';
 
 /**
- * Diensten voor mkb-ondernemingen. Dit zijn de werkzaamheden die MERIT daadwerkelijk
+ * Diensten voor mkb-ondernemers. Dit zijn de werkzaamheden die MERIT daadwerkelijk
  * aanbiedt; de precieze dienstverlening wordt per onderneming vooraf afgestemd.
  */
 const mkbServices = [
@@ -85,25 +85,25 @@ export default function VoorMkb() {
   return (
     <>
       <Seo
-        title="Voor mkb-ondernemingen — administratie en financiële ondersteuning"
-        description="MERIT ondersteunt mkb-ondernemingen met de financiële administratie, btw-gerelateerde werkzaamheden, de administratieve jaarafsluiting, de voorbereiding van financiële overzichten en procesverbetering. Pakketten vanaf € 125 per maand."
+        title="Administratie voor mkb — boekhouding, btw en jaarrekening"
+        description="MERIT verzorgt de financiële administratie van mkb-ondernemers: facturen en bankmutaties verwerken, btw-aangiften, de jaarafsluiting en periodieke financiële overzichten. Pakketten vanaf € 125 per maand."
         canonicalPath={routes.voorMkb.path}
         jsonLd={[
           serviceJsonLd({
-            name: 'Financiële administratie voor mkb-ondernemingen',
+            name: 'Financiële administratie voor mkb-ondernemers',
             description:
-              'Financiële administratie, btw-gerelateerde werkzaamheden, administratieve jaarafsluiting, voorbereiding van financiële overzichten en procesverbetering voor Nederlandse mkb-ondernemingen.',
+              'Financiële administratie, btw-aangiften, administratieve jaarafsluiting en periodieke financiële overzichten voor Nederlandse mkb-ondernemers.',
             path: routes.voorMkb.path,
           }),
-          breadcrumbJsonLd([{ name: 'Voor mkb-ondernemingen', path: routes.voorMkb.path }]),
+          breadcrumbJsonLd([{ name: 'Voor mkb-ondernemers', path: routes.voorMkb.path }]),
         ]}
       />
 
       <PageHero
-        eyebrow="Voor mkb-ondernemingen"
-        title="Uw financiële administratie in vertrouwde handen"
-        intro="Wij verzorgen de financiële administratie van mkb-ondernemingen: verwerking, btw-gerelateerde werkzaamheden, de administratieve jaarafsluiting en de voorbereiding van financiële overzichten. Wat wij precies voor u doen, stemmen wij vooraf af."
-        breadcrumbs={[{ name: 'Voor mkb-ondernemingen', path: routes.voorMkb.path }]}
+        eyebrow="Voor mkb-ondernemers"
+        title="Een betrouwbare administratie, zonder dat u erover hoeft na te denken"
+        intro="Wij verzorgen de financiële administratie van uw onderneming: de verwerking, de btw-aangiften, de jaarafsluiting en periodieke overzichten waarmee u ziet hoe uw onderneming ervoor staat."
+        breadcrumbs={[{ name: 'Voor mkb-ondernemers', path: routes.voorMkb.path }]}
         actions={
           <>
             <Button to={routes.kennismaking.path} size="lg" iconRight={<ArrowRight />}>
@@ -116,14 +116,14 @@ export default function VoorMkb() {
         }
       />
 
-      {/* Wat wij voor mkb-ondernemingen doen */}
+      {/* Wat wij voor mkb-ondernemers doen */}
       <Section tone="default" id="diensten-mkb" aria-labelledby="diensten-mkb-title">
         <Container>
           <SectionHeading
             id="diensten-mkb-title"
             eyebrow="Dienstverlening"
             title="Wat wij voor uw onderneming kunnen verzorgen"
-            description="Deze werkzaamheden bieden wij aan mkb-ondernemingen. Welke onderdelen voor u van toepassing zijn, bepalen wij samen tijdens de kennismaking."
+            description="Deze werkzaamheden bieden wij aan mkb-ondernemers. Welke onderdelen voor u van toepassing zijn, bepalen wij samen tijdens de kennismaking."
             align="center"
             className="reveal"
           />
@@ -156,7 +156,7 @@ export default function VoorMkb() {
           <SectionHeading
             id="pakketten-title"
             eyebrow="Pakketten"
-            title="Maandpakketten voor mkb-ondernemingen"
+            title="Maandpakketten"
             description="Vanaf-tarieven per maand. Het definitieve tarief en de precieze dienstverlening stemmen wij vooraf met u af."
             align="center"
             className="reveal"
@@ -229,19 +229,17 @@ export default function VoorMkb() {
         description="In drie stappen van een eerste gesprek naar een administratie die loopt. U weet vooraf wat wij doen en wat het kost."
       />
 
-      {/* Positionering: kantoren blijven de hoofddoelgroep */}
+      {/* Doorverwijzing naar de andere doelgroep */}
       <Section tone="default">
         <Container narrow>
-          <Notice tone="info" title="Ook voor administratie- en accountantskantoren" className="reveal">
-            MERIT richt zich in de eerste plaats op Nederlandse administratie- en
-            accountantskantoren, die wij ondersteunen als externe financiële backoffice. Werkt u bij
-            een kantoor en zoekt u extra capaciteit voor financiële verwerking, btw-aangiften,
-            jaarafsluitingen of kwaliteitscontroles? Bekijk dan{' '}
+          <Notice tone="info" title="Werkt u als zelfstandige?" className="reveal">
+            Heeft u geen personeel en een overzichtelijke administratie? Dan sluit onze
+            dienstverlening voor zzp’ers waarschijnlijk beter aan bij uw situatie. Bekijk{' '}
             <a
-              href={routes.voorKantoren.path}
+              href={routes.voorZzp.path}
               className="font-semibold text-primary underline underline-offset-4"
             >
-              onze pagina voor kantoren
+              onze pagina voor zzp’ers
             </a>
             .
           </Notice>

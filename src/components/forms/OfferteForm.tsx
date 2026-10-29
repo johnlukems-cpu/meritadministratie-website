@@ -4,7 +4,6 @@ import { Checkbox, Input, Select, Textarea } from '@/components/ui/Field';
 import { routes } from '@/config/routes';
 import { offerteDiensten } from '@/data/forms';
 import { packages } from '@/data/packages';
-import { hourBundles } from '@/data/pricing';
 import { useForm } from '@/lib/forms/useForm';
 import { FormError, FormSuccess, Honeypot, SubmitRow } from './FormShell';
 
@@ -26,23 +25,12 @@ function useQueryParam(name: string): string | null {
   );
 }
 
-/**
- * Zet `?pakket=…` om naar een leesbaar label. De urenbundels en de mkb-pakketten
- * gebruiken deels dezelfde id's, daarom dragen de links een prefix.
- */
+/** Zet `?pakket=…` om naar een leesbaar label voor in de aanvraag. */
 function resolvePackage(value: string | null): string | null {
   if (!value) return null;
-  if (value.startsWith('bundel-')) {
-    const bundle = hourBundles.find((b) => b.id === value.slice('bundel-'.length));
-    return bundle
-      ? `Urenbundel ${bundle.name} — ${bundle.hours} uur p/m (€ ${bundle.pricePerMonth} p/m)`
-      : null;
-  }
-  if (value.startsWith('mkb-')) {
-    const pkg = packages.find((p) => p.id === value.slice('mkb-'.length));
-    return pkg ? `${pkg.name} — vanaf € ${pkg.priceFrom} p/m` : null;
-  }
-  return null;
+  const id = value.startsWith('mkb-') ? value.slice('mkb-'.length) : value;
+  const pkg = packages.find((p) => p.id === id);
+  return pkg ? `${pkg.name} — vanaf € ${pkg.priceFrom} p/m` : null;
 }
 
 export function OfferteForm() {
@@ -164,7 +152,7 @@ export function OfferteForm() {
           name="omschrijving"
           required
           rows={6}
-          placeholder="Welke werkzaamheden wilt u uitbesteden, om welke periode gaat het en wat is de huidige stand van de administratie?"
+          placeholder="Welke werkzaamheden wilt u uit handen geven, om welke periode gaat het en hoe staat uw administratie er nu voor?"
           hint="Hoe concreter u dit beschrijft, hoe nauwkeuriger ons voorstel kan zijn."
           error={errors.omschrijving}
         />

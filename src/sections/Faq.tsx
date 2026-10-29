@@ -20,7 +20,7 @@ interface FaqSectionProps {
 export function FaqSection({
   items = homeFaq,
   title = 'Veelgestelde vragen',
-  description = 'Over samenwerken, uitbesteden, btw-aangiften, jaarafsluitingen en tarieven.',
+  description = 'Over samenwerken, uw administratie, btw-aangiften, de jaarafsluiting en tarieven.',
   tone = 'default',
   showAllLink = true,
   id = 'faq',

@@ -10,40 +10,40 @@ export interface ProcessStep {
 export const processSteps: ProcessStep[] = [
   {
     number: '01',
-    title: 'Kennismaking en inventarisatie',
+    title: 'Kennismaking',
     description:
-      'We bespreken uw werkzaamheden, software, deadlines en gewenste capaciteit.',
+      'We bespreken uw onderneming, uw administratie en wat u uit handen wilt geven.',
     items: [
-      'Uw situatie en werkvoorraad in beeld',
-      'Welke werkzaamheden goed overdraagbaar zijn',
-      'Welke software en procedures u gebruikt',
+      'Uw rechtsvorm, omvang en manier van werken in beeld',
+      'Welke werkzaamheden u zelf wilt blijven doen',
+      'Welke software u gebruikt of wilt gaan gebruiken',
     ],
   },
   {
     number: '02',
     title: 'Duidelijke afspraken',
     description:
-      'We bepalen de taken, tarieven, werkwijze en controlemomenten en leggen die vast.',
+      'U ontvangt een voorstel met een vast maandbedrag en een heldere afbakening.',
     items: [
-      'Werkzaamheden en verantwoordelijkheden schriftelijk vastgelegd',
-      'Tarief of urenbundel vooraf afgesproken',
-      'Vaste controle- en overlegmomenten',
+      'Schriftelijk vastgelegd welke werkzaamheden wij doen',
+      'Vooraf duidelijk wat afzonderlijk wordt geoffreerd',
+      'Vaste momenten waarop u iets van ons hoort',
     ],
   },
   {
     number: '03',
-    title: 'Start van de samenwerking',
+    title: 'Uw administratie loopt',
     description:
-      'We beginnen met een afgebakende opdracht of een urenbundel en koppelen terug wat is verwerkt.',
+      'Wij verwerken uw administratie en koppelen periodiek terug hoe u ervoor staat.',
     items: [
-      'Werken binnen uw software en procedures',
-      'Terugkoppeling van verwerkte werkzaamheden',
-      'Signalering van ontbrekende documenten en afwijkingen',
+      'Facturen en bankmutaties periodiek verwerkt',
+      'Btw-aangifte op tijd voorbereid en ingediend',
+      'Terugkoppeling van ontbrekende stukken en opvallende zaken',
     ],
   },
 ];
 
-/** Waarom kantoren met MERIT werken — sectie "Waarom MERIT?" */
+/** Waarom ondernemers met MERIT werken — sectie "Waarom MERIT?" */
 export interface Benefit {
   title: string;
   description: string;
@@ -51,38 +51,38 @@ export interface Benefit {
 
 export const benefits: Benefit[] = [
   {
-    title: 'Betaalbare tarieven',
+    title: 'Eén vast aanspreekpunt',
     description:
-      'Een tariefstructuur die past bij uitvoerende backofficewerkzaamheden, met een helder instaptarief en voordeliger tarieven bij een vaste urenbundel.',
+      'U krijgt niet elke keer iemand anders aan de lijn. U weet bij wie u terechtkunt en hoeft uw situatie niet telkens opnieuw uit te leggen.',
   },
   {
-    title: 'Flexibele ondersteuning',
+    title: 'Een vast bedrag per maand',
     description:
-      'U kunt klein beginnen en opschalen wanneer het nodig is. Ook rond aangifteperioden en jaarafsluitingen kunt u extra capaciteit inzetten.',
+      'U weet vooraf wat u betaalt. Werkzaamheden die buiten het pakket vallen bespreken wij eerst met u en offreren wij afzonderlijk.',
   },
   {
-    title: 'Duidelijke werkafspraken',
+    title: 'Duidelijke afspraken',
     description:
-      'Wij leggen vooraf vast welke werkzaamheden wij uitvoeren, wat bij uw kantoor blijft en op welke momenten wordt gecontroleerd en afgestemd.',
+      'Wij leggen vooraf schriftelijk vast welke werkzaamheden wij uitvoeren, wat u zelf blijft doen en wanneer u iets van ons hoort.',
   },
   {
-    title: 'Ondersteuning bij terugkerende werkzaamheden',
+    title: 'Uw administratie blijft bij',
     description:
-      'Juist het werk dat elke periode terugkomt — verwerking, controles, aansluitingen — is goed over te dragen en vraagt daarna weinig uitleg.',
+      'Door periodiek te verwerken blijft uw administratie actueel. Dat voorkomt een berg werk aan het einde van het boekjaar.',
   },
   {
-    title: 'Kwaliteitsbewuste verwerking',
+    title: 'Inzicht in uw cijfers',
     description:
-      'Wij werken met vaste controlepunten, signaleren ontbrekende documenten en afwijkingen en leggen vast wat wij hebben gecontroleerd.',
+      'U ziet periodiek wat er binnenkomt, wat eruit gaat en wat er nog openstaat. Zo kunt u met cijfers onderbouwd beslissen.',
   },
   {
-    title: 'Meer tijd voor klantadvies',
+    title: 'Begrijpelijke taal',
     description:
-      'Wanneer uitvoerende werkzaamheden elders worden opgepakt, ontstaat binnen uw kantoor ruimte voor het gesprek met de klant.',
+      'Wij leggen uit wat er in uw cijfers gebeurt zonder vakjargon, zodat u weet waar u aan toe bent.',
   },
   {
-    title: 'Mogelijkheid tot structurele samenwerking',
+    title: 'Meegroeien wanneer het nodig is',
     description:
-      'Veel kantoren kiezen na een eerste opdracht voor een vaste urenbundel, zodat de capaciteit elke maand beschikbaar is.',
+      'Groeit uw onderneming, dan passen wij het pakket aan. U begint met wat past bij uw huidige omvang.',
   },
 ];

@@ -1,18 +1,18 @@
 import { ArrowRight, Check, FileCheck2, ScanLine, Settings2, SquareCheck } from 'lucide-react';
 
 /**
- * Cluster van administratieve panelen voor de kantorensectie.
+ * Cluster van administratieve panelen bij de doelgroepsectie op de homepage.
  *
  * Opgebouwd in markup en SVG — geen foto's, geen mensen. Alle getallen zijn
  * illustratieve voorbeeldwaarden en worden als zodanig gelabeld.
  */
 
 const processing = [
-  { label: 'Inkoopfacturen', value: '892' },
-  { label: 'Verkoopfacturen', value: '645' },
-  { label: 'Bankmutaties', value: '1.284' },
-  { label: 'Debiteuren', value: '320' },
-  { label: 'Crediteuren', value: '410' },
+  { label: 'Inkoopfacturen', value: '86' },
+  { label: 'Verkoopfacturen', value: '112' },
+  { label: 'Bankmutaties', value: '243' },
+  { label: 'Openstaand', value: '7' },
+  { label: 'Te betalen', value: '4' },
 ];
 
 const quarters = [
@@ -22,8 +22,8 @@ const quarters = [
   { label: 'Q4', value: 88 },
 ];
 
-const closing = ['Balansaansluitingen', 'Specificaties', 'Controlelijst', 'Concept jaarrekening'];
-const control = ['Grootboekcontroles', 'Openstaande posten', 'Aansluitingen', 'Rapportage'];
+const closing = ['Volledigheid gecontroleerd', 'Grootboek aangesloten', 'Specificaties', 'Concept jaarrekening'];
+const control = ['Omzet', 'Kosten', 'Resultaat', 'Openstaand'];
 const flow = [
   { icon: ScanLine, label: 'Factuur­herkenning' },
   { icon: FileCheck2, label: 'Boekings­voorstel' },
@@ -57,7 +57,7 @@ export function PanelCluster() {
     <div aria-hidden="true" className="relative min-w-0 select-none">
       <div className="grid items-start gap-3 sm:grid-cols-2">
         {/* Administratieverwerking */}
-        <Panel title="Administratieverwerking">
+        <Panel title="Uw administratie">
           <ul className="mt-3 flex flex-col gap-2">
             {processing.map((row) => (
               <li key={row.label} className="flex items-center gap-2.5 text-[0.8125rem]">
@@ -123,7 +123,7 @@ export function PanelCluster() {
         </Panel>
 
         {/* Finance Control */}
-        <Panel title="Finance Control">
+        <Panel title="Uw cijfers">
           <div className="mt-3 flex items-center gap-4">
             <svg viewBox="0 0 64 64" className="size-16 shrink-0" role="presentation">
               <circle cx="32" cy="32" r="25" fill="none" stroke="var(--surface-muted)" strokeWidth="8" />
@@ -164,7 +164,7 @@ export function PanelCluster() {
         </Panel>
 
         {/* Automatisering */}
-        <Panel title="Automatisering" className="sm:col-span-2">
+        <Panel title="Zo verwerken wij" className="sm:col-span-2">
           {/* Op een smal scherm krijgt elke stap in een rij van vier maar zo'n
               45 px; daar past geen enkel label in. Onder sm staan de stappen
               daarom onder elkaar, met het label naast het icoon. */}

@@ -20,7 +20,7 @@ export default function Offerte() {
     <>
       <Seo
         title="Offerte aanvragen"
-        description="Vraag vrijblijvend een prijsvoorstel aan voor btw-aangiften, jaarrekeningen, financiële backoffice, AFAS-ondersteuning, Finance Control of automatisering. Vaste tarieven op afspraak."
+        description="Vraag vrijblijvend een prijsvoorstel aan voor uw financiële administratie, btw-aangiften of jaarrekening. Vaste tarieven op afspraak."
         jsonLd={[
           breadcrumbJsonLd([{ name: 'Prijsvoorstel aanvragen', path: routes.offerte.path }]),
         ]}
